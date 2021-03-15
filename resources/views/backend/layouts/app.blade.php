@@ -36,7 +36,7 @@
   @include('backend.layouts.footer')
 </div>
 <!-- ./wrapper -->
-
+@include('sweetalert::alert')
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
 <script src="{{asset('assets/backend')}}/plugins/jquery/jquery.min.js"></script>
