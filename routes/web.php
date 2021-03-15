@@ -38,8 +38,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'customize', 'as' => 'customize.'], function () {
         Route::group(['prefix' => 'brand', 'as' => 'brand.'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'Admin\BrandController@index']);
-            Route::get('create', ['as' => 'create', 'uses' => 'Admin\BrandController@storeBrand']);
-            Route::post('view-list', ['as' => 'view_list', 'uses' => 'Admin\BrandController@store']);
+            Route::post('create', ['as' => 'create', 'uses' => 'Admin\BrandController@storeBrand']);
+            Route::get('view-list', ['as' => 'view_list', 'uses' => 'Admin\BrandController@store']);
             Route::post('update', ['as' => 'update', 'uses' => 'Admin\BrandController@editBrand']);
         });
         Route::group(['prefix' => 'category', 'as' => 'category.'], function () {

@@ -4,6 +4,8 @@ namespace App\Http\Repository\Brand;
 use App\Models\Brand;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Validator;
+
 class BrandRepository implements BrandInterface{
     public function all(){
         return Brand::paginate(25);
@@ -23,7 +25,10 @@ class BrandRepository implements BrandInterface{
         }
         $brand = new Brand;
         $this->saveData($brand, $request);
+        $brand->status = Brand::ACTIVE;
+        $brand->created_by = Auth::user()->id;
         $brand->save();
+        Alert::success('Success', 'Successfully Created a new Brand');
     }
     public function update($request,$id){
         $validator = Validator::make($request->all(),[
@@ -49,6 +54,7 @@ class BrandRepository implements BrandInterface{
         }
         $this->saveData($brand, $request);
         $brand->save();
+        Alert::success('Success', 'Successfully Brand information has been updated.');
     }
     public function delete($id){
         $brand = Brand::destory($id);
@@ -62,6 +68,5 @@ class BrandRepository implements BrandInterface{
             $image->move(public_path('brand_image'), $new_name);
             $data->image = $new_name;
         }
-        $data->status = Brand::ACTIVE;
     }
 }
