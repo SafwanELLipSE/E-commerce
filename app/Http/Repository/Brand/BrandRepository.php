@@ -4,7 +4,7 @@ namespace App\Http\Repository\Brand;
 use App\Models\Brand;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
-use Illuminate\Support\Facades\Validator;
+
 
 class BrandRepository implements BrandInterface{
     public function all(){
@@ -14,15 +14,6 @@ class BrandRepository implements BrandInterface{
         return Brand::find($id);
     }
     public function store($request){
-        $validator = Validator::make($request->all(),[
-            'brand_name'         => 'required',
-            'brand_image'         => 'image|mimes:jpeg,png,jpg,svg|max:2048',
-        ]);
-        if ($validator->fails())
-        {
-            alert()->warning('Error occured',$validator->errors()->all()[0]);
-            return redirect()->back()->withInput()->withErrors($validator);
-        }
         $brand = new Brand;
         $this->saveData($brand, $request);
         $brand->status = Brand::ACTIVE;
@@ -31,19 +22,10 @@ class BrandRepository implements BrandInterface{
         Alert::success('Success', 'Successfully Created a new Brand');
     }
     public function update($request,$id){
-        $validator = Validator::make($request->all(),[
-            'brand_name'         => 'required',
-            'brand_image'         => 'image|mimes:jpeg,png,jpg,svg|max:2048',
-        ]);
-        if ($validator->fails())
-        {
-            alert()->warning('Error occured',$validator->errors()->all()[0]);
-            return redirect()->back()->withInput()->withErrors($validator);
-        }
         $brand = Brand::find($id);
-        if($request->image)
+        if($request->file('brand_image'))
         {
-            if($image_link != null)
+            if($brand->image != null)
             {
                 $path_image = public_path().'/brand_image/'. $brand->image;
                 if(file_exists($path_image) == true)
@@ -56,8 +38,20 @@ class BrandRepository implements BrandInterface{
         $brand->save();
         Alert::success('Success', 'Successfully Brand information has been updated.');
     }
+    // TODO: need to use ajax delete for easlier and btr solution.
     public function delete($id){
-        $brand = Brand::destory($id);
+        $brand = $this->get($id);
+        if($brand->image != null)
+        {
+            $path_image = public_path().'/brand_image/'. $brand->image;
+            if(file_exists($path_image) == true)
+            {
+                unlink($path_image);
+            }
+        }
+
+        $brand->delete();
+        Alert::success('Success', 'Successfully Brand information has been deleted.');
     }
 
     private function saveData($data, $request){

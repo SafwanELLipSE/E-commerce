@@ -1,7 +1,7 @@
 @extends('backend.layouts.app')
 
 @section('title')
-OneTechShop | Dashboard
+{{ env('APP_NAME') }} | Dashboard
 @endsection
 
 @section('additional_headers')

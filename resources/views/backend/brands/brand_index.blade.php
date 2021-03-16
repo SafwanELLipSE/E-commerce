@@ -1,7 +1,7 @@
 @extends('backend.layouts.app')
 
 @section('title')
-OneTechShop | Dashboard
+{{ env('APP_NAME') }} | Brand
 @endsection
 @section('additional_headers')
   <!-- DataTables -->
@@ -55,41 +55,36 @@ OneTechShop | Dashboard
                                                 </div>
                                                 <!-- /.card-header -->
                                                 <div class="card-body">
-                                                    <table id="example1" class="table table-bordered table-striped">
+                                                    <table id="brand_table" class="table table-bordered table-striped">
                                                     <thead>
                                                     <tr>
                                                         <th width="10%">No.</th>
-                                                        <th width="25%">Name</th>
-                                                        <th width="20%">Image</th>
-                                                        <th width="20%">Created Date</th>
-                                                        <th width="20%">Action</th>
+                                                        <th width="20%">Name</th>
+                                                        <th width="15%">Image</th>
+                                                        <th width="15%">Creator</th>
+                                                        <th width="15%">Created Date</th>
+                                                        <th width="25%">Action</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <tr>
-                                                        <td>Trident</td>
-                                                        <td>Internet</td>
-                                                        <td>Win 95+</td>
-                                                        <td> 4</td>
-                                                        <td>X</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Trident</td>
-                                                        <td>Internet</td>
-                                                        <td>Win 95+</td>
-                                                        <td> 4</td>
-                                                        <td>X</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Trident</td>
-                                                        <td>Internet</td>
-                                                        <td>Win 95+</td>
-                                                        <td> 4</td>
-                                                        <td>X</td>
-                                                    </tr>
+                                                        @foreach($brands as $brand)
+                                                        <tr>
+                                                            <td>{{ $brand->id }}</td>
+                                                            <td>{{ $brand->name }}</td>
+                                                            <td>
+                                                                <img src="/brand_image/{{ $brand->image }}" alt="{{ $brand->name }}" class="img-centered img-thumbnail mx-auto d-block mt-2">
+                                                            </td>
+                                                            <td>{{ Auth::User($brand->created_by)->name }}</td>
+                                                            <td> {{ $brand->created_at->format('d.m.Y') }}</td>
+                                                            <td>
+                                                                <a href="{{route('customize.brand.edit',$brand->id)}}" class="btn btn-sm btn-primary"><i class="fas fa-user-edit"></i></a>
+                                                                <a href="{{route('customize.brand.delete',$brand->id)}}" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                        @endforeach
                                                     </tbody>
                                                     <tfoot>
-                                                        
+                                                       {{ $brands->links() }}
                                                     </tfoot>
                                                     </table>
                                                 </div>
@@ -165,22 +160,22 @@ OneTechShop | Dashboard
     <!-- bs-custom-file-input -->
     <script src="{{asset('assets/backend')}}/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script>
-            $(document).ready(function(){
-                $(".imageUpload").change(function(data){
+        $(document).ready(function(){
+            $(".imageUpload").change(function(data){
 
-                var imageFile = data.target.files[0];
-                var reader = new FileReader();
-                reader.readAsDataURL(imageFile);
+            var imageFile = data.target.files[0];
+            var reader = new FileReader();
+            reader.readAsDataURL(imageFile);
 
-                    reader.onload = function(evt){
-                    $('#imagePreview').attr('src', evt.target.result);
-                    $('#imagePreview').hide();
-                    $('#imagePreview').fadeIn(650);
-                    }		
-                });
+                reader.onload = function(evt){
+                $('#imagePreview').attr('src', evt.target.result);
+                $('#imagePreview').hide();
+                $('#imagePreview').fadeIn(650);
+                }		
             });
-         $(function () {
-            $("#example1").DataTable({
+        });
+        $(function () {
+            $("#brand_table").DataTable({
                 "responsive": true, "lengthChange": false, "autoWidth": false,
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
@@ -193,7 +188,7 @@ OneTechShop | Dashboard
                 "autoWidth": false,
                 "responsive": true,
             });
-        });
+        }); 
         $(function () {
             bsCustomFileInput.init();
         });
