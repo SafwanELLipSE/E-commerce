@@ -11,4 +11,16 @@ class CategoryController extends Controller
     {
         return view('backend.category.category_index');
     }
+    public function storeCategory(Request $request){
+
+    }
+    public function editCategory(Request $request){
+
+    }
+    public function updateCategory(Request $request){
+        
+    }
+    public function destroyCategory(Request $request){
+        
+    }
 }

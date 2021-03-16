@@ -46,8 +46,11 @@ Route::group(['middleware' => ['auth']], function () {
         });
         Route::group(['prefix' => 'category', 'as' => 'category.'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'Admin\CategoryController@index']);
-            Route::get('view-list', ['as' => 'view_list', 'uses' => 'Admin\CategoryController@getCategoryList']);
-            Route::post('update', ['as' => 'update', 'uses' => 'Admin\CategoryController@editCategory']);
+            Route::post('create', ['as' => 'create', 'uses' => 'Admin\CategoryController@storeCategory']);
+            // Route::get('view-list', ['as' => 'view_list', 'uses' => 'Admin\CategoryController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Admin\CategoryController@editCategory']);
+            Route::post('update', ['as' => 'update', 'uses' => 'Admin\CategoryController@updateCategory']);
+            Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Admin\CategoryController@destroyCategory']);
         });
         Route::group(['prefix' => 'subCategory', 'as' => 'subCategory.'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'Admin\SubCategoryController@index']);
