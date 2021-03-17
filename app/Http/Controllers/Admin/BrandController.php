@@ -50,13 +50,19 @@ class BrandController extends Controller
         }
         $id = $request->post('brand_id');
         $this->brandRepository->update($request,$id);
-        
+        Alert::success('Success', 'Successfully Brand information has been updated.');
         return view('backend.brands.brand_edit',[
             'brand' => $this->brandRepository->get($id)
         ]);
     }
-    public function destroyBrand(Request $request,$id){
-        $this->brandRepository->delete($id);
-        return redirect()->back();
+    public function destroyBrand(Request $request){
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|exists:brands,id',
+        ]);
+        if ($validator->fails())
+            return response()->json($validator->errors()->all()[0], 422);
+
+        $this->brandRepository->delete($request->post('id'));
+        return response()->json("Succesfully, Brand has been deleted", 200);
     }
 }

@@ -59,11 +59,12 @@
                                                     <thead>
                                                     <tr>
                                                         <th width="10%">No.</th>
-                                                        <th width="20%">Name</th>
+                                                        <th width="15%">Name</th>
                                                         <th width="15%">Image</th>
+                                                        <th width="10%">Status</th>
                                                         <th width="15%">Creator</th>
                                                         <th width="15%">Created Date</th>
-                                                        <th width="25%">Action</th>
+                                                        <th width="20%">Action</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -74,11 +75,12 @@
                                                             <td>
                                                                 <img src="/brand_image/{{ $brand->image }}" alt="{{ $brand->name }}" class="img-centered img-thumbnail mx-auto d-block mt-2">
                                                             </td>
+                                                            <td>{!! App\Models\Brand::getStatus($brand->status) !!}</td>
                                                             <td>{{ Auth::User($brand->created_by)->name }}</td>
                                                             <td> {{ $brand->created_at->format('d.m.Y') }}</td>
                                                             <td>
                                                                 <a href="{{route('customize.brand.edit',$brand->id)}}" class="btn btn-sm btn-primary"><i class="fas fa-user-edit"></i></a>
-                                                                <a href="{{route('customize.brand.delete',$brand->id)}}" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                                                <a id="delete-brand" data-brand-id="{{$brand->id}}" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
                                                             </td>
                                                         </tr>
                                                         @endforeach
@@ -157,6 +159,7 @@
     <script src="{{asset('assets/backend')}}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="{{asset('assets/backend')}}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="{{asset('assets/backend')}}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="{{asset('js/brand.js')}}"></script>
     <!-- bs-custom-file-input -->
     <script src="{{asset('assets/backend')}}/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script>

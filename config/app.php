@@ -175,6 +175,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Http\Repository\Brand\BrandRepositoryServiceProvider::class,
+        App\Http\Repository\Category\CategoryRepositoryServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
 
     ],

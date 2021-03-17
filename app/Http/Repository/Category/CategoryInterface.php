@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Repository\Brand;
+namespace App\Http\Repository\Category;
 
-interface BrandInterface{
+interface CategoryInterface
+{
     public function all();
     public function get($id);
     public function store($request);

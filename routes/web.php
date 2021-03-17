@@ -42,7 +42,7 @@ Route::group(['middleware' => ['auth']], function () {
             // Route::get('view-list', ['as' => 'view_list', 'uses' => 'Admin\BrandController@store']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Admin\BrandController@editBrand']);
             Route::post('update', ['as' => 'update', 'uses' => 'Admin\BrandController@updateBrand']);
-            Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Admin\BrandController@destroyBrand']);
+            Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\BrandController@destroyBrand']);
         });
         Route::group(['prefix' => 'category', 'as' => 'category.'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'Admin\CategoryController@index']);

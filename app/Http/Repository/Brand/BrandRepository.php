@@ -3,8 +3,6 @@
 namespace App\Http\Repository\Brand;
 use App\Models\Brand;
 use Illuminate\Support\Facades\Auth;
-use RealRashid\SweetAlert\Facades\Alert;
-
 
 class BrandRepository implements BrandInterface{
     public function all(){
@@ -19,7 +17,6 @@ class BrandRepository implements BrandInterface{
         $brand->status = Brand::ACTIVE;
         $brand->created_by = Auth::user()->id;
         $brand->save();
-        Alert::success('Success', 'Successfully Created a new Brand');
     }
     public function update($request,$id){
         $brand = Brand::find($id);
@@ -36,9 +33,7 @@ class BrandRepository implements BrandInterface{
         }
         $this->saveData($brand, $request);
         $brand->save();
-        Alert::success('Success', 'Successfully Brand information has been updated.');
     }
-    // TODO: need to use ajax delete for easlier and btr solution.
     public function delete($id){
         $brand = $this->get($id);
         if($brand->image != null)
@@ -49,11 +44,8 @@ class BrandRepository implements BrandInterface{
                 unlink($path_image);
             }
         }
-
         $brand->delete();
-        Alert::success('Success', 'Successfully Brand information has been deleted.');
     }
-
     private function saveData($data, $request){
         $data->name = $request->post('brand_name');
         if($request->file('brand_image')){
