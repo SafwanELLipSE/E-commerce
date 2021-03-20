@@ -9,7 +9,7 @@ class SubcategoryRepository implements SubcategoryInterface
 {
     public function all()
     {
-        return Sub_Category::paginate(25);
+        return Sub_Category::all();
     }
     public function get($id)
     {

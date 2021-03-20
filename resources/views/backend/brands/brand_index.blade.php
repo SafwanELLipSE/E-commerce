@@ -57,37 +57,24 @@
                                                 <div class="card-body">
                                                     <table id="brand_table" class="table table-bordered table-striped">
                                                     <thead>
-                                                    <tr>
-                                                        <th width="10%">No.</th>
-                                                        <th width="15%">Name</th>
-                                                        <th width="15%">Image</th>
-                                                        <th width="10%">Status</th>
-                                                        <th width="15%">Creator</th>
-                                                        <th width="15%">Created Date</th>
-                                                        <th width="20%">Action</th>
-                                                    </tr>
+                                                        <tr>
+                                                            <th width="10%">No.</th>
+                                                            <th width="15%">Name</th>
+                                                            <th width="15%">Image</th>
+                                                            <th width="15%">
+                                                                <select id="status" class="custom-select form-control-border border-width-2">
+                                                                    <option value="" selected>Status</option>
+                                                                    <option value="1">Active</option>
+                                                                    <option value="2">Inactive</option>
+                                                                </select>
+                                                            </th>
+                                                            <th width="15%">Creator</th>
+                                                            <th width="10%">Created Date</th>
+                                                            <th width="20%">Action</th>
+                                                        </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @foreach($brands as $brand)
-                                                        <tr>
-                                                            <td>{{ $brand->id }}</td>
-                                                            <td>{{ $brand->name }}</td>
-                                                            <td>
-                                                                <img src="/brand_image/{{ $brand->image }}" alt="{{ $brand->name }}" class="img-centered img-thumbnail mx-auto d-block mt-2">
-                                                            </td>
-                                                            <td>{!! App\Models\Brand::getStatus($brand->status) !!}</td>
-                                                            <td>{{ Auth::User($brand->created_by)->name }}</td>
-                                                            <td> {{ $brand->created_at->format('d.m.Y') }}</td>
-                                                            <td>
-                                                                <a href="{{route('customize.brand.edit',$brand->id)}}" class="btn btn-sm btn-primary"><i class="fas fa-user-edit"></i></a>
-                                                                <a id="delete-brand" data-brand-id="{{$brand->id}}" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
-                                                            </td>
-                                                        </tr>
-                                                        @endforeach
                                                     </tbody>
-                                                    <tfoot>
-                                                       {{ $brands->links() }}
-                                                    </tfoot>
                                                     </table>
                                                 </div>
                                             <!-- /.card-body -->
@@ -177,21 +164,6 @@
                 }		
             });
         });
-        $(function () {
-            $("#brand_table").DataTable({
-                "responsive": true, "lengthChange": false, "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
-        }); 
         $(function () {
             bsCustomFileInput.init();
         });

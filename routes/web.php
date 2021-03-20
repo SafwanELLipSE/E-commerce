@@ -39,7 +39,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::group(['prefix' => 'brand', 'as' => 'brand.'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'Admin\BrandController@index']);
             Route::post('create', ['as' => 'create', 'uses' => 'Admin\BrandController@storeBrand']);
-            // Route::get('view-list', ['as' => 'view_list', 'uses' => 'Admin\BrandController@store']);
+            Route::post('list', ['as' => 'list', 'uses' => 'Admin\BrandController@allBrandList']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Admin\BrandController@editBrand']);
             Route::post('update', ['as' => 'update', 'uses' => 'Admin\BrandController@updateBrand']);
             Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\BrandController@destroyBrand']);
@@ -47,7 +47,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::group(['prefix' => 'category', 'as' => 'category.'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'Admin\CategoryController@index']);
             Route::post('create', ['as' => 'create', 'uses' => 'Admin\CategoryController@storeCategory']);
-            // Route::get('view-list', ['as' => 'view_list', 'uses' => 'Admin\CategoryController@store']);
+            Route::post('list', ['as' => 'list', 'uses' => 'Admin\CategoryController@allCategoryList']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Admin\CategoryController@editCategory']);
             Route::post('update', ['as' => 'update', 'uses' => 'Admin\CategoryController@updateCategory']);
             Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\CategoryController@destroyCategory']);

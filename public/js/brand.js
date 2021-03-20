@@ -1,6 +1,38 @@
 $(document).ready(function () {
     var _token = $('meta[name="_token"]').attr('content');
     var ssl = $('meta[name="ssl"]').attr('content');
+    function populate_brands() {
+
+        dataTable = $('#brand_table').DataTable({
+            "serverSide": true,
+            "processing": false,
+            "pageLength": 20,
+            "ordering": false,
+            "ajax":
+            {
+                url: ssl + window.location.hostname + "/customize/brand/list",
+                type: "POST",
+                data: {
+                    'status': $("#status").val(),
+                    _token
+                },
+            },
+            "language": {
+                "paginate": {
+                    "previous": "&#706",
+                    "next": "&#707"
+                }
+            }
+        });
+
+    }
+    populate_brands();
+
+    $("#status").on("change", function () {
+        dataTable.destroy();
+        populate_brands();
+    });
+
     $("#brand_table").on("click", '#delete-brand', function () {
         var brand_id = $(this).attr("data-brand-id");
         $.ajax({
@@ -11,8 +43,8 @@ $(document).ready(function () {
                 _token
             }, 
             success: function (response) {
-                // $(el).closest("tr").remove();
-                location.reload();
+                $('#brand_table').DataTable().destroy();
+                populate_brands();
                 Swal.fire({
                     title: "SUCCESS!!",
                     text: response,

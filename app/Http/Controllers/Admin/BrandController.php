@@ -14,10 +14,9 @@ class BrandController extends Controller
     }
     public function index(Request $request)
     {
-        return view('backend.brands.brand_index',[
-            'brands' => $this->brandRepository->all()
-        ]);
+        return view('backend.brands.brand_index');
     }
+    
     // TODO: need to show error on the create tab panel.
     public function storeBrand(Request $request){
         $validator = Validator::make($request->all(),[
@@ -32,6 +31,9 @@ class BrandController extends Controller
         $this->brandRepository->store($request);
         Alert::success('Success', 'Successfully Created a new Brand');
         return redirect()->back();
+    }
+    public function allBrandList(Request $request){
+        echo json_encode($this->brandRepository->list($request));
     }
     public function editBrand(Request $request,$id){
         return view('backend.brands.brand_edit',[

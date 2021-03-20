@@ -16,9 +16,7 @@ class CategoryController extends Controller
     }
     public function index(Request $request)
     {
-        return view('backend.category.category_index',[
-            'categories' => $this->categoryRepository->all()
-        ]);
+        return view('backend.category.category_index');
     }
     public function storeCategory(Request $request){
         $validator = Validator::make($request->all(), [
@@ -32,6 +30,9 @@ class CategoryController extends Controller
         $this->categoryRepository->store($request);
         Alert::success('Success', 'Successfully Created a new Category');
         return redirect()->back();
+    }
+    public function allCategoryList(Request $request){
+        echo json_encode($this->categoryRepository->list($request));
     }
     public function editCategory(Request $request,$id){
         return view('backend.category.category_edit', [

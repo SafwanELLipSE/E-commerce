@@ -61,33 +61,20 @@ OneTechShop | Dashboard
                                                         <th width="10%">No.</th>
                                                         <th width="15%">Name</th>
                                                         <th width="15%">Image</th>
-                                                        <th width="10%">Status</th>
+                                                        <th width="15%">
+                                                            <select id="status" class="custom-select form-control-border border-width-2">
+                                                                <option value="" selected>Status</option>
+                                                                <option value="1">Active</option>
+                                                                <option value="2">Inactive</option>
+                                                            </select>
+                                                        </th>
                                                         <th width="15%">Creator</th>
-                                                        <th width="15%">Created Date</th>
+                                                        <th width="10%">Created Date</th>
                                                         <th width="20%">Action</th>
                                                     </tr>
                                                     </thead>
-                                                    <tbody>
-                                                        @foreach($categories as $category)
-                                                        <tr>
-                                                            <td>{{ $category->id }}</td>
-                                                            <td>{{ $category->name }}</td>
-                                                            <td>
-                                                                <img src="/category_image/{{ $category->image }}" alt="{{ $category->name }}" class="img-centered img-thumbnail mx-auto d-block mt-2">
-                                                            </td>
-                                                            <td>{!! App\Models\Category::getStatus($category->status) !!}</td>
-                                                            <td>{{ Auth::User($category->created_by)->name }}</td>
-                                                            <td> {{ $category->created_at->format('d.m.Y') }}</td>
-                                                            <td>
-                                                                <a href="{{route('customize.category.edit',$category->id)}}" class="btn btn-sm btn-primary"><i class="fas fa-user-edit"></i></a>
-                                                                <a id="delete-category" data-category-id="{{$category->id}}" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
-                                                            </td>
-                                                        </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                    <tfoot>
-                                                       {{ $categories->links() }}
-                                                    </tfoot>
+                                                    <tbody>                                                   
+                                                    </tbody>                             
                                                     </table>
                                                 </div>
                                             <!-- /.card-body -->
@@ -177,13 +164,6 @@ OneTechShop | Dashboard
                     }		
                 });
             });
-         $(function () {
-            $("#category_table").DataTable({
-                "responsive": true, "lengthChange": false, "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-
-        });
         $(function () {
             bsCustomFileInput.init();
         });
