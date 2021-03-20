@@ -19,7 +19,7 @@ class BrandRepository implements BrandInterface{
         $brand->save();
     }
     public function update($request,$id){
-        $brand = Brand::find($id);
+        $brand = $this->get($id);
         if($request->file('brand_image'))
         {
             if($brand->image != null)

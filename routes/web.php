@@ -50,12 +50,15 @@ Route::group(['middleware' => ['auth']], function () {
             // Route::get('view-list', ['as' => 'view_list', 'uses' => 'Admin\CategoryController@store']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Admin\CategoryController@editCategory']);
             Route::post('update', ['as' => 'update', 'uses' => 'Admin\CategoryController@updateCategory']);
-            Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Admin\CategoryController@destroyCategory']);
+            Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\CategoryController@destroyCategory']);
         });
         Route::group(['prefix' => 'subCategory', 'as' => 'subCategory.'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'Admin\SubCategoryController@index']);
-            Route::get('list', ['as' => 'list', 'uses' => 'Admin\SubCategoryController@getCategoryList']);
-            Route::post('update', ['as' => 'update', 'uses' => 'Admin\SubCategoryController@editCategory']);
+            Route::post('create', ['as' => 'create', 'uses' => 'Admin\SubCategoryController@storeSubcategory']);
+            // Route::get('list', ['as' => 'list', 'uses' => 'Admin\SubCategoryController@getCategoryList']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Admin\SubCategoryController@editSubcategory']);
+            Route::post('update', ['as' => 'update', 'uses' => 'Admin\SubCategoryController@updateSubcategory']);
+            Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\SubCategoryController@destroySubcategory']);
         });
     });
 });

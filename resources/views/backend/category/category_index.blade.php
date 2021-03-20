@@ -55,7 +55,7 @@ OneTechShop | Dashboard
                                                 </div>
                                                 <!-- /.card-header -->
                                                 <div class="card-body">
-                                                    <table id="example1" class="table table-bordered table-striped">
+                                                    <table id="category_table" class="table table-bordered table-striped">
                                                     <thead>
                                                     <tr>
                                                         <th width="10%">No.</th>
@@ -68,25 +68,25 @@ OneTechShop | Dashboard
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @foreach($brands as $brand)
+                                                        @foreach($categories as $category)
                                                         <tr>
-                                                            <td>{{ $brand->id }}</td>
-                                                            <td>{{ $brand->name }}</td>
+                                                            <td>{{ $category->id }}</td>
+                                                            <td>{{ $category->name }}</td>
                                                             <td>
-                                                                <img src="/brand_image/{{ $brand->image }}" alt="{{ $brand->name }}" class="img-centered img-thumbnail mx-auto d-block mt-2">
+                                                                <img src="/category_image/{{ $category->image }}" alt="{{ $category->name }}" class="img-centered img-thumbnail mx-auto d-block mt-2">
                                                             </td>
-                                                            <td>{!! App\Models\Brand::getStatus($brand->status) !!}</td>
-                                                            <td>{{ Auth::User($brand->created_by)->name }}</td>
-                                                            <td> {{ $brand->created_at->format('d.m.Y') }}</td>
+                                                            <td>{!! App\Models\Category::getStatus($category->status) !!}</td>
+                                                            <td>{{ Auth::User($category->created_by)->name }}</td>
+                                                            <td> {{ $category->created_at->format('d.m.Y') }}</td>
                                                             <td>
-                                                                <a href="{{route('customize.brand.edit',$brand->id)}}" class="btn btn-sm btn-primary"><i class="fas fa-user-edit"></i></a>
-                                                                <a id="delete-brand" data-brand-id="{{$brand->id}}" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                                                <a href="{{route('customize.category.edit',$category->id)}}" class="btn btn-sm btn-primary"><i class="fas fa-user-edit"></i></a>
+                                                                <a id="delete-category" data-category-id="{{$category->id}}" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
                                                             </td>
                                                         </tr>
                                                         @endforeach
                                                     </tbody>
                                                     <tfoot>
-                                                       {{ $brands->links() }}
+                                                       {{ $categories->links() }}
                                                     </tfoot>
                                                     </table>
                                                 </div>
@@ -99,6 +99,8 @@ OneTechShop | Dashboard
                             <div class="tab-pane fade" id="custom-tabs-two-profile" role="tabpanel" aria-labelledby="custom-tabs-two-profile-tab">
                                 <div class="row">
                                     <div class="col-12">
+                                      <form action="{{route('customize.category.create')}}" method="POST" enctype="multipart/form-data">
+                                        @csrf
                                         <div class="card">
                                             <div class="card-header">
                                                 <h3 class="card-title">Create a New Category</h3>
@@ -109,13 +111,13 @@ OneTechShop | Dashboard
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label for="exampleInputBorderWidth2">Name :</label>
-                                                            <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Category Name">
+                                                            <input type="text" name="category_name" value="{{old('category_name')}}" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Category Name">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="exampleInputFile">Image :</label>
                                                             <div class="input-group">
                                                                 <div class="custom-file">
-                                                                    <input type="file" class="custom-file-input imageUpload" id="exampleInputFile">
+                                                                    <input type="file" name="category_image" class="custom-file-input imageUpload" id="exampleInputFile">
                                                                     <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                                                 </div>
                                                             </div>
@@ -125,7 +127,11 @@ OneTechShop | Dashboard
                                                 </div>
                                             </div>
                                             <!-- /.card-body -->
+                                            <div class="card-footer">
+                                                <button type="submit" class="btn btn-sm bg-gradient-primary float-right">Create</button>
+                                            </div>
                                         </div>
+                                      </form>
                                     </div>
                                 </div>
                             </div>
@@ -153,6 +159,7 @@ OneTechShop | Dashboard
     <script src="{{asset('assets/backend')}}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="{{asset('assets/backend')}}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="{{asset('assets/backend')}}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="{{asset('js/category.js')}}"></script>
     <!-- bs-custom-file-input -->
     <script src="{{asset('assets/backend')}}/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script>
@@ -171,19 +178,11 @@ OneTechShop | Dashboard
                 });
             });
          $(function () {
-            $("#example1").DataTable({
+            $("#category_table").DataTable({
                 "responsive": true, "lengthChange": false, "autoWidth": false,
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
+
         });
         $(function () {
             bsCustomFileInput.init();

@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Http\Repository\Brand\BrandRepositoryServiceProvider::class,
         App\Http\Repository\Category\CategoryRepositoryServiceProvider::class,
+        App\Http\Repository\Subcategory\SubcategoryRepositoryServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
 
     ],
