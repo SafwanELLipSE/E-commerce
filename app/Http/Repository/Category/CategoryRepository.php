@@ -3,20 +3,28 @@
 namespace App\Http\Repository\Category;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryRepository implements CategoryInterface{
     public function all(){
-        return Category::paginate(25);
+        return Category::all();
     }
     public function get($id){
         return Category::find($id);
     }
     public function store($request){
+        $validator = $this->validationCategory($request);
+        if ($validator->fails()) {
+            alert()->warning('Error occured', $validator->errors()->all()[0]);
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
         $category = new Category;
-        $this->saveData($category, $request);
+        $this->saveInformation($category, $request);
         $category->status = Category::ACTIVE;
         $category->created_by = Auth::user()->id;
         $category->save();
+        Alert::success('Success', 'Successfully Created a new Category');
     }
     public function list($request)
     {
@@ -31,14 +39,17 @@ class CategoryRepository implements CategoryInterface{
 
         foreach ($categories as $category) {
             $show = route('customize.category.edit', $category->id);
+            $status_link = route('customize.category.status', $category->id);
             $image = $category->image != null  ? asset('category_image/' . $category->image) : asset("/backend/dist/img/No image.png");
+            $status_icon = $category->status != 1 ? "fa-check" : "fa-times";
+            $status_color = $category->status != 1 ? "btn-success" : "btn-danger";
             $localArray[0] = $category->id;
             $localArray[1] = $category->name;
             $localArray[2] = "<img src='{$image}' alt='{$category->name}' class='img-centered img-thumbnail mx-auto d-block mt-2'>";
             $localArray[3] = category::getStatus($category->status);
             $localArray[4] = Auth::User($category->created_by)->name;
             $localArray[5] = $category->created_at->format('d.m.Y');
-            $localArray[6] = "<a href='{$show}' class='btn btn-sm btn-info'><i class='fas fa-user-edit'></i></a>  <div class='btn btn-sm btn-danger' id='delete-category' data-category-id='{$category->id}'><i class='fas fa-trash-alt'></i></div>";
+            $localArray[6] = "<a href='{$show}' class='btn btn-sm btn-info'><i class='fas fa-user-edit'></i></a> <a href='{$status_link}' class='btn btn-sm {$status_color}'><i class='fas {$status_icon}'></i></a> <div class='btn btn-sm btn-danger' id='delete-category' data-category-id='{$category->id}'><i class='fas fa-trash-alt'></i></div>";
             $toReturn[] = $localArray;
         }
         $json_data = array(
@@ -50,6 +61,11 @@ class CategoryRepository implements CategoryInterface{
         return $json_data;
     }
     public function update($request, $id){
+        $validator = $this->validationCategory($request);
+        if ($validator->fails()) {
+            alert()->warning('Error occured', $validator->errors()->all()[0]);
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
         $category = $this->get($id);
         if ($request->file('category_image')) {
             if ($category->image != null) {
@@ -59,10 +75,16 @@ class CategoryRepository implements CategoryInterface{
                 }
             }
         }
-        $this->saveData($category, $request);
+        $this->saveInformation($category, $request);
         $category->save();
+        Alert::success('Success', 'Successfully Category information has been updated.');
     }
-    public function delete($id){
+    public function delete($request,$id){
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|exists:categories,id',
+        ]);
+        if ($validator->fails())
+            return response()->json($validator->errors()->all()[0], 422);
         $category = $this->get($id);
         if ($category->image != null) {
             $path_image = public_path() . '/category_image/' . $category->image;
@@ -72,7 +94,23 @@ class CategoryRepository implements CategoryInterface{
         }
         $category->delete();
     }
-    private function saveData($data, $request)
+    public function status($request,$id){
+        $category = $this->get($id);
+        if($category->status == Category::ACTIVE){
+            $category->status = Category::INACTIVE;
+        }elseif($category->status == Category::INACTIVE){
+            $category->status = Category::ACTIVE;
+        }
+        $category->save();
+        Alert::success('Success', 'Successfully Status of Category has been changed.');
+    }
+    private function validationCategory($request){
+        return  Validator::make($request->all(),[
+                    'category_name'   => 'required',
+                    'category_image'  => 'image|mimes:jpeg,png,jpg,svg|max:2048',
+                ]);
+    }
+    private function saveInformation($data, $request)
     {
         $data->name = $request->post('category_name');
         if ($request->file('category_image')) {

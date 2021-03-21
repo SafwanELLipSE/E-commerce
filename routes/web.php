@@ -43,6 +43,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Admin\BrandController@editBrand']);
             Route::post('update', ['as' => 'update', 'uses' => 'Admin\BrandController@updateBrand']);
             Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\BrandController@destroyBrand']);
+            Route::get('status/{id}', ['as' => 'status', 'uses' => 'Admin\BrandController@changeStatus']);
         });
         Route::group(['prefix' => 'category', 'as' => 'category.'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'Admin\CategoryController@index']);
@@ -51,14 +52,16 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Admin\CategoryController@editCategory']);
             Route::post('update', ['as' => 'update', 'uses' => 'Admin\CategoryController@updateCategory']);
             Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\CategoryController@destroyCategory']);
+            Route::get('status/{id}', ['as' => 'status', 'uses' => 'Admin\CategoryController@changeStatus']);
         });
         Route::group(['prefix' => 'subCategory', 'as' => 'subCategory.'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'Admin\SubCategoryController@index']);
             Route::post('create', ['as' => 'create', 'uses' => 'Admin\SubCategoryController@storeSubcategory']);
-            // Route::get('list', ['as' => 'list', 'uses' => 'Admin\SubCategoryController@getCategoryList']);
+            Route::post('list', ['as' => 'list', 'uses' => 'Admin\SubCategoryController@allSubCategoryList']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Admin\SubCategoryController@editSubcategory']);
             Route::post('update', ['as' => 'update', 'uses' => 'Admin\SubCategoryController@updateSubcategory']);
             Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\SubCategoryController@destroySubcategory']);
+            Route::get('status/{id}', ['as' => 'status', 'uses' => 'Admin\SubCategoryController@changeStatus']);
         });
     });
 });

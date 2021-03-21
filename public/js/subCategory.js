@@ -3,7 +3,7 @@ $(document).ready(function () {
     var ssl = $('meta[name="ssl"]').attr('content');
     function populate_categories() {
 
-        dataTable = $('#category_table').DataTable({
+        dataTable = $('#subCategory_table').DataTable({
             "serverSide": true,
             "processing": false,
             "pageLength": 20,
@@ -14,7 +14,7 @@ $(document).ready(function () {
             ],
             "ajax":
             {
-                url: ssl + window.location.hostname + "/customize/category/list",
+                url: ssl + window.location.hostname + "/customize/subCategory/list",
                 type: "POST",
                 data: {
                     'status': $("#status").val(),
@@ -37,17 +37,17 @@ $(document).ready(function () {
         populate_categories();
     });
 
-    $("#category_table").on("click", '#delete-category', function () {
-        var category_id = $(this).attr("data-category-id");
+    $("#subCategory_table").on("click", '#delete-subCatgory', function () {
+        var category_id = $(this).attr("data-subCatgory-id");
         $.ajax({
-            url: ssl + window.location.hostname + "/customize/category/delete",
+            url: ssl + window.location.hostname + "/customize/subCategory/delete",
             type: "POST",
             data: {
                 'id': category_id,
                 _token
             },
             success: function (response) {
-                $('#category_table').DataTable().destroy();
+                $('#subCategory_table').DataTable().destroy();
                 populate_categories();
                 Swal.fire({
                     title: "SUCCESS!!",

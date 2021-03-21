@@ -13,12 +13,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0"><i class="fab fa-copyright"></i> Edit Sub-Category's Information</h1>
+                    <h1 class="m-0"><i class="fab fa-speakap"></i> Edit Sub-Category's Information</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i> Home</a></li>
-                        <li class="breadcrumb-item active"><i class="fab fa-copyright mt-1 mr-1"></i> Edit Sub-Category</li>
+                        <li class="breadcrumb-item active"><i class="fab fa-speakap mt-1 mr-1"></i> Edit Sub-Category</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -50,7 +50,7 @@
                                 </div>
                             </div>
                         </div>
-                        <img id="imagePreview" src="/subCategory_image/{{$subCategory->image}}" class="rounded mx-auto d-block thumbnail" width="200" height="120" alt="Brand Image Upload">
+                        <img id="imagePreview" src="/subCategory_image/{{$subCategory->image}}" class="rounded mx-auto d-block thumbnail" width="200" height="120" alt="{{$subCategory->name}}">
                     </div>
                 </div>
             </div>

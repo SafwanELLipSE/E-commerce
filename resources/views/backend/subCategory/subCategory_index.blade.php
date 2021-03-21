@@ -57,42 +57,27 @@ OneTechShop | Dashboard
                                         </div>
                                         <!-- /.card-header -->
                                         <div class="card-body">
-                                            <table id="example1" class="table table-bordered table-striped">
-                                            <thead>
-                                            <tr>
-                                                <th width="10%">No.</th>
-                                                <th width="25%">Name</th>
-                                                <th width="20%">Image</th>
-                                                <th width="20%">Created Date</th>
-                                                <th width="20%">Action</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td>Trident</td>
-                                                <td>Internet</td>
-                                                <td>Win 95+</td>
-                                                <td> 4</td>
-                                                <td>X</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Trident</td>
-                                                <td>Internet</td>
-                                                <td>Win 95+</td>
-                                                <td> 4</td>
-                                                <td>X</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Trident</td>
-                                                <td>Internet</td>
-                                                <td>Win 95+</td>
-                                                <td> 4</td>
-                                                <td>X</td>
-                                            </tr>
-                                            </tbody>
-                                            <tfoot>
-                                                
-                                            </tfoot>
+                                            <table id="subCategory_table" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="10%">No.</th>
+                                                        <th width="15%">Name</th>
+                                                        <th width="10%">Category</th>
+                                                        <th width="15%">Image</th>
+                                                        <th width="15%">
+                                                            <select id="status" class="custom-select form-control-border border-width-2">
+                                                                <option value="" selected>Status</option>
+                                                                <option value="1">Active</option>
+                                                                <option value="2">Inactive</option>
+                                                            </select>
+                                                        </th>
+                                                        <th width="15%">Creator</th>
+                                                        <th width="10%">Created Date</th>
+                                                        <th width="15%">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
                                             </table>
                                         </div>
                                     <!-- /.card-body -->
@@ -108,17 +93,19 @@ OneTechShop | Dashboard
                                     <div class="card-header">
                                         <h3 class="card-title">Create a New Sub-category</h3>
                                     </div>
+                                  <form action="{{route('customize.subCategory.create')}}" method="POST" enctype="multipart/form-data">
+                                    @csrf
                                     <!-- /.card-header -->
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="exampleInputBorderWidth2">Name :</label>
-                                                    <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Sub-category Name">
+                                                    <input type="text" name="subCatgory_name" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Sub-category Name">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Select Category: </label>
-                                                    <select class="form-control select2 select2-muted" data-dropdown-css-class="select2-muted" style="width: 100%;">
+                                                    <select name="category" class="form-control select2 select2-muted" data-dropdown-css-class="select2-muted" style="width: 100%;">
                                                         <option selected="selected" value="" disabled>Select a Category</option>
                                                         @foreach($categories as $category)
                                                             <option value="{{$category->id}}">{{$category->name}}</option>
@@ -129,7 +116,7 @@ OneTechShop | Dashboard
                                                     <label for="exampleInputFile">Image :</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input imageUpload" id="exampleInputFile">
+                                                            <input name="subCatgory_image" type="file" class="custom-file-input imageUpload" id="exampleInputFile">
                                                             <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                                         </div>
                                                     </div>
@@ -138,7 +125,11 @@ OneTechShop | Dashboard
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-sm bg-gradient-primary float-right">Create</button>
+                                    </div>
                                     <!-- /.card-body -->
+                                  </form>
                                 </div>
                             </div>
                         </div>
@@ -169,6 +160,7 @@ OneTechShop | Dashboard
     <script src="{{asset('assets/backend')}}/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <!-- Select2 -->
     <script src="{{asset('assets/backend')}}/plugins/select2/js/select2.full.min.js"></script>
+    <script src="{{asset('js/subCategory.js')}}"></script>
     <script>
             $(document).ready(function(){
                 $(".imageUpload").change(function(data){
@@ -189,20 +181,19 @@ OneTechShop | Dashboard
             $('.select2').select2({
             theme: 'bootstrap4'
             })
-
-            $("#example1").DataTable({
-                "responsive": true, "lengthChange": false, "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
+            // $("#example1").DataTable({
+            //     "responsive": true, "lengthChange": false, "autoWidth": false,
+            //     "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            // }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            // $('#example2').DataTable({
+            //     "paging": true,
+            //     "lengthChange": false,
+            //     "searching": false,
+            //     "ordering": true,
+            //     "info": true,
+            //     "autoWidth": false,
+            //     "responsive": true,
+            // });
         });
         $(function () {
             bsCustomFileInput.init();

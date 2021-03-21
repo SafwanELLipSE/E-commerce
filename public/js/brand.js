@@ -7,7 +7,11 @@ $(document).ready(function () {
             "serverSide": true,
             "processing": false,
             "pageLength": 20,
-            "ordering": false,
+            "ordering": [],
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print' , 'colvis'
+            ],
             "ajax":
             {
                 url: ssl + window.location.hostname + "/customize/brand/list",
@@ -60,8 +64,5 @@ $(document).ready(function () {
                 });
             }
         });
-        $('#brand_table').listview("refresh");
-
-        return false;
     });
 });
