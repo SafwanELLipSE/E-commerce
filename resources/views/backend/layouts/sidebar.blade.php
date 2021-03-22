@@ -79,6 +79,29 @@
                   <p>Slider</p>
                 </a>
               </li>
+              <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fab fa-product-hunt"></i>
+                  <p>
+                    Product
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="fab fa-product-hunt nav-icon"></i>
+                      <p>Create Product</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="fab fa-product-hunt nav-icon"></i>
+                      <p>All Product</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
             </ul>
           </li>
           <li class="nav-item">

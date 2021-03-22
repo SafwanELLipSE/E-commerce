@@ -80,5 +80,15 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\SliderController@destroySlider']);
             Route::get('status/{id}', ['as' => 'status', 'uses' => 'Admin\SliderController@changeStatus']);
         });
+        Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
+            Route::get('/', ['as' => 'index', 'uses' => 'Admin\ProductController@index']);
+            Route::get('list-view', ['list_view' => 'index', 'uses' => 'Admin\ProductController@diplayProductList']);
+            Route::post('create', ['as' => 'create', 'uses' => 'Admin\ProductController@storeSlider']);
+            Route::post('list', ['as' => 'list', 'uses' => 'Admin\ProductController@allSliderList']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Admin\ProductController@editSlider']);
+            Route::post('update', ['as' => 'update', 'uses' => 'Admin\ProductController@updateSlider']);
+            Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\ProductController@destroySlider']);
+            Route::get('status/{id}', ['as' => 'status', 'uses' => 'Admin\ProductController@changeStatus']);
+        });
     });
 });
