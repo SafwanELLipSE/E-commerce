@@ -17,6 +17,19 @@ class SubcategoryRepository implements SubcategoryInterface
     {
         return Sub_Category::find($id);
     }
+    public function count(){
+        $totalsubCategory = $this->all()->count();
+        $activesubCategory = Sub_Category::where('status',Sub_Category::ACTIVE)->count();
+        $inactivesubCategory = Sub_Category::where('status',Sub_Category::INACTIVE)->count();
+        $creatorsubCategory = Sub_Category::distinct('created_by')->count();
+
+        return [
+            'totalsubCategory' => $totalsubCategory,
+            'activesubCategory' => $activesubCategory,
+            'inactivesubCategory' => $inactivesubCategory,
+            'creatorsubCategory' => $creatorsubCategory
+        ];
+    }
     public function store($request)
     {
         $validator = $this->validationSubcatgory($request);

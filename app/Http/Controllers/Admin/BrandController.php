@@ -13,7 +13,9 @@ class BrandController extends Controller
     }
     public function index(Request $request)
     {
-        return view('backend.brands.brand_index');
+        return view('backend.brands.brand_index',[
+            'count' => $this->brandRepository->count()
+        ]);
     }
     public function storeBrand(Request $request){
         $this->brandRepository->store($request);

@@ -13,6 +13,19 @@ class BrandRepository implements BrandInterface{
     public function get($id){
         return Brand::find($id);
     }
+    public function count(){
+        $totalBrand = $this->all()->count();
+        $activeBrand = Brand::where('status',Brand::ACTIVE)->count();
+        $inactiveBrand = Brand::where('status',Brand::INACTIVE)->count();
+        $creatorBrand = Brand::distinct('created_by')->count();
+
+        return [
+            'totalBrand' => $totalBrand,
+            'activeBrand' => $activeBrand,
+            'inactiveBrand' => $inactiveBrand,
+            'creatorBrand' => $creatorBrand
+        ];
+    }
     public function store($request){
         $validator = $this->validationBrand($request);
         if ($validator->fails())

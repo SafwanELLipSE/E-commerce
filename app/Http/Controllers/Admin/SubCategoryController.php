@@ -17,7 +17,8 @@ class SubCategoryController extends Controller
     public function index(Request $request)
     {
         return view('backend.subCategory.subCategory_index',[
-            'categories' => $this->categoryRepository->all()
+            'categories' => $this->categoryRepository->all(),
+            'count' => $this->subCategoryRepository->count()
         ]);
     }
     public function storeSubcategory(Request $request){

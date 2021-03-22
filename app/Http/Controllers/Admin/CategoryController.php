@@ -14,7 +14,9 @@ class CategoryController extends Controller
     }
     public function index(Request $request)
     {
-        return view('backend.category.category_index');
+        return view('backend.category.category_index',[
+            'count' => $this->categoryRepository->count()
+        ]);
     }
     public function storeCategory(Request $request){
         $this->categoryRepository->store($request);

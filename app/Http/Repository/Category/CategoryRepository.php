@@ -13,6 +13,19 @@ class CategoryRepository implements CategoryInterface{
     public function get($id){
         return Category::find($id);
     }
+    public function count(){
+        $totalCategory = $this->all()->count();
+        $activeCategory = Category::where('status',Category::ACTIVE)->count();
+        $inactiveCategory = Category::where('status',Category::INACTIVE)->count();
+        $creatorCategory = Category::distinct('created_by')->count();
+
+        return [
+            'totalCategory' => $totalCategory,
+            'activeCategory' => $activeCategory,
+            'inactiveCategory' => $inactiveCategory,
+            'creatorCategory' => $creatorCategory
+        ];
+    }
     public function store($request){
         $validator = $this->validationCategory($request);
         if ($validator->fails()) {
