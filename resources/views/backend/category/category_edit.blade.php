@@ -1,7 +1,7 @@
 @extends('backend.layouts.app')
 
 @section('title')
-{{ env('APP_NAME') }} | Brand Edit
+{{ env('APP_NAME') }} | Catgory Edit
 @endsection
 @section('additional_headers')
 

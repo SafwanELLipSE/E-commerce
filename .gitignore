@@ -13,3 +13,5 @@ yarn-error.log
 /public/brand_image/*
 /public/category_image/*
 /public/subCategory_image/*
+/public/slider_image/*
+

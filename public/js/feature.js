@@ -1,9 +1,9 @@
 $(document).ready(function () {
     var _token = $('meta[name="_token"]').attr('content');
     var ssl = $('meta[name="ssl"]').attr('content');
-    function populate_category() {
+    function populate_features() {
 
-        dataTable = $('#category_table').DataTable({
+        dataTable = $('#feature_table').DataTable({
             "serverSide": true,
             "processing": false,
             "pageLength": 20,
@@ -14,10 +14,9 @@ $(document).ready(function () {
             ],
             "ajax":
             {
-                url: ssl + window.location.hostname + "/customize/category/list",
+                url: ssl + window.location.hostname + "/customize/feature/list",
                 type: "POST",
                 data: {
-                    'status': $("#status").val(),
                     _token
                 },
             },
@@ -30,25 +29,20 @@ $(document).ready(function () {
         });
 
     }
-    populate_category();
+    populate_features();
 
-    $("#status").on("change", function () {
-        dataTable.destroy();
-        populate_category();
-    });
-
-    $("#category_table").on("click", '#delete-category', function () {
-        var category_id = $(this).attr("data-category-id");
+    $("#feature_table").on("click", '#delete-feature', function () {
+        var feature_id = $(this).attr("data-feature-id");
         $.ajax({
-            url: ssl + window.location.hostname + "/customize/category/delete",
+            url: ssl + window.location.hostname + "/customize/feature/delete",
             type: "POST",
             data: {
-                'id': category_id,
+                'id': feature_id,
                 _token
             },
             success: function (response) {
-                $('#category_table').DataTable().destroy();
-                populate_category();
+                $('#feature_table').DataTable().destroy();
+                populate_features();
                 Swal.fire({
                     title: "SUCCESS!!",
                     text: response,

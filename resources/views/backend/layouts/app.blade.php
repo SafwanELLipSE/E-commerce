@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('assets/backend')}}/dist/css/adminlte.min.css">
+  {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css"> --}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
   @yield('additional_headers')
 
 </head>
@@ -40,6 +42,7 @@
 </div>
 <!-- ./wrapper -->
 <!-- REQUIRED SCRIPTS -->
+@include('sweetalert::alert')
 <!-- jQuery -->
 <script src="{{asset('assets/backend')}}/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap -->
@@ -60,7 +63,6 @@
 
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('assets/backend')}}/dist/js/demo.js"></script>
-@include('sweetalert::alert')
 @yield('additional_scripts')
 </body>
 </html>

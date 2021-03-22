@@ -38,7 +38,7 @@ class CategoryController extends Controller
         ]);
     }
     public function destroyCategory(Request $request){
-        $this->categoryRepository->delete($request->post('id'));
+        $this->categoryRepository->delete($request,$request->post('id'));
         return response()->json("Succesfully, Category has been deleted", 200);
     }
     public function changeStatus(Request $request,$id){

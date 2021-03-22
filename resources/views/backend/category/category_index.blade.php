@@ -1,7 +1,7 @@
 @extends('backend.layouts.app')
 
 @section('title')
-OneTechShop | Dashboard
+OneTechShop | Category
 @endsection
 @section('additional_headers')
   <!-- DataTables -->

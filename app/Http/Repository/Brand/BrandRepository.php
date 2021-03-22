@@ -54,7 +54,7 @@ class BrandRepository implements BrandInterface{
         foreach ($brands as $brand) {
             $show = route('customize.brand.edit', $brand->id);
             $status_link = route('customize.brand.status', $brand->id);
-            $image = $brand->image != null  ? asset('brand_image/' . $brand->image) : asset("/backend/dist/img/No image.png");
+            $image = $brand->image != null ? asset('brand_image/' . $brand->image) : asset("/backend/dist/img/No image.png");
             $status_icon = $brand->status != 1 ? "fa-check" : "fa-times";
             $status_color = $brand->status != 1 ? "btn-success" : "btn-danger";
             $localArray[0] = $brand->id;
@@ -63,7 +63,9 @@ class BrandRepository implements BrandInterface{
             $localArray[3] = Brand::getStatus($brand->status);
             $localArray[4] = Auth::User($brand->created_by)->name;
             $localArray[5] = $brand->created_at->format('d.m.Y');
-            $localArray[6] = "<a href='{$show}' class='btn btn-sm btn-primary'><i class='fas fa-user-edit'></i></a> <a href='{$status_link}' class='btn btn-sm {$status_color}'><i class='fas {$status_icon}'></i></a> <a class='btn btn-sm btn-danger' id='delete-brand' data-brand-id='{$brand->id}'><i class='fas fa-trash-alt'></i></a>";
+            $localArray[6] = "<a href='{$show}' class='btn btn-sm btn-primary'><i class='fas fa-user-edit'></i></a>
+                              <a href='{$status_link}' class='btn btn-sm {$status_color}'><i class='fas {$status_icon}'></i></a> 
+                              <a class='btn btn-sm btn-danger' id='delete-brand' data-brand-id='{$brand->id}'><i class='fas fa-trash-alt'></i></a>";
             $toReturn[] = $localArray;
         }
         $json_data = array(

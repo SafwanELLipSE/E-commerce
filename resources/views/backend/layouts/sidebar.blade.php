@@ -67,6 +67,18 @@
                   <p>Sub-category</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{route('customize.feature.index')}}" class="nav-link {{Request::is('customize/feature') || Request::is('customize/feature/*') ? 'active' : ''}}">
+                  <i class="fas fa-sitemap nav-icon"></i>
+                  <p>Feature</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('customize.slider.index')}}" class="nav-link {{Request::is('customize/slider') || Request::is('customize/slider/*') ? 'active' : ''}}">
+                  <i class="fas fa-sliders-h nav-icon"></i>
+                  <p>Slider</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item">

@@ -63,5 +63,22 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\SubCategoryController@destroySubcategory']);
             Route::get('status/{id}', ['as' => 'status', 'uses' => 'Admin\SubCategoryController@changeStatus']);
         });
+         Route::group(['prefix' => 'feature', 'as' => 'feature.'], function () {
+            Route::get('/', ['as' => 'index', 'uses' => 'Admin\FeatureController@index']);
+            Route::post('create', ['as' => 'create', 'uses' => 'Admin\FeatureController@storeFeature']);
+            Route::post('list', ['as' => 'list', 'uses' => 'Admin\FeatureController@allFeatureList']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Admin\FeatureController@editFeature']);
+            Route::post('update', ['as' => 'update', 'uses' => 'Admin\FeatureController@updateFeature']);
+            Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\FeatureController@destroyFeature']);
+        });
+        Route::group(['prefix' => 'slider', 'as' => 'slider.'], function () {
+            Route::get('/', ['as' => 'index', 'uses' => 'Admin\SliderController@index']);
+            Route::post('create', ['as' => 'create', 'uses' => 'Admin\SliderController@storeSlider']);
+            Route::post('list', ['as' => 'list', 'uses' => 'Admin\SliderController@allSliderList']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Admin\SliderController@editSlider']);
+            Route::post('update', ['as' => 'update', 'uses' => 'Admin\SliderController@updateSlider']);
+            Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\SliderController@destroySlider']);
+            Route::get('status/{id}', ['as' => 'status', 'uses' => 'Admin\SliderController@changeStatus']);
+        });
     });
 });

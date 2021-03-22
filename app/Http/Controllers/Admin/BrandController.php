@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Repository\Brand\BrandInterface;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller

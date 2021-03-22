@@ -53,7 +53,7 @@ class CategoryRepository implements CategoryInterface{
         foreach ($categories as $category) {
             $show = route('customize.category.edit', $category->id);
             $status_link = route('customize.category.status', $category->id);
-            $image = $category->image != null  ? asset('category_image/' . $category->image) : asset("/backend/dist/img/No image.png");
+            $image = $category->image != null ? asset('category_image/' . $category->image) : asset("/backend/dist/img/No image.png");
             $status_icon = $category->status != 1 ? "fa-check" : "fa-times";
             $status_color = $category->status != 1 ? "btn-success" : "btn-danger";
             $localArray[0] = $category->id;
@@ -62,7 +62,9 @@ class CategoryRepository implements CategoryInterface{
             $localArray[3] = category::getStatus($category->status);
             $localArray[4] = Auth::User($category->created_by)->name;
             $localArray[5] = $category->created_at->format('d.m.Y');
-            $localArray[6] = "<a href='{$show}' class='btn btn-sm btn-info'><i class='fas fa-user-edit'></i></a> <a href='{$status_link}' class='btn btn-sm {$status_color}'><i class='fas {$status_icon}'></i></a> <div class='btn btn-sm btn-danger' id='delete-category' data-category-id='{$category->id}'><i class='fas fa-trash-alt'></i></div>";
+            $localArray[6] = "<a href='{$show}' class='btn btn-sm btn-info'><i class='fas fa-user-edit'></i></a> 
+                              <a href='{$status_link}' class='btn btn-sm {$status_color}'><i class='fas {$status_icon}'></i></a> 
+                              <a class='btn btn-sm btn-danger' id='delete-category' data-category-id='{$category->id}'><i class='fas fa-trash-alt'></i></a>";
             $toReturn[] = $localArray;
         }
         $json_data = array(
@@ -94,10 +96,11 @@ class CategoryRepository implements CategoryInterface{
     }
     public function delete($request,$id){
         $validator = Validator::make($request->all(), [
-            'id' => 'required|exists:categories,id',
+            'id' => 'required',
         ]);
         if ($validator->fails())
             return response()->json($validator->errors()->all()[0], 422);
+
         $category = $this->get($id);
         if ($category->image != null) {
             $path_image = public_path() . '/category_image/' . $category->image;

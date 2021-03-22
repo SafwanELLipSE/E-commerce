@@ -177,6 +177,8 @@ return [
         App\Http\Repository\Brand\BrandRepositoryServiceProvider::class,
         App\Http\Repository\Category\CategoryRepositoryServiceProvider::class,
         App\Http\Repository\Subcategory\SubcategoryRepositoryServiceProvider::class,
+        App\Http\Repository\Feature\FeatureRepositoryServiceProvider::class,
+        App\Http\Repository\Slider\SliderRepositoryServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
 
     ],
