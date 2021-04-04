@@ -1,6 +1,7 @@
-$(document).ready(function () {
+$(document).ready(function() {
     var _token = $('meta[name="_token"]').attr('content');
     var ssl = $('meta[name="ssl"]').attr('content');
+
     function populate_category() {
 
         dataTable = $('#category_table').DataTable({
@@ -12,8 +13,7 @@ $(document).ready(function () {
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print', 'colvis'
             ],
-            "ajax":
-            {
+            "ajax": {
                 url: ssl + window.location.hostname + "/customize/category/list",
                 type: "POST",
                 data: {
@@ -32,12 +32,12 @@ $(document).ready(function () {
     }
     populate_category();
 
-    $("#status").on("change", function () {
+    $("#status").on("change", function() {
         dataTable.destroy();
         populate_category();
     });
 
-    $("#category_table").on("click", '#delete-category', function () {
+    $("#category_table").on("click", '#delete-category', function() {
         var category_id = $(this).attr("data-category-id");
         $.ajax({
             url: ssl + window.location.hostname + "/customize/category/delete",
@@ -46,7 +46,7 @@ $(document).ready(function () {
                 'id': category_id,
                 _token
             },
-            success: function (response) {
+            success: function(response) {
                 $('#category_table').DataTable().destroy();
                 populate_category();
                 Swal.fire({
@@ -56,7 +56,7 @@ $(document).ready(function () {
                 });
 
             },
-            error: function (response) {
+            error: function(response) {
                 Swal.fire({
                     title: "ERROR!",
                     text: response,

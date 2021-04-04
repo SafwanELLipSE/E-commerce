@@ -37,15 +37,23 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="form-group">
-                            <input type="hidden" name="brand_id" value="{{$subCategory->id}}" >
+                            <input type="hidden" name="subCategory_id" value="{{$subCategory->id}}" >
                             <label for="exampleInputBorderWidth2">Name :</label>
-                            <input type="text" name="brand_name" value="{{$subCategory->name}}" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Brand Name">
+                            <input type="text" name="subCategory_name" value="{{$subCategory->name}}" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Brand Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Select Category: </label>
+                            <select name="category" class="form-control select2 select2-muted" data-dropdown-css-class="select2-muted" style="width: 100%;">
+                                @foreach($categories as $category)
+                                    <option value="{{$category->id}}" @isset($subCategory){{ $subCategory->category_id == $category->id ? 'selected': '' }} @endisset>{{$category->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputFile">Image :</label>
                             <div class="input-group">
                                 <div class="custom-file">
-                                    <input type="file" name="brand_image" class="custom-file-input imageUpload" id="exampleInputFile">
+                                    <input type="file" name="subCategory_image" class="custom-file-input imageUpload" id="exampleInputFile">
                                     <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                 </div>
                             </div>

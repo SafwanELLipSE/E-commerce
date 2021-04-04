@@ -1,6 +1,7 @@
-$(document).ready(function () {
+$(document).ready(function() {
     var _token = $('meta[name="_token"]').attr('content');
     var ssl = $('meta[name="ssl"]').attr('content');
+
     function populate_brands() {
 
         dataTable = $('#brand_table').DataTable({
@@ -10,10 +11,9 @@ $(document).ready(function () {
             "ordering": [],
             dom: 'Bfrtip',
             buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print' , 'colvis'
+                'copy', 'csv', 'excel', 'pdf', 'print', 'colvis'
             ],
-            "ajax":
-            {
+            "ajax": {
                 url: ssl + window.location.hostname + "/customize/brand/list",
                 type: "POST",
                 data: {
@@ -32,12 +32,12 @@ $(document).ready(function () {
     }
     populate_brands();
 
-    $("#status").on("change", function () {
+    $("#status").on("change", function() {
         dataTable.destroy();
         populate_brands();
     });
 
-    $("#brand_table").on("click", '#delete-brand', function () {
+    $("#brand_table").on("click", '#delete-brand', function() {
         var brand_id = $(this).attr("data-brand-id");
         $.ajax({
             url: ssl + window.location.hostname + "/customize/brand/delete",
@@ -45,8 +45,8 @@ $(document).ready(function () {
             data: {
                 'id': brand_id,
                 _token
-            }, 
-            success: function (response) {
+            },
+            success: function(response) {
                 $('#brand_table').DataTable().destroy();
                 populate_brands();
                 Swal.fire({
@@ -56,7 +56,7 @@ $(document).ready(function () {
                 });
 
             },
-            error: function (response) {
+            error: function(response) {
                 Swal.fire({
                     title: "ERROR!",
                     text: response,

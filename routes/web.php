@@ -63,7 +63,16 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\SubCategoryController@destroySubcategory']);
             Route::get('status/{id}', ['as' => 'status', 'uses' => 'Admin\SubCategoryController@changeStatus']);
         });
-         Route::group(['prefix' => 'feature', 'as' => 'feature.'], function () {
+        Route::group(['prefix' => 'size', 'as' => 'size.'], function () {
+            Route::get('/', ['as' => 'index', 'uses' => 'Admin\SizeController@index']);
+            Route::post('create', ['as' => 'create', 'uses' => 'Admin\SizeController@storeSize']);
+            Route::post('list', ['as' => 'list', 'uses' => 'Admin\SizeController@allSizeList']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Admin\SizeController@editSize']);
+            Route::post('update', ['as' => 'update', 'uses' => 'Admin\SizeController@updateSize']);
+            Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\SizeController@destroySize']);
+            Route::get('status/{id}', ['as' => 'status', 'uses' => 'Admin\SizeController@changeSize']);
+        });
+        Route::group(['prefix' => 'feature', 'as' => 'feature.'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'Admin\FeatureController@index']);
             Route::post('create', ['as' => 'create', 'uses' => 'Admin\FeatureController@storeFeature']);
             Route::post('list', ['as' => 'list', 'uses' => 'Admin\FeatureController@allFeatureList']);

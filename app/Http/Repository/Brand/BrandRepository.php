@@ -64,8 +64,8 @@ class BrandRepository implements BrandInterface{
             $localArray[4] = Auth::User($brand->created_by)->name;
             $localArray[5] = $brand->created_at->format('d.m.Y');
             $localArray[6] = "<a href='{$show}' class='btn btn-sm btn-primary'><i class='fas fa-user-edit'></i></a>
-                              <a href='{$status_link}' class='btn btn-sm {$status_color}'><i class='fas {$status_icon}'></i></a> 
-                              <a class='btn btn-sm btn-danger' id='delete-brand' data-brand-id='{$brand->id}'><i class='fas fa-trash-alt'></i></a>";
+                            <a href='{$status_link}' class='btn btn-sm {$status_color}'><i class='fas {$status_icon}'></i></a> 
+                            <a class='btn btn-sm btn-danger' id='delete-brand' data-brand-id='{$brand->id}'><i class='fas fa-trash-alt'></i></a>";
             $toReturn[] = $localArray;
         }
         $json_data = array(
@@ -80,7 +80,7 @@ class BrandRepository implements BrandInterface{
         $validator = $this->validationBrand($request);
         if ($validator->fails())
         {
-            alert()->warning('Error occured',$validator->errors()->all()[0]);
+            alert()->warning('Error Occurred',$validator->errors()->all()[0]);
             return redirect()->back()->withInput()->withErrors($validator);
         }
 

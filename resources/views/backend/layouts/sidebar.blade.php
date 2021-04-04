@@ -64,7 +64,7 @@
               <li class="nav-item">
                 <a href="{{route('customize.subCategory.index')}}" class="nav-link {{Request::is('customize/subCategory') || Request::is('customize/subCategory/*') ? 'active' : ''}}">
                   <i class="fab fa-speakap nav-icon"></i>
-                  <p>Sub-category</p>
+                  <p>Sub-category & Size</p>
                 </a>
               </li>
               <li class="nav-item">

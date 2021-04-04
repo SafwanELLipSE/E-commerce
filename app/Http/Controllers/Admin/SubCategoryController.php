@@ -18,6 +18,7 @@ class SubCategoryController extends Controller
     {
         return view('backend.subCategory.subCategory_index',[
             'categories' => $this->categoryRepository->all(),
+            'subCategories' => $this->subCategoryRepository->all(),
             'count' => $this->subCategoryRepository->count()
         ]);
     }
@@ -30,19 +31,18 @@ class SubCategoryController extends Controller
     }
     public function editSubcategory(Request $request, $id){
         return view('backend.subCategory.subCategory_edit', [
-            'subCategory' => $this->subCategoryRepository->get($id)
+            'subCategory' => $this->subCategoryRepository->get($id),
+            'categories' => $this->categoryRepository->all()
         ]);
     }
     public function updateSubcategory(Request $request){
         $id = $request->post('subCategory_id');
         $this->subCategoryRepository->update($request, $id);
-        return view('backend.subCategory.subCategory_edit', [
-            'category' => $this->subCategoryRepository->get($id)
-        ]);
+        return redirect()->back();
     }
     public function destroySubcategory(Request $request){
         $this->subCategoryRepository->delete($request,$request->post('id'));
-        return response()->json("Succesfully, Sub-category has been deleted", 200);
+        return response()->json("Successfully, Sub-category has been deleted", 200);
     }
     public function changeStatus(Request $request,$id){
         $this->subCategoryRepository->status($request,$id); 

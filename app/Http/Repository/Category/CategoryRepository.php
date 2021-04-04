@@ -63,8 +63,8 @@ class CategoryRepository implements CategoryInterface{
             $localArray[4] = Auth::User($category->created_by)->name;
             $localArray[5] = $category->created_at->format('d.m.Y');
             $localArray[6] = "<a href='{$show}' class='btn btn-sm btn-info'><i class='fas fa-user-edit'></i></a> 
-                              <a href='{$status_link}' class='btn btn-sm {$status_color}'><i class='fas {$status_icon}'></i></a> 
-                              <a class='btn btn-sm btn-danger' id='delete-category' data-category-id='{$category->id}'><i class='fas fa-trash-alt'></i></a>";
+                            <a href='{$status_link}' class='btn btn-sm {$status_color}'><i class='fas {$status_icon}'></i></a> 
+                            <a class='btn btn-sm btn-danger' id='delete-category' data-category-id='{$category->id}'><i class='fas fa-trash-alt'></i></a>";
             $toReturn[] = $localArray;
         }
         $json_data = array(
@@ -78,7 +78,7 @@ class CategoryRepository implements CategoryInterface{
     public function update($request, $id){
         $validator = $this->validationCategory($request);
         if ($validator->fails()) {
-            alert()->warning('Error occured', $validator->errors()->all()[0]);
+            alert()->warning('Error Occurred', $validator->errors()->all()[0]);
             return redirect()->back()->withInput()->withErrors($validator);
         }
         $category = $this->get($id);

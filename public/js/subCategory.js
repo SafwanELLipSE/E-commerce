@@ -1,6 +1,7 @@
-$(document).ready(function () {
+$(document).ready(function() {
     var _token = $('meta[name="_token"]').attr('content');
     var ssl = $('meta[name="ssl"]').attr('content');
+
     function populate_categories() {
 
         dataTable = $('#subCategory_table').DataTable({
@@ -12,8 +13,7 @@ $(document).ready(function () {
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print', 'colvis'
             ],
-            "ajax":
-            {
+            "ajax": {
                 url: ssl + window.location.hostname + "/customize/subCategory/list",
                 type: "POST",
                 data: {
@@ -32,13 +32,13 @@ $(document).ready(function () {
     }
     populate_categories();
 
-    $("#status").on("change", function () {
+    $("#status").on("change", function() {
         dataTable.destroy();
         populate_categories();
     });
 
-    $("#subCategory_table").on("click", '#delete-subCatgory', function () {
-        var category_id = $(this).attr("data-subCatgory-id");
+    $("#subCategory_table").on("click", '#delete-subCategory', function() {
+        var category_id = $(this).attr("data-subCategory-id");
         $.ajax({
             url: ssl + window.location.hostname + "/customize/subCategory/delete",
             type: "POST",
@@ -46,7 +46,7 @@ $(document).ready(function () {
                 'id': category_id,
                 _token
             },
-            success: function (response) {
+            success: function(response) {
                 $('#subCategory_table').DataTable().destroy();
                 populate_categories();
                 Swal.fire({
@@ -56,7 +56,7 @@ $(document).ready(function () {
                 });
 
             },
-            error: function (response) {
+            error: function(response) {
                 Swal.fire({
                     title: "ERROR!",
                     text: response,

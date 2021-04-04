@@ -30,7 +30,7 @@ class SliderRepository implements SliderInterface{
         $validator = $this->validationSlider($request);
         if ($validator->fails())
         {
-            alert()->warning('Error occured',$validator->errors()->all()[0]);
+            alert()->warning('Error Occurred',$validator->errors()->all()[0]);
             return redirect()->back()->withInput()->withErrors($validator);
         }
 
@@ -79,7 +79,7 @@ class SliderRepository implements SliderInterface{
         $validator = $this->validationSlider($request);
         if ($validator->fails())
         {
-            alert()->warning('Error occured',$validator->errors()->all()[0]);
+            alert()->warning('Error Occurred',$validator->errors()->all()[0]);
             return redirect()->back()->withInput()->withErrors($validator);
         }
 
