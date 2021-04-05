@@ -70,7 +70,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Admin\SizeController@editSize']);
             Route::post('update', ['as' => 'update', 'uses' => 'Admin\SizeController@updateSize']);
             Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\SizeController@destroySize']);
-            Route::get('status/{id}', ['as' => 'status', 'uses' => 'Admin\SizeController@changeSize']);
+            Route::get('status/{id}', ['as' => 'status', 'uses' => 'Admin\SizeController@changeStatus']);
         });
         Route::group(['prefix' => 'feature', 'as' => 'feature.'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'Admin\FeatureController@index']);
@@ -79,6 +79,14 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Admin\FeatureController@editFeature']);
             Route::post('update', ['as' => 'update', 'uses' => 'Admin\FeatureController@updateFeature']);
             Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\FeatureController@destroyFeature']);
+        });
+        Route::group(['prefix' => 'color', 'as' => 'color.'], function () {
+            Route::get('/', ['as' => 'index', 'uses' => 'Admin\ColorController@index']);
+            Route::post('create', ['as' => 'create', 'uses' => 'Admin\ColorController@storeColor']);
+            Route::post('list', ['as' => 'list', 'uses' => 'Admin\ColorController@allColorList']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Admin\ColorController@editColor']);
+            Route::post('update', ['as' => 'update', 'uses' => 'Admin\ColorController@updateColor']);
+            Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\ColorController@destroyColor']);
         });
         Route::group(['prefix' => 'slider', 'as' => 'slider.'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'Admin\SliderController@index']);

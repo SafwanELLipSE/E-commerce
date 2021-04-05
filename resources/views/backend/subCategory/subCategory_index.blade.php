@@ -1,7 +1,7 @@
 @extends('backend.layouts.app')
 
 @section('title')
-OneTechShop | Sub-Category
+OneTechShop | Sub-Category & Size
 @endsection
 @section('additional_headers')
     <!-- DataTables -->
@@ -265,14 +265,17 @@ OneTechShop | Sub-Category
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
-                                        <table id="size_table" class="table table-bordered table-striped">
+                                        <table id="size_table" class="table table-bordered table-striped" style="width:100%">
                                             <thead>
                                                 <tr>
                                                     <th width="10%">No.</th>
-                                                    <th width="15%">Measurement</th>
+                                                    <th width="10%">Measurement</th>
                                                     <th width="20%">
                                                         <select id="subCategorySelect" class="custom-select form-control-border border-width-2">
                                                             <option value="" selected>Sub-Category</option>
+                                                            @foreach($subCategories as $subCategory)
+                                                                <option value="{{$subCategory->id}}">{{$subCategory->name}}</option>
+                                                            @endforeach
                                                         </select>
                                                     </th>
                                                     <th width="20%">
@@ -292,7 +295,6 @@ OneTechShop | Sub-Category
                                         </table>
                                     </div>
                                     <!-- /.card-body -->
-                                  
                                 </div>
                             </div>
                         </div>
@@ -327,6 +329,7 @@ OneTechShop | Sub-Category
     <!-- Select2 -->
     <script src="{{asset('assets/backend')}}/plugins/select2/js/select2.full.min.js"></script>
     <script src="{{asset('js/subCategory.js')}}"></script>
+    <script src="{{asset('js/size.js')}}"></script>
     <script>
         $(document).ready(function(){
             $(".imageUpload").change(function(data){

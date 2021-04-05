@@ -2,9 +2,9 @@ $(document).ready(function() {
     var _token = $('meta[name="_token"]').attr('content');
     var ssl = $('meta[name="ssl"]').attr('content');
 
-    function populate_categories() {
+    function populate_colors() {
 
-        dataTable = $('#subCategory_table').DataTable({
+        dataTable = $('#color_table').DataTable({
             "serverSide": true,
             "processing": false,
             "pageLength": 20,
@@ -14,11 +14,9 @@ $(document).ready(function() {
                 'copy', 'csv', 'excel', 'pdf', 'print', 'colvis'
             ],
             "ajax": {
-                url: ssl + window.location.hostname + "/customize/subCategory/list",
+                url: ssl + window.location.hostname + "/customize/color/list",
                 type: "POST",
                 data: {
-                    'status': $("#status").val(),
-                    'category': $("#category").val(),
                     _token
                 },
             },
@@ -31,30 +29,20 @@ $(document).ready(function() {
         });
 
     }
-    populate_categories();
+    populate_colors();
 
-    $("#status").on("change", function() {
-        dataTable.destroy();
-        populate_categories();
-    });
-
-    $("#category").on("change", function() {
-        dataTable.destroy();
-        populate_categories();
-    });
-
-    $("#subCategory_table").on("click", '#delete-subCategory', function() {
-        var subCategory_id = $(this).attr("data-subCategory-id");
+    $("#color_table").on("click", '#delete-color', function() {
+        var color_id = $(this).attr("data-color-id");
         $.ajax({
-            url: ssl + window.location.hostname + "/customize/subCategory/delete",
+            url: ssl + window.location.hostname + "/customize/color/delete",
             type: "POST",
             data: {
-                'id': subCategory_id,
+                'id': color_id,
                 _token
             },
             success: function(response) {
-                $('#subCategory_table').DataTable().destroy();
-                populate_categories();
+                $('#color_table').DataTable().destroy();
+                populate_colors();
                 Swal.fire({
                     title: "SUCCESS!!",
                     text: response,

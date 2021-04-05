@@ -16,9 +16,7 @@ class SizeController extends Controller
     }
     public function index(Request $request)
     {
-        return view('backend.subCategory.size_model', [
-            'subCategories' => $this->subCategoryRepository->all(),
-        ]);
+        //
     }
     public function storeSize(Request $request)
     {

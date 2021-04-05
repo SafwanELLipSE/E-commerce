@@ -51,6 +51,9 @@ class SubcategoryRepository implements SubcategoryInterface
         if ($request->post('status')) {
             $subCategories = Sub_Category::where('status', $request->post('status'))->get();
         }
+        if ($request->post('category')) {
+            $subCategories = Sub_Category::where('category_id', $request->post('category'))->get();
+        }
 
         $totalData = $subCategories->count();
         $totalFiltered = $totalData;

@@ -1,30 +1,28 @@
-<div class="modal fade" id="modal-size">
+<div class="modal fade" id="modal-Color">
     <div class="modal-dialog  modal-lg">
         <div class="modal-content bg-secondary">
         <div class="modal-header bg-navy color-palette">
-            <h4 class="modal-title">Create a New Size</h4>
+            <h4 class="modal-title">Create a New Color</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <form action="{{route('customize.size.create')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route('customize.color.create')}}" method="POST" enctype="multipart/form-data">
         @csrf
             <div class="modal-body">
                 <div class="row">
                     <div class="col-12">
                         <div class="form-group">
-                            <label for="exampleInputBorderWidth2">Measurement :</label>
-                            <input type="text" name="size" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Size">
+                            <label for="exampleInputBorderWidth2">Name :</label>
+                            <input type="text" name="color_name" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Color Name">
                         </div>
+                    </div>
+                    <div class="col-12">
                         <div class="form-group">
-                            <label>Select Sub-Category: </label>
-                            <select name="sub_category" class="form-control select2 select2-muted" data-dropdown-css-class="select2-muted" style="width: 100%;">
-                                <option selected="selected" value="" disabled>Select a Sub-Category</option>
-                                @foreach($subCategories as $subCategory)
-                                    <option value="{{$subCategory->id}}">{{$subCategory->name}}</option>
-                                @endforeach
-                            </select>
+                            <label>Color picker:</label>
+                            <input type="text" name="color_code"  class="form-control my-colorpicker1 form-control-border border-width-2" placeholder="Color Code">
                         </div>
+                        <p class="text-center">Tip: Color code example will be "#55acee"</p>
                     </div>
                 </div>
             </div>

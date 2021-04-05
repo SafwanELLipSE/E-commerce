@@ -14,7 +14,9 @@ class FeatureController extends Controller
         $this->featureRepository = $featureRepository;
     }
     public function index(){
-        return view('backend.features.feature_index');
+        return view('backend.features.feature_index',[
+            'count' => $this->featureRepository->count()
+        ]);
     }
     public function storeFeature(Request $request){
         $this->featureRepository->store($request);
@@ -37,6 +39,6 @@ class FeatureController extends Controller
     }
     public function destroyFeature(Request $request){
         $this->featureRepository->delete($request,$request->post('id'));
-        return response()->json("Succesfully, Feature has been deleted", 200);
+        return response()->json("Successfully, Feature has been deleted", 200);
     }
 }

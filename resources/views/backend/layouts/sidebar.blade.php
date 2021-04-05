@@ -21,7 +21,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+              with font-awesome or any other icon font library -->
           <li class="nav-item {{Request::is('dashboard') ? 'menu-open' : ''}}">
             <a href="#" class="nav-link {{Request::is('dashboard') ? 'active' : ''}}">
               <i class="nav-icon fas fa-home"></i>
@@ -70,7 +70,7 @@
               <li class="nav-item">
                 <a href="{{route('customize.feature.index')}}" class="nav-link {{Request::is('customize/feature') || Request::is('customize/feature/*') ? 'active' : ''}}">
                   <i class="fas fa-sitemap nav-icon"></i>
-                  <p>Feature</p>
+                  <p>Feature & Color</p>
                 </a>
               </li>
               <li class="nav-item">

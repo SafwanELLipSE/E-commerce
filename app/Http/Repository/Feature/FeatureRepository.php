@@ -55,7 +55,7 @@ class FeatureRepository implements FeatureInterface{
         $validator = $this->validationFeature($request);
         if ($validator->fails())
         {
-            alert()->warning('Error occured',$validator->errors()->all()[0]);
+            alert()->warning('Error occurred',$validator->errors()->all()[0]);
             return redirect()->back()->withInput()->withErrors($validator);
         }
         $feature = $this->get($id);
@@ -64,7 +64,7 @@ class FeatureRepository implements FeatureInterface{
         Alert::success('Success', 'Successfully Feature information has been updated.');
     }
     public function delete($request, $id){
-         $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'id' => 'required|exists:features,id',
         ]);
         if ($validator->fails())

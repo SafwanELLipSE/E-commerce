@@ -8,7 +8,7 @@ class Slider extends Model
 {
     const ACTIVE = 1;
     const INACTIVE = 0;
-    protected $table = 'slider';
+    protected $table = 'sliders';
     public static function getStatus($status_id)
     {
         switch ($status_id) {
