@@ -38,9 +38,7 @@ class SizeController extends Controller
     {
         $id = $request->post('size_id');
         $this->sizeRepository->update($request, $id);
-        return view('backend.subCategory.size_edit', [
-            'size' => $this->sizeRepository->get($id)
-        ]);
+        return redirect()->back();
     }
     public function destroySize(Request $request)
     {

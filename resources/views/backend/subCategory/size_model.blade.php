@@ -12,16 +12,26 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-12">
-                        <div class="form-group">
-                            <label for="exampleInputBorderWidth2">Measurement :</label>
-                            <input type="text" name="size" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Size">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="exampleInputBorderWidth2">Measurement :</label>
+                                    <input type="text" name="size" value="{{old('size')}}" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Size">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="exampleInputBorderWidth2">Unit :</label>
+                                    <input type="text" name="unit" value="{{old('unit')}}" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Unit">
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label>Select Sub-Category: </label>
                             <select name="sub_category" class="form-control select2 select2-muted" data-dropdown-css-class="select2-muted" style="width: 100%;">
                                 <option selected="selected" value="" disabled>Select a Sub-Category</option>
                                 @foreach($subCategories as $subCategory)
-                                    <option value="{{$subCategory->id}}">{{$subCategory->name}}</option>
+                                    <option value="{{$subCategory->id}}"  @if (old('sub_category') == $subCategory->id) {{ 'selected' }} @endif>{{$subCategory->name}}</option>
                                 @endforeach
                             </select>
                         </div>

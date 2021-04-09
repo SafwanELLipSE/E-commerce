@@ -5,17 +5,19 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Repository\Feature\FeatureInterface;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Repository\Color\ColorInterface;
 
 class FeatureController extends Controller
 {
-    public function __construct(FeatureInterface $featureRepository)
+    public function __construct(FeatureInterface $featureRepository, ColorInterface $colorRepository)
     {
         $this->featureRepository = $featureRepository;
+        $this->colorRepository = $colorRepository;
     }
     public function index(){
         return view('backend.features.feature_index',[
-            'count' => $this->featureRepository->count()
+            'count' => $this->featureRepository->count(),
+            'countColor' => $this->colorRepository->count()
         ]);
     }
     public function storeFeature(Request $request){

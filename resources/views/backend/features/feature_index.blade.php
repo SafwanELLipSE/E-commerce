@@ -31,25 +31,96 @@
     </div>
     <!-- /.content-header -->
     <section class="content">
-        <div class="row">
-            <div class="offset-lg-3 offset-md-3 col-lg-6 col-md-6 col-12">
-                <!-- small card -->
-                <div class="small-box bg-info">
-                    <div class="inner">
-                        <h3>{{$count['totalFeature']}}</h3>
-                        <p>Total Features</p>
+        <div id="multi-item-example" class="carousel slide carousel-multi-item mb-3" data-ride="carousel">
+            <div class="carousel-inner mb-4" role="listbox">
+                <!--First slide-->
+                <div class="carousel-item active">
+                    <div class="row">
+                        <div class="offset-lg-3 offset-md-3 col-lg-6 col-md-6 col-12">
+                            <!-- small card -->
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>{{$count['totalFeature']}}</h3>
+                                    <p>Total Features</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-sitemap"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">
+                                    More info <i class="fas fa-arrow-circle-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    <!-- ./col -->
                     </div>
-                    <div class="icon">
-                        <i class="fas fa-sitemap"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">
-                        More info <i class="fas fa-arrow-circle-right"></i>
-                    </a>
+                    <!-- /.row -->
+                </div>
+                <!-- /.carousel-ITEM -->
+                <div class="carousel-item">
+                    <div class="row">
+                            <div class="col-lg-4 col-6">
+                            <!-- small card -->
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>{{$countColor['totalColor']}}</h3>
+
+                                    <p>Total Colors</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-paint-roller"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">
+                                    More info <i class="fas fa-arrow-circle-right"></i>
+                                </a>
+                                </div>
+                            </div>
+                            <!-- ./col -->
+                            <div class="col-lg-4 col-6">
+                                <!-- small card -->
+                                <div class="small-box bg-success">
+                                    <div class="inner">
+                                        <h3>{{$countColor['totalColorCode']}}</h3>
+
+                                        <p>Total Color Codes</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fas fa-palette"></i>
+                                    </div>
+                                    <a href="#" class="small-box-footer">
+                                        More info <i class="fas fa-arrow-circle-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- ./col -->
+                            <div class="col-lg-4 col-6">
+                                <!-- small card -->
+                                <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <h3>{{$countColor['creatorColor']}}</h3>
+
+                                    <p>Total Creators</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-users-cog"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">
+                                    More info <i class="fas fa-arrow-circle-right"></i>
+                                </a>
+                                </div>
+                            </div>
+                            <!-- ./col -->
+                        </div>
+                        <!-- /.row -->
                 </div>
             </div>
-        <!-- ./col -->
+            <!--Indicators-->
+            <ol class="carousel-indicators" style="top:9rem">
+                <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
+                <li data-target="#multi-item-example" data-slide-to="1"></li>
+            </ol>
+            <!--/.Indicators-->
         </div>
-        <!-- /.row -->
+
         <div class="card card-primary card-tabs">
             <div class="card-header p-0 pt-1">
                 <ul class="nav nav-tabs" id="custom-tabs-two-tab" role="tablist">

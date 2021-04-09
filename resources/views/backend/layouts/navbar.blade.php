@@ -123,7 +123,7 @@
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
       </li>
-     {{-- Setting option --}}
+      {{-- Setting option --}}
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="fas fa-cog"></i>

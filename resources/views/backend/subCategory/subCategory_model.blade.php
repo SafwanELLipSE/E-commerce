@@ -14,14 +14,14 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label for="exampleInputBorderWidth2">Name :</label>
-                            <input type="text" name="subCategory_name" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Sub-category Name">
+                            <input type="text" name="subCategory_name" value="{{old('subCategory_name')}}" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Sub-category Name">
                         </div>
                         <div class="form-group">
                             <label>Select Category: </label>
                             <select name="category" class="form-control select2 select2-muted" data-dropdown-css-class="select2-muted" style="width: 100%;">
                                 <option selected="selected" value="" disabled>Select a Category</option>
                                 @foreach($categories as $category)
-                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                    <option value="{{$category->id}}" @if (old('category') == $category->id) {{ 'selected' }} @endif>{{$category->name}}</option>
                                 @endforeach
                             </select>
                         </div>

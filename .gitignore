@@ -14,4 +14,4 @@ yarn-error.log
 /public/category_image/*
 /public/subCategory_image/*
 /public/slider_image/*
-
+/public/product_image/*

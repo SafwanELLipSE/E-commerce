@@ -80,7 +80,7 @@
                 </a>
               </li>
               <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
+                <a href="#" class="nav-link {{Request::is('customize/product') || Request::is('customize/product/*') ? 'active' : ''}}">
                   <i class="nav-icon fab fa-product-hunt"></i>
                   <p>
                     Product
@@ -89,13 +89,13 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('customize.product.index')}}" class="nav-link {{Request::is('customize/product') ? 'active' : ''}}">
                       <i class="fab fa-product-hunt nav-icon"></i>
                       <p>Create Product</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('customize.product.list_view')}}" class="nav-link {{Request::is('customize/product/list-view') ? 'active' : ''}}">
                       <i class="fab fa-product-hunt nav-icon"></i>
                       <p>All Product</p>
                     </a>

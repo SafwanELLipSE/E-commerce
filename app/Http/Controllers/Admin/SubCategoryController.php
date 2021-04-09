@@ -6,20 +6,22 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Repository\Subcategory\SubcategoryInterface;
 use App\Http\Repository\Category\CategoryInterface;
-
+use App\Http\Repository\Size\SizeInterface;
 class SubCategoryController extends Controller
 {
-    public function __construct(SubcategoryInterface $subCategoryRepository, CategoryInterface $categoryRepository)
+    public function __construct(SubcategoryInterface $subCategoryRepository, CategoryInterface $categoryRepository, SizeInterface  $sizeRepository)
     {
         $this->categoryRepository = $categoryRepository;
         $this->subCategoryRepository = $subCategoryRepository;
+        $this->sizeRepository = $sizeRepository;
     }
     public function index(Request $request)
     {
         return view('backend.subCategory.subCategory_index',[
             'categories' => $this->categoryRepository->all(),
             'subCategories' => $this->subCategoryRepository->all(),
-            'count' => $this->subCategoryRepository->count()
+            'count' => $this->subCategoryRepository->count(),
+            'countSize' => $this->sizeRepository->count()
         ]);
     }
     public function storeSubcategory(Request $request){

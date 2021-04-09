@@ -181,6 +181,7 @@ return [
         App\Http\Repository\Feature\FeatureRepositoryServiceProvider::class,
         App\Http\Repository\Color\ColorRepositoryServiceProvider::class,
         App\Http\Repository\Slider\SliderRepositoryServiceProvider::class,
+        App\Http\Repository\Product\ProductRepositoryServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
 
     ],

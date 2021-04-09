@@ -99,12 +99,13 @@ Route::group(['middleware' => ['auth']], function () {
         });
         Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'Admin\ProductController@index']);
-            Route::get('list-view', ['list_view' => 'index', 'uses' => 'Admin\ProductController@diplayProductList']);
-            Route::post('create', ['as' => 'create', 'uses' => 'Admin\ProductController@storeSlider']);
-            Route::post('list', ['as' => 'list', 'uses' => 'Admin\ProductController@allSliderList']);
-            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Admin\ProductController@editSlider']);
-            Route::post('update', ['as' => 'update', 'uses' => 'Admin\ProductController@updateSlider']);
-            Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\ProductController@destroySlider']);
+            Route::get('list-view', ['as' => 'list_view', 'uses' => 'Admin\ProductController@displayProductList']);
+            Route::post('create', ['as' => 'create', 'uses' => 'Admin\ProductController@storeProduct']);
+            Route::post('list', ['as' => 'list', 'uses' => 'Admin\ProductController@allProductList']);
+            Route::get('display/{id}', ['as' => 'display', 'uses' => 'Admin\ProductController@displayProduct']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Admin\ProductController@editProduct']);
+            Route::post('update', ['as' => 'update', 'uses' => 'Admin\ProductController@updateProduct']);
+            Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\ProductController@destroyProduct']);
             Route::get('status/{id}', ['as' => 'status', 'uses' => 'Admin\ProductController@changeStatus']);
         });
     });

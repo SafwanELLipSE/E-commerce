@@ -116,7 +116,7 @@ OneTechShop | Sub-Category & Size
                         <!-- small card -->
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h3>{{$count['totalsubCategory']}}</h3>
+                                <h3>{{$countSize['totalSize']}}</h3>
 
                                 <p>Total Sizes</p>
                             </div>
@@ -128,60 +128,60 @@ OneTechShop | Sub-Category & Size
                             </a>
                             </div>
                         </div>
-                    <!-- ./col -->
-                    <div class="col-lg-3 col-6">
-                        <!-- small card -->
-                        <div class="small-box bg-success">
-                            <div class="inner">
-                                <h3>{{$count['activesubCategory']}}</h3>
+                        <!-- ./col -->
+                        <div class="col-lg-3 col-6">
+                            <!-- small card -->
+                            <div class="small-box bg-success">
+                                <div class="inner">
+                                    <h3>{{$countSize['activeSize']}}</h3>
 
-                                <p>Active Sizes</p>
+                                    <p>Active Sizes</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="far fa-thumbs-up"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">
+                                    More info <i class="fas fa-arrow-circle-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- ./col -->
+                        <div class="col-lg-3 col-6">
+                            <!-- small card -->
+                            <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h3>{{$countSize['inactiveSize']}}</h3>
+
+                                <p>Inactive Sizes</p>
                             </div>
                             <div class="icon">
-                                <i class="far fa-thumbs-up"></i>
+                                <i class="far fa-thumbs-down"></i>
                             </div>
                             <a href="#" class="small-box-footer">
                                 More info <i class="fas fa-arrow-circle-right"></i>
                             </a>
+                            </div>
                         </div>
-                    </div>
-                    <!-- ./col -->
-                    <div class="col-lg-3 col-6">
-                        <!-- small card -->
-                        <div class="small-box bg-danger">
-                        <div class="inner">
-                            <h3>{{$count['inactivesubCategory']}}</h3>
+                        <!-- ./col -->
+                        <div class="col-lg-3 col-6">
+                            <!-- small card -->
+                            <div class="small-box bg-warning">
+                            <div class="inner text-light">
+                                <h3>{{$countSize['creatorSize']}}</h3>
 
-                            <p>Inactive Sizes</p>
+                                <p>Total Creators</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <a href="#" class="small-box-footer">
+                                <span class="text-light">
+                                    More info <i class="fas fa-arrow-circle-right"></i>
+                                </span>
+                            </a>
+                            </div>
                         </div>
-                        <div class="icon">
-                            <i class="far fa-thumbs-down"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">
-                            More info <i class="fas fa-arrow-circle-right"></i>
-                        </a>
-                        </div>
-                    </div>
-                    <!-- ./col -->
-                    <div class="col-lg-3 col-6">
-                        <!-- small card -->
-                        <div class="small-box bg-warning">
-                        <div class="inner text-light">
-                            <h3>{{$count['creatorsubCategory']}}</h3>
-
-                            <p>Total Creators</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fas fa-user-plus"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">
-                            <span class="text-light">
-                                More info <i class="fas fa-arrow-circle-right"></i>
-                            </span>
-                        </a>
-                        </div>
-                    </div>
-                    <!-- ./col -->
+                        <!-- ./col -->
                     </div>
                     <!-- /.row -->
                 </div>
@@ -270,6 +270,7 @@ OneTechShop | Sub-Category & Size
                                                 <tr>
                                                     <th width="10%">No.</th>
                                                     <th width="10%">Measurement</th>
+                                                    <th width="10%">Unit</th>
                                                     <th width="20%">
                                                         <select id="subCategorySelect" class="custom-select form-control-border border-width-2">
                                                             <option value="" selected>Sub-Category</option>
