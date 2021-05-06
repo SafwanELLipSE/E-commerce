@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/toastr/toastr.min.css">
 @endsection
 @section('content')
 <div class="content-wrapper">
@@ -34,7 +36,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Brand's Table List</h3>
+                            <h3 class="card-title">Product's Table List</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -71,8 +73,9 @@
                                     <th width="15%">
                                         <select id="status" class="custom-select form-control-border border-width-2">
                                             <option value="" selected>Status</option>
-                                            <option value="1">Active</option>
-                                            <option value="2">Inactive</option>
+                                            <option value="1">No Previous Stock</option>
+                                            <option value="2">In Stock</option>
+                                            <option value="0">Out Stock</option>
                                         </select>
                                     </th>
                                     <th width="10%">Created Date</th>
@@ -93,6 +96,8 @@
 </div>
 @endsection
 @section('additional_scripts')
+    <!-- Toastr -->
+    <script src="{{asset('assets/backend')}}/plugins/toastr/toastr.min.js"></script>
     <!-- DataTables  & Plugins -->
     <script src="{{asset('assets/backend')}}/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="{{asset('assets/backend')}}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>

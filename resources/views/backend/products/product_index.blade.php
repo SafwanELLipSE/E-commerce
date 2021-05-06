@@ -87,7 +87,7 @@
                                         <div class="form-group">
                                             <label>Color</label>
                                             <div class="select2-primary">
-                                                <select name="product_color[]" class="form-control select3 select2-info" multiple="multiple" data-placeholder="Select a State" data-dropdown-css-class="select2-info" style="width: 100%;">
+                                                <select id="product_color" name="product_color[]" class="form-control select3 select2-info" multiple="multiple" data-placeholder="Select a State" data-dropdown-css-class="select2-info" style="width: 100%;">
                                                 @foreach($colors as $color)
                                                     <option value="{{$color->id}}" @if (old("product_color")){{ (in_array($color->id, old("product_color")) ? "selected":"") }}@endif>{{$color->name}} </option>
                                                 @endforeach
@@ -99,7 +99,7 @@
                                         <div class="form-group">
                                             <label>Feature</label>
                                             <div class="select2-primary">
-                                                <select name="product_feature[]" class="form-control select3 select2-info" multiple="multiple" data-placeholder="Select a State" data-dropdown-css-class="select2-info" style="width: 100%;">
+                                                <select id="product_feature" name="product_feature[]" class="form-control select3 select2-info" multiple="multiple" data-placeholder="Select a State" data-dropdown-css-class="select2-info" style="width: 100%;">
                                                 @foreach($features as $feature)
                                                     <option value="{{$feature->id}}" @if (old("product_feature")){{ (in_array($feature->id, old("product_feature")) ? "selected":"") }}@endif>{{$feature->name}}</option>
                                                 @endforeach
@@ -163,7 +163,7 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary float-right">Submit</button>
+                                <button id="send_form" class="btn btn-primary float-right">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -183,7 +183,93 @@
     <script src="{{asset('assets/backend')}}/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     {{-- Image Uploader js --}}
     <script type="text/javascript" src="{{asset('assets/backend')}}/plugins/image-uploader/dist/image-uploader.min.js"></script>
+    <!-- jquery-validation -->
+    <script src="{{asset('assets/backend')}}/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="{{asset('assets/backend')}}/plugins/jquery-validation/additional-methods.min.js"></script>
     <script>
+        $(function () {
+            $('#quickForm').validate({
+                rules: {
+                    product_name: {
+                        required: true,
+                    },
+                    product_brand: {
+                        required: true,
+                    },
+                    product_category: {
+                        required: true,
+                    },
+                    product_sub_category: {
+                        required: true,
+                    },
+                    "product_color[]": {
+                        required: true,
+                    },
+                    "product_feature[]": {
+                        required: true,
+                    },
+                    code: {
+                        required: true,
+                    },
+                    product_image: {
+                        required: true,
+                    },
+                    buying_price: {
+                        required: true,
+                        number: true,
+                    },
+                    selling_price: {
+                        required: true,
+                        number: true,
+                    },
+                },
+                messages: {
+                    product_name: {
+                        required: "Please enter your Product Name",
+                    },
+                    product_brand: {
+                        required: "Please enter your Product Brand",
+                    },
+                    product_category: {
+                        required: "Please enter your Product Category",
+                    },
+                    product_sub_category: {
+                        required: "Please enter your Product Sub-Category",
+                    },
+                    product_color: {
+                        required: "Please enter your Product Color",
+                    },
+                    product_feature: {
+                        required: "Please enter your Product Feature",
+                    },
+                    code: {
+                        required: "Please enter your Product Code",
+                    },
+                    product_image: {
+                        required: "Please enter your Product image",
+                    },
+                    buying_price: {
+                        required: "Please provide a Buying Price",
+                        number: "Only can use Number",
+                    },
+                    selling_price: {
+                        required: "Please provide a Selling Price",
+                        number: "Only can use Number",
+                    },
+                },
+                    errorElement: 'span',
+                    errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });
         $(function () {
             bsCustomFileInput.init();
             //Initialize Select2 Elements
@@ -202,6 +288,5 @@
                 maxFiles: 10,
             });
         });
-
     </script>
 @endsection

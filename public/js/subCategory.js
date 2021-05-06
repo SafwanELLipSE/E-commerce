@@ -55,19 +55,10 @@ $(document).ready(function() {
             success: function(response) {
                 $('#subCategory_table').DataTable().destroy();
                 populate_categories();
-                Swal.fire({
-                    title: "SUCCESS!!",
-                    text: response,
-                    type: "success",
-                });
-
+                toastr.success('SUCCESS!!', response, { timeOut: 5000 })
             },
             error: function(response) {
-                Swal.fire({
-                    title: "ERROR!",
-                    text: response,
-                    type: "error",
-                });
+                toastr.error('ERROR!!', response, { timeOut: 5000 })
             }
         });
     });

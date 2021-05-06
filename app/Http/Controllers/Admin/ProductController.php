@@ -54,4 +54,26 @@ class ProductController extends Controller
             'product' => $this->productRepository->get($id),
         ]);
     }
+    public function editProduct(Request $request, $id)
+    {
+        return view('backend.products.product_edit', [
+            'brands' => $this->brandRepository->all(),
+            'categories' => $this->categoryRepository->all(),
+            'subCategories' => $this->subCategoryRepository->all(),
+            'features' => $this->featureRepository->all(),
+            'colors' => $this->colorRepository->all(),
+            'product' => $this->productRepository->get($id),
+        ]);
+    }
+    public function updateProduct(Request $request)
+    {
+        $id = $request->post('product_id');
+        $this->productRepository->update($request, $id);
+        return redirect()->back();
+    }
+    public function destroyProduct(Request $request)
+    {
+        $this->productRepository->delete($request, $request->post('id'));
+        return response()->json("Successfully, Product has been deleted", 200);
+    }
 }

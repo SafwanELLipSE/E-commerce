@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- Bootstrap Color Picker -->
     <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/toastr/toastr.min.css">
 @endsection
 @section('content')
 <div class="content-wrapper">
@@ -210,6 +212,8 @@
 </div>
 @endsection
 @section('additional_scripts')
+    <!-- Toastr -->
+    <script src="{{asset('assets/backend')}}/plugins/toastr/toastr.min.js"></script>
     <!-- DataTables  & Plugins -->
     <script src="{{asset('assets/backend')}}/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="{{asset('assets/backend')}}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -223,13 +227,13 @@
     <script src="{{asset('assets/backend')}}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="{{asset('assets/backend')}}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="{{asset('assets/backend')}}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="{{asset('js/feature.js')}}"></script>
+    <script src="{{asset('js/color.js')}}"></script>
     <!-- bootstrap color picker -->
     <script src="{{asset('assets/backend')}}/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
     <!-- bs-custom-file-input -->
     <script src="{{asset('assets/backend')}}/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-    
-    <script src="{{asset('js/feature.js')}}"></script>
-    <script src="{{asset('js/color.js')}}"></script>
+
     <script>
         $(function () {
             bsCustomFileInput.init();

@@ -29,7 +29,7 @@ class CategoryRepository implements CategoryInterface{
     public function store($request){
         $validator = $this->validationCategory($request);
         if ($validator->fails()) {
-            alert()->warning('Error occured', $validator->errors()->all()[0]);
+            alert()->warning('Error occurred', $validator->errors()->all()[0]);
             return redirect()->back()->withInput()->withErrors($validator);
         }
         $category = new Category;

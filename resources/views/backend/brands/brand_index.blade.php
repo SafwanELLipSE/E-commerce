@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/toastr/toastr.min.css">
 @endsection
 @section('content')
 <div class="content-wrapper">
@@ -30,76 +32,75 @@
     <!-- /.content-header -->
     <section class="content">
         <div class="row">
-          <div class="col-lg-3 col-6">
-            <!-- small card -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>{{$count['totalBrand']}}</h3>
+            <div class="col-lg-3 col-6">
+                    <!-- small card -->
+                    <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>{{$count['totalBrand']}}</h3>
 
-                <p>Total Brands</p>
-              </div>
-              <div class="icon">
-                <i class="fab fa-bootstrap"></i>
-              </div>
-              <a href="#" class="small-box-footer">
-                More info <i class="fas fa-arrow-circle-right"></i>
-              </a>
+                        <p>Total Brands</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fab fa-bootstrap"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">
+                        More info <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
             </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small card -->
-            <div class="small-box bg-success">
-              <div class="inner">
-                <h3>{{$count['activeBrand']}}</h3>
+        <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small card -->
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3>{{$count['activeBrand']}}</h3>
 
-                <p>Active Brands</p>
-              </div>
-              <div class="icon">
-                <i class="far fa-thumbs-up"></i>
-              </div>
-              <a href="#" class="small-box-footer">
-                More info <i class="fas fa-arrow-circle-right"></i>
-              </a>
+                        <p>Active Brands</p>
+                    </div>
+                    <div class="icon">
+                        <i class="far fa-thumbs-up"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">
+                        More info <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
             </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small card -->
-            <div class="small-box bg-danger">
-              <div class="inner">
-                <h3>{{$count['inactiveBrand']}}</h3>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small card -->
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{$count['inactiveBrand']}}</h3>
 
-                <p>Inactive Brands</p>
-              </div>
-              <div class="icon">
-                <i class="far fa-thumbs-down"></i>
-              </div>
-              <a href="#" class="small-box-footer">
-                More info <i class="fas fa-arrow-circle-right"></i>
-              </a>
+                        <p>Inactive Brands</p>
+                    </div>
+                    <div class="icon">
+                        <i class="far fa-thumbs-down"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">
+                        More info <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
             </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small card -->
-            <div class="small-box bg-warning">
-              <div class="inner text-light">
-                <h3>{{$count['creatorBrand']}}</h3>
-
-                <p>Total Creators</p>
-              </div>
-              <div class="icon">
-                <i class="fas fa-user-plus"></i>
-              </div>
-              <a href="#" class="small-box-footer">
-                <span class="text-light">
-                    More info <i class="fas fa-arrow-circle-right"></i>
-                </span>
-              </a>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small card -->
+                <div class="small-box bg-warning">
+                    <div class="inner text-light">
+                        <h3>{{$count['creatorBrand']}}</h3>
+                        <p>Total Creators</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">
+                        <span class="text-light">
+                            More info <i class="fas fa-arrow-circle-right"></i>
+                        </span>
+                    </a>
+                </div>
             </div>
-          </div>
-          <!-- ./col -->
+        <!-- ./col -->
         </div>
         <!-- /.row -->
                 <div class="card card-primary card-tabs">
@@ -205,6 +206,8 @@
 </div>
 @endsection
 @section('additional_scripts')
+    <!-- Toastr -->
+    <script src="{{asset('assets/backend')}}/plugins/toastr/toastr.min.js"></script>
     <!-- DataTables  & Plugins -->
     <script src="{{asset('assets/backend')}}/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="{{asset('assets/backend')}}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>

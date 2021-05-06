@@ -4,10 +4,12 @@
 {{ env('APP_NAME') }} | Slider
 @endsection
 @section('additional_headers')
-  <!-- DataTables -->
-  <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/toastr/toastr.min.css">
 @endsection
 @section('content')
 <div class="content-wrapper">
@@ -55,7 +57,7 @@
                                                 </div>
                                                 <!-- /.card-header -->
                                                 <div class="card-body">
-                                                    <table id="slider_table" class="table table-bordered table-striped">
+                                                    <table id="slider_table" class="table table-bordered table-striped" style="width: 100%;">
                                                     <thead>
                                                         <tr>
                                                             <th width="10%">No.</th>
@@ -138,6 +140,8 @@
 </div>
 @endsection
 @section('additional_scripts')
+    <!-- Toastr -->
+    <script src="{{asset('assets/backend')}}/plugins/toastr/toastr.min.js"></script>
     <!-- DataTables  & Plugins -->
     <script src="{{asset('assets/backend')}}/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="{{asset('assets/backend')}}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>

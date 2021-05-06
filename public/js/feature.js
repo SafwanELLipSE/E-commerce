@@ -1,6 +1,7 @@
-$(document).ready(function () {
+$(document).ready(function() {
     var _token = $('meta[name="_token"]').attr('content');
     var ssl = $('meta[name="ssl"]').attr('content');
+
     function populate_features() {
 
         dataTable = $('#feature_table').DataTable({
@@ -12,8 +13,7 @@ $(document).ready(function () {
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print', 'colvis'
             ],
-            "ajax":
-            {
+            "ajax": {
                 url: ssl + window.location.hostname + "/customize/feature/list",
                 type: "POST",
                 data: {
@@ -31,7 +31,7 @@ $(document).ready(function () {
     }
     populate_features();
 
-    $("#feature_table").on("click", '#delete-feature', function () {
+    $("#feature_table").on("click", '#delete-feature', function() {
         var feature_id = $(this).attr("data-feature-id");
         $.ajax({
             url: ssl + window.location.hostname + "/customize/feature/delete",
@@ -40,22 +40,13 @@ $(document).ready(function () {
                 'id': feature_id,
                 _token
             },
-            success: function (response) {
+            success: function(response) {
                 $('#feature_table').DataTable().destroy();
                 populate_features();
-                Swal.fire({
-                    title: "SUCCESS!!",
-                    text: response,
-                    type: "success",
-                });
-
+                toastr.success('SUCCESS!!', response, { timeOut: 5000 })
             },
-            error: function (response) {
-                Swal.fire({
-                    title: "ERROR!",
-                    text: response,
-                    type: "error",
-                });
+            error: function(response) {
+                toastr.error('ERROR!!', response, { timeOut: 5000 })
             }
         });
     });

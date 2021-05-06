@@ -1,7 +1,7 @@
 @extends('backend.layouts.app')
 
 @section('title')
-OneTechShop | Sub-Category & Size
+{{ env('APP_NAME') }} | Sub-Category & Size
 @endsection
 @section('additional_headers')
     <!-- DataTables -->
@@ -11,6 +11,8 @@ OneTechShop | Sub-Category & Size
     <!-- Select2 -->
     <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/select2/css/select2.min.css">
     <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/toastr/toastr.min.css">
 @endsection
 @section('content')
 <div class="content-wrapper">
@@ -312,6 +314,8 @@ OneTechShop | Sub-Category & Size
 </div>
 @endsection
 @section('additional_scripts')
+    <!-- Toastr -->
+    <script src="{{asset('assets/backend')}}/plugins/toastr/toastr.min.js"></script>
     <!-- DataTables  & Plugins -->
     <script src="{{asset('assets/backend')}}/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="{{asset('assets/backend')}}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -325,12 +329,12 @@ OneTechShop | Sub-Category & Size
     <script src="{{asset('assets/backend')}}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="{{asset('assets/backend')}}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="{{asset('assets/backend')}}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="{{asset('js/subCategory.js')}}"></script>
+    <script src="{{asset('js/size.js')}}"></script>
     <!-- bs-custom-file-input -->
     <script src="{{asset('assets/backend')}}/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <!-- Select2 -->
     <script src="{{asset('assets/backend')}}/plugins/select2/js/select2.full.min.js"></script>
-    <script src="{{asset('js/subCategory.js')}}"></script>
-    <script src="{{asset('js/size.js')}}"></script>
     <script>
         $(document).ready(function(){
             $(".imageUpload").change(function(data){

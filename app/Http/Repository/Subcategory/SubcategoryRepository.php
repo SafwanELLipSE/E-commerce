@@ -67,7 +67,7 @@ class SubcategoryRepository implements SubcategoryInterface
             $status_color = $subCategory->status != 1 ? "btn-success" : "btn-danger";
             $localArray[0] = $subCategory->id;
             $localArray[1] = $subCategory->name;
-            $localArray[2] = $subCategory->category->name;
+            $localArray[2] = isset($subCategory->category->name) ? $subCategory->category->name : 'No Longer Available';
             $localArray[3] = "<img src='{$image}' alt='{$subCategory->name}' class='img-centered img-thumbnail mx-auto d-block mt-2'>";
             $localArray[4] = Sub_Category::getStatus($subCategory->status);
             $localArray[5] = Auth::User($subCategory->created_by)->name;

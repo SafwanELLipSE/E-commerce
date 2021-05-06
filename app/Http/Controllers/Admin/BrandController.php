@@ -37,7 +37,7 @@ class BrandController extends Controller
     }
     public function destroyBrand(Request $request){
         $this->brandRepository->delete($request,$request->post('id'));
-        return response()->json("Succesfully, Brand has been deleted", 200);
+        return response()->json("Successfully, Brand has been deleted", 200);
     }
     public function changeStatus(Request $request, $id){
         $this->brandRepository->status($request,$id); 

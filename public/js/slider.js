@@ -1,6 +1,7 @@
-$(document).ready(function () {
+$(document).ready(function() {
     var _token = $('meta[name="_token"]').attr('content');
     var ssl = $('meta[name="ssl"]').attr('content');
+
     function populate_sliders() {
 
         dataTable = $('#slider_table').DataTable({
@@ -12,8 +13,7 @@ $(document).ready(function () {
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print', 'colvis'
             ],
-            "ajax":
-            {
+            "ajax": {
                 url: ssl + window.location.hostname + "/customize/slider/list",
                 type: "POST",
                 data: {
@@ -32,36 +32,27 @@ $(document).ready(function () {
     }
     populate_sliders();
 
-    $("#status").on("change", function () {
+    $("#status").on("change", function() {
         dataTable.destroy();
         populate_sliders();
     });
 
-    $("#slider_table").on("click", '#delete-slider', function () {
-        var category_id = $(this).attr("data-slider-id");
+    $("#slider_table").on("click", '#delete-slider', function() {
+        var slider_id = $(this).attr("data-slider-id");
         $.ajax({
             url: ssl + window.location.hostname + "/customize/slider/delete",
             type: "POST",
             data: {
-                'id': category_id,
+                'id': slider_id,
                 _token
             },
-            success: function (response) {
+            success: function(response) {
                 $('#slider_table').DataTable().destroy();
                 populate_sliders();
-                Swal.fire({
-                    title: "SUCCESS!!",
-                    text: response,
-                    type: "success",
-                });
-
+                toastr.success('SUCCESS!!', response, { timeOut: 5000 })
             },
-            error: function (response) {
-                Swal.fire({
-                    title: "ERROR!",
-                    text: response,
-                    type: "error",
-                });
+            error: function(response) {
+                toastr.error('ERROR!!', response, { timeOut: 5000 })
             }
         });
     });

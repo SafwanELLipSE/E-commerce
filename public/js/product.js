@@ -17,10 +17,10 @@ $(document).ready(function() {
                 url: ssl + window.location.hostname + "/customize/product/list",
                 type: "POST",
                 data: {
-                    'status': $("#status").val(),
                     'brand': $("#brand").val(),
                     'category': $("#category").val(),
                     'subCategory': $("#subCategory").val(),
+                    'status': $("#status").val(),
                     _token
                 },
             },
@@ -67,19 +67,10 @@ $(document).ready(function() {
             success: function(response) {
                 $('#product_table').DataTable().destroy();
                 populate_products();
-                Swal.fire({
-                    title: "SUCCESS!!",
-                    text: response,
-                    type: "success",
-                });
-
+                toastr.success('SUCCESS!!', response, { timeOut: 5000 })
             },
             error: function(response) {
-                Swal.fire({
-                    title: "ERROR!",
-                    text: response,
-                    type: "error",
-                });
+                toastr.error('ERROR!!', response, { timeOut: 5000 })
             }
         });
     });

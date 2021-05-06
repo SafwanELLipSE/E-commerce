@@ -35,7 +35,7 @@ class SliderController extends Controller
     }
     public function destroySlider(Request $request){
         $this->sliderRepository->delete($request,$request->post('id'));
-        return response()->json("Succesfully, Slider has been deleted", 200);
+        return response()->json("Successfully, Slider has been deleted", 200);
     }
     public function changeStatus(Request $request,$id){
         $this->sliderRepository->status($request,$id); 

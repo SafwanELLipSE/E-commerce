@@ -16,10 +16,6 @@
   <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('assets/backend')}}/dist/css/adminlte.min.css">
-  
-  {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css"> --}}
-  {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script> --}}
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
   @yield('additional_headers')
 

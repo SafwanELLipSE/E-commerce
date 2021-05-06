@@ -67,7 +67,7 @@ class SizeRepository implements SizeInterface
             $localArray[0] = $size->id;
             $localArray[1] = $size->measurement;
             $localArray[2] = $size->unit;
-            $localArray[3] = $size->subCategory->name;
+            $localArray[3] = isset($size->subCategory->name) ? $size->subCategory->name : 'No Long Available';
             $localArray[4] = Size::getStatus($size->status);
             $localArray[5] = Auth::User($size->creator)->name;
             $localArray[6] = $size->created_at->format('d.m.Y');

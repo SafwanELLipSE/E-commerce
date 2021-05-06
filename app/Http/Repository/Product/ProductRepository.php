@@ -36,11 +36,11 @@ class ProductRepository implements ProductInterface
         if ($request->post('brand')) {
             $products = Product::where('brand_id', $request->post('brand'))->get();
         }
-        elseif ($request->post('product')) {
-            $products = Product::where('product_id', $request->post('product'))->get();
+        elseif ($request->post('category')) {
+            $products = Product::where('category_id', $request->post('category'))->get();
         }
-        elseif ($request->post('subproduct')) {
-            $products = Product::where('sub_product_id', $request->post('subproduct'))->get();
+        elseif ($request->post('subCategory')) {
+            $products = Product::where('sub_category_id', $request->post('subCategory'))->get();
         }
         elseif ($request->post('status')) {
             $products = Product::where('status', $request->post('status'))->get();
@@ -55,9 +55,9 @@ class ProductRepository implements ProductInterface
             $status_link = route('customize.product.status', $product->id);
             $localArray[0] = $product->id;
             $localArray[1] = $product->name;
-            $localArray[2] = $product->brand->name;
-            $localArray[3] = $product->category->name;
-            $localArray[4] = $product->subCategory->name;
+            $localArray[2] = isset($product->brand->name) ? $product->brand->name : 'No Longer Available';
+            $localArray[3] = isset($product->category->name) ? $product->category->name : 'No Longer Available';
+            $localArray[4] = isset($product->subCategory->name) ? $product->subCategory->name : 'No Longer Available';
             $localArray[5] = $product->selling_price;
             $localArray[6] = Product::getStatus($product->status);
             $localArray[7] = $product->created_at->format('d.m.Y');
@@ -84,15 +84,51 @@ class ProductRepository implements ProductInterface
         );
         return $json_data;
     }
-    public function update($request, $id){}
-    public function delete($request, $id){}
+    public function update($request, $id){
+        $validator = $this->validationProductEdit($request);
+        if ($validator->fails()) {
+            alert()->warning('Error Occurred', $validator->errors()->all()[0]);
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
+
+        $product = $this->get($id);
+        $this->saveInformation($product, $request);
+        if ($request->file('product_image')) {
+            if ($product->image != null) {
+                $path_image = public_path() . '/product_image/' . $product->image;
+                if (file_exists($path_image) == true) {
+                    unlink($path_image);
+                }
+            }
+        }
+        $this->saveMainImage($product, $request);
+        $product->save();
+        Alert::success('Success', 'Successfully, The Product Information has been updated.');
+    }
+    public function delete($request, $id){
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+        if ($validator->fails())
+            return response()->json($validator->errors()->all()[0], 422);
+
+        $product = $this->get($id);
+        dd($product->image_slider);
+        // if ($product->image != null) {
+        //     $path_image = public_path() . '/product_image/' . $product->image;
+        //     if (file_exists($path_image) == true) {
+        //         unlink($path_image);
+        //     }
+        // }
+        // $product->delete();
+    }
     private function validationProduct($request)
     {
         return  Validator::make($request->all(), [
             'product_name' => 'required',
             'product_brand'=> 'required',
-            'product_product'=> 'required',
-            'product_sub_product' => 'required',
+            'product_category'=> 'required',
+            'product_sub_category' => 'required',
             'product_color' => 'required|array',
             'product_feature' => 'required|array',
             'product_details' => 'required',
@@ -103,11 +139,27 @@ class ProductRepository implements ProductInterface
             'image_slider' => 'required',
         ]);
     }
+    private function validationProductEdit($request)
+    {
+        return  Validator::make($request->all(), [
+            'product_name' => 'required',
+            'product_brand'=> 'required',
+            'product_category'=> 'required',
+            'product_sub_category' => 'required',
+            'product_color' => 'required|array',
+            'product_feature' => 'required|array',
+            'product_details' => 'required',
+            'product_image' => 'image|mimes:jpeg,png,jpg,svg|max:2048',
+            'code' => 'required',
+            'buying_price' => 'required|numeric',
+            'selling_price' => 'required|numeric',
+        ]);
+    }
     private function saveInformation($data, $request)
     {
         $data->brand_id = $request->post('product_brand');
-        $data->product_id = $request->post('product_product');
-        $data->sub_product_id = $request->post('product_sub_product');
+        $data->category_id = $request->post('product_category');
+        $data->sub_category_id = $request->post('product_sub_category');
         $data->name = $request->post('product_name');
         $data->code = $request->post('code');
         $data->details = $request->post('product_details');

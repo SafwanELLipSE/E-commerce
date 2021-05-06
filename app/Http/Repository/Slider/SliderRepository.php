@@ -101,7 +101,7 @@ class SliderRepository implements SliderInterface{
     }
     public function delete($request, $id){
         $validator = Validator::make($request->all(), [
-            'id' => 'required|exists:slider,id',
+            'id' => 'required|exists:sliders,id',
         ]);
         if ($validator->fails())
             return response()->json($validator->errors()->all()[0], 422);
