@@ -50,7 +50,7 @@ Class ProductSliderRepository implements ProductSliderInterface
         $addProduct = Product::find($request->post('product_id'));
         $addProduct->image_slider = $newLink;
         $addProduct->save();
-
+        Alert::success('Success', 'Successfully, New Product Slider Image has been added.');
     }
     public function update($request)
     {
@@ -94,6 +94,7 @@ Class ProductSliderRepository implements ProductSliderInterface
         $addProduct = Product::find($request->post('product_id'));
         $addProduct->image_slider = $currentArray;
         $addProduct->save();
+        Alert::success('Success', 'Successfully, The Product Slider Image has been updated.');
     }
     public function delete($request)
     {
@@ -128,7 +129,7 @@ Class ProductSliderRepository implements ProductSliderInterface
         $addProduct = Product::find($request->post('product_id'));
         $addProduct->image_slider = $currentArray;
         $addProduct->save();
-
+        Alert::success('Success', 'Successfully, The Product Slider Image has been deleted.');
     }
     private function uniqueString()
     {

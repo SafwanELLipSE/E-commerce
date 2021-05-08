@@ -157,13 +157,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="active">Slider Photos</label>
-                                    <div class="input-images-2" style="padding-top: .5rem;"></div>
+                                    <div class="input-images-2" id="input-images-2" style="padding-top: .5rem;"></div>
                                 </div>
                                 
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                <button id="send_form" class="btn btn-primary float-right">Submit</button>
+                                <button type="submit" class="btn btn-primary float-right">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -185,9 +185,16 @@
     <script type="text/javascript" src="{{asset('assets/backend')}}/plugins/image-uploader/dist/image-uploader.min.js"></script>
     <!-- jquery-validation -->
     <script src="{{asset('assets/backend')}}/plugins/jquery-validation/jquery.validate.min.js"></script>
-    <script src="{{asset('assets/backend')}}/plugins/jquery-validation/additional-methods.min.js"></script>
     <script>
+
         $(function () {
+            $('#input-images-2').imageUploader({
+                extensions: ['.jpg', '.jpeg', '.png', '.gif', '.svg'],
+                mimetype:['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/svg+xml'],
+                imagesInputName: 'image_slider[]',
+                maxFiles: 10,
+            });
+
             $('#quickForm').validate({
                 rules: {
                     product_name: {
@@ -221,7 +228,7 @@
                     selling_price: {
                         required: true,
                         number: true,
-                    },
+                    }
                 },
                 messages: {
                     product_name: {
@@ -255,7 +262,7 @@
                     selling_price: {
                         required: "Please provide a Selling Price",
                         number: "Only can use Number",
-                    },
+                    }
                 },
                     errorElement: 'span',
                     errorPlacement: function (error, element) {
@@ -283,10 +290,6 @@
                 minHeight: 250,              
                 maxHeight: 400,
             })
-            $('.input-images-2').imageUploader({
-                imagesInputName: 'image_slider[]',
-                maxFiles: 10,
-            });
         });
     </script>
 @endsection

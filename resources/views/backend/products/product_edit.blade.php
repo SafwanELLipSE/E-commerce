@@ -185,6 +185,8 @@
     <script src="{{asset('assets/backend')}}/plugins/summernote/summernote-bs4.min.js"></script>
     <!-- bs-custom-file-input -->
     <script src="{{asset('assets/backend')}}/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <!-- jquery-validation -->
+    <script src="{{asset('assets/backend')}}/plugins/jquery-validation/jquery.validate.min.js"></script>
     <script>
         $(function () {
             $('#quickForm').validate({

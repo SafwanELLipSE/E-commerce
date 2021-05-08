@@ -113,14 +113,25 @@ class ProductRepository implements ProductInterface
             return response()->json($validator->errors()->all()[0], 422);
 
         $product = $this->get($id);
-        dd($product->image_slider);
-        // if ($product->image != null) {
-        //     $path_image = public_path() . '/product_image/' . $product->image;
-        //     if (file_exists($path_image) == true) {
-        //         unlink($path_image);
-        //     }
-        // }
-        // $product->delete();
+
+        if ($product->image != null) {
+            $path_image = public_path() . '/product_image/' . $product->image;
+            if (file_exists($path_image) == true) {
+                unlink($path_image);
+            }
+        }
+
+        $arrayOfImageFiles = explode(',', $product->image_slider);
+        if(count($arrayOfImageFiles) != 0){
+            foreach ($arrayOfImageFiles as $image) {
+                $path_image = public_path() . '/product_image/' . $image;
+                if (file_exists($path_image) == true) {
+                    unlink($path_image);
+                }
+            }
+        }
+
+        $product->delete();
     }
     private function validationProduct($request)
     {
