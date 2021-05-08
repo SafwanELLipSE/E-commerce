@@ -24,12 +24,19 @@ class Product extends Model
         return $this->hasOne(Sub_Category::class, 'id', 'sub_category_id');
     }
     public static function getColor($id)
-    {
-        return Color::find($id);
+    {   
+        if(Color::find($id) == null)
+            return 'N/A';
+        else
+            return Color::where('id', $id)->first();
+        
     }
     public static function getFeature($id)
-    {
-        return Feature::find($id);
+    {   
+        if (Feature::find($id) == null)
+            return 'N/A';
+        else
+        return Feature::where('id', $id)->first();
     }
     public static function getSize($id){
         return Size::where('sub_category_id',$id)->where('status', Size::ACTIVE)->select('measurement', 'unit')->get();

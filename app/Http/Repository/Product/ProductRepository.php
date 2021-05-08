@@ -196,7 +196,6 @@ class ProductRepository implements ProductInterface
         $imageNames = array();
         if ($request->file('image_slider')) {
             $count = 1;
-            // dd($request->file('image_slider'));
             foreach ($request->file('image_slider') as $image) {
                 $extension = $image[0]->getClientOriginalExtension();
                 $name = Auth::user()->id . '_p_' . $count . '_' . $this->uniqueString() . ++$count . '.' . $extension;

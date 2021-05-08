@@ -87,5 +87,11 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\ProductController@destroyProduct']);
             Route::get('status/{id}', ['as' => 'status', 'uses' => 'Admin\ProductController@changeStatus']);
         });
+        Route::group(['prefix' => 'productImages', 'as' => 'productImages.'], function () {
+            Route::get('internals/{id}', ['as' => 'internals', 'uses' => 'Admin\ProductSliderImageController@index']);
+            Route::post('create', ['as' => 'create', 'uses' => 'Admin\ProductSliderImageController@storeImage']);
+            Route::post('update', ['as' => 'update', 'uses' => 'Admin\ProductSliderImageController@updateImage']);
+            Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\ProductSliderImageController@destroyImage']);
+        });
     });
 });
