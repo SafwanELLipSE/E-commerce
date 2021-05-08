@@ -50,7 +50,7 @@ Class ProductSliderRepository implements ProductSliderInterface
         $addProduct = Product::find($request->post('product_id'));
         $addProduct->image_slider = $newLink;
         $addProduct->save();
-        Alert::success('Success', 'Successfully, New Product Slider Image has been added.');
+        Alert::success('Success', 'Successfully, New Product Slider Image has been Added.');
     }
     public function update($request)
     {
