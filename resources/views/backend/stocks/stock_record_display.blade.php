@@ -43,7 +43,15 @@
                                     <p><strong>Size:</strong> {{$stock->size->measurement .' ('.$stock->size->unit.')'}}</p>
                                 </div>
                             </div>
-                            <p><strong>Product:</strong> {{$stock->user->name}}</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><strong>Buying Price:</strong> {{$stock->product->buying_price .' Tk'}}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>Selling Price:</strong> {{$stock->product->selling_price .' Tk'}}</p>
+                                </div>
+                            </div>
+                            <p><strong>Creator:</strong> {{$stock->user->name}}</p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <p><strong>Started From:</strong> {{$stock->created_at->format('d.m.Y').' ('. $stock->created_at->format('i:H').')'}}</)}}</p>
@@ -77,8 +85,8 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title"><strong>Stock Record List ({{$records->count()}})</strong></h3>
-
+                            <h3 class="card-title mr-5"><strong>Stock Record List ({{$records->count()}})</strong></h3>
+                            <a href="{{route('utilize.stockRecord.excel_report', $stock->id)}}" class="btn btn-sm btn-success"><i class="fas fa-file-excel"></i> Convert to Excel</a>
                             <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 150px;">
                                     <input type="text" name="table_search" class="form-control float-right" placeholder="Search">

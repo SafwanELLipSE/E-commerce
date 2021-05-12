@@ -3,7 +3,6 @@
 namespace App\Http\Repository\StockRecord;
 
 use App\Models\Stock_record;
-
 class StockRecordRepository implements StockRecordInterface
 {
     public function all()

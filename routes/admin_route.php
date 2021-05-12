@@ -110,6 +110,7 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::group(['prefix' => 'stockRecord', 'as' => 'stockRecord.'], function () {
             Route::get('view/{id}', ['as' => 'view', 'uses' => 'Admin\StockRecordController@displayAllStockRecord']);
+            Route::get('excel-report/{id}', ['as' => 'excel_report', 'uses' => 'Admin\StockRecordController@excelReport']);
         });
     });
 });
