@@ -183,6 +183,8 @@ return [
         App\Http\Repository\Slider\SliderRepositoryServiceProvider::class,
         App\Http\Repository\Product\ProductRepositoryServiceProvider::class,
         App\Http\Repository\ProductSlider\ProductSliderRepositoryServiceProvider::class,
+        App\Http\Repository\Stock\StockRepositoryServiceProvider::class,
+        App\Http\Repository\StockRecord\StockRecordRepositoryServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
 
     ],

@@ -39,7 +39,7 @@ class Product extends Model
         return Feature::where('id', $id)->first();
     }
     public static function getSize($id){
-        return Size::where('sub_category_id',$id)->where('status', Size::ACTIVE)->select('measurement', 'unit')->get();
+        return Size::where('sub_category_id',$id)->where('status', Size::ACTIVE)->select('id','measurement', 'unit')->get();
     }
     public static function getStatus($status_id)
     {
