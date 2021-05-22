@@ -60,8 +60,8 @@ class StockController extends Controller
         return response()->json("Successfully, Stock has been deleted", 200);
     }
     public function deleteSelectedStock(Request $request){
-        $discount_id_array = $request->input('id');
-        $this->stockRepository->selectedDelete($request, $discount_id_array);
+        $stock_id_array = $request->input('id');
+        $this->stockRepository->selectedDelete($request, $stock_id_array);
         return response()->json("Successfully, Stocks has been deleted", 200);
     }
     public function deleteAllStock(Request $request)

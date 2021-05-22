@@ -38,7 +38,7 @@ class FeatureRepository implements FeatureInterface{
 
         foreach ($features as $feature) {
             $show = route('customize.feature.edit', $feature->id);
-            $localArray[0] = $feature->id;
+            $localArray[0] = "<input type='checkbox' name='feature_checkbox[]' class='feature_checkbox mr-2' value='{$feature->id}'/>" . $feature->id;
             $localArray[1] = $feature->name;
             $localArray[2] = "<a href='{$show}' class='btn btn-sm btn-primary'><i class='fas fa-user-edit'></i></a> <a class='btn btn-sm btn-danger' id='delete-feature' data-feature-id='{$feature->id}'><i class='fas fa-trash-alt'></i></a>";
             $toReturn[] = $localArray;
@@ -71,6 +71,14 @@ class FeatureRepository implements FeatureInterface{
             return response()->json($validator->errors()->all()[0], 422);
         $feature = $this->get($id);
         $feature->delete();
+    }
+    public function selectedDelete($request, $id)
+    {
+        $feature = Feature::whereIn('id', $id)->delete();
+    }
+    public function deleteAll($request)
+    {
+        $feature = Feature::truncate();
     }
     private function validationFeature($request){
         return  Validator::make($request->all(),[

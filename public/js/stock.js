@@ -50,7 +50,6 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '#bulk_delete', function() {
-        var id = [];
         toastr.warning("<br /><button type='button' value='yes'>Yes</button><button type='button' value='no' >No</button>", 'Are you sure you want to delete this item?', {
             allowHtml: true,
             timeOut: 1500,
@@ -58,7 +57,7 @@ $(document).ready(function() {
             onclick: function(toast) {
                 value = toast.target.value
                 if (value == 'yes') {
-                    $('.discount_checkbox:checked').each(function() {
+                    $('.stack_checkbox:checked').each(function() {
                         id.push($(this).val());
                     });
                     if (id.length > 0) {
@@ -66,7 +65,6 @@ $(document).ready(function() {
                             url: ssl + window.location.hostname + "/utilize/stock/delete-selected",
                             method: "POST",
                             data: {
-                                id: id,
                                 _token
                             },
                             success: function(data) {

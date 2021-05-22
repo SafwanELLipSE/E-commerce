@@ -47,7 +47,7 @@ class ColorRepository implements ColorInterface
 
         foreach ($colors as $color) {
             $show = route('customize.color.edit', $color->id);
-            $localArray[0] = $color->id;
+            $localArray[0] = "<input type='checkbox' name='color_checkbox[]' class='color_checkbox mr-2' value='{$color->id}'/>" . $color->id;
             $localArray[1] = $color->name;
             $localArray[2] = $color->code;
             $localArray[3] = "<button style='background-color:{$color->code} !important; border-color: white !important; width:70px; height:20px;' class='btn text-center'></button>";
@@ -85,7 +85,14 @@ class ColorRepository implements ColorInterface
         $color = $this->get($id);
         $color->delete();
     }
-
+    public function selectedDelete($request, $id)
+    {
+        $color = Color::whereIn('id', $id)->delete();
+    }
+    public function deleteAll($request)
+    {
+        $color = Color::truncate();
+    }
     private function validationColor($request)
     {
         return  Validator::make($request->all(), [
@@ -95,9 +102,7 @@ class ColorRepository implements ColorInterface
     }
     private function saveInformation($data, $request)
     {
-        // dd($request->post('color_code'));
         $data->name = $request->post('color_name');
         $data->code = $request->post('color_code');
-        
     }
 }

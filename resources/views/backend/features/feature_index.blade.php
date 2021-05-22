@@ -145,6 +145,8 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <h3 class="card-title">Feature's Table List</h3>
+                                            <button type="button" id="delete_all_feature" class="btn btn-warning btn-sm float-right text-light ml-1"><i class="fas fa-exclamation-circle"></i> Deleted All</button>
+                                            <button type="button" name="bulk_delete_feature" id="bulk_delete_feature" class="btn btn-danger btn-sm float-right ml-1"><i class="fas fa-trash"></i> Selected Delete</button>
                                             <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#modal-Feature"><i class="fas fa-folder-plus"></i> Add Feature</button>
                                         </div>
                                         <!-- /.card-header -->
@@ -173,7 +175,9 @@
                                 <div class="col-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h3 class="card-title">Feature's Table List</h3>
+                                            <h3 class="card-title">Color's Table List</h3>
+                                            <button type="button" id="delete_all_color" class="btn btn-warning btn-sm float-right text-light ml-1"><i class="fas fa-exclamation-circle"></i> Deleted All</button>
+                                            <button type="button" name="bulk_delete_color" id="bulk_delete_color" class="btn btn-danger btn-sm float-right ml-1"><i class="fas fa-trash"></i> Selected Delete</button>
                                             <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#modal-Color"><i class="fas fa-folder-plus"></i> Add Color</button>
                                         </div>
                                         <!-- /.card-header -->

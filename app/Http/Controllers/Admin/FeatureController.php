@@ -43,4 +43,15 @@ class FeatureController extends Controller
         $this->featureRepository->delete($request,$request->post('id'));
         return response()->json("Successfully, Feature has been deleted", 200);
     }
+    public function deleteSelectedStock(Request $request)
+    {
+        $feature_id_array = $request->input('id');
+        $this->featureRepository->selectedDelete($request, $feature_id_array);
+        return response()->json("Successfully, Features has been deleted", 200);
+    }
+    public function deleteAllStock(Request $request)
+    {
+        $this->featureRepository->deleteAll($request);
+        return response()->json("Successfully, All Features has been deleted", 200);
+    }
 }

@@ -64,7 +64,7 @@ class StockRepository implements StockInterface
         $count = 1;
         foreach ($stocks as $stock) {
             $show = route('utilize.stockRecord.view', $stock->id);
-            $localArray[0] = "<input type='checkbox' name='discount_checkbox[]' class='discount_checkbox mr-2' value='{$stock->id}'/>". $count++;
+            $localArray[0] = "<input type='checkbox' name='stock_checkbox[]' class='stock_checkbox mr-2' value='{$stock->id}'/>". $count++;
             $localArray[1] = isset($stock->product->name) ? $stock->product->name : 'No Longer Available';
             $localArray[2] = isset($stock->color->name) ? $stock->color->name : 'No Longer Available';
             $localArray[3] = isset($stock->size->measurement) ? $stock->size->measurement : 'No Longer Available';
