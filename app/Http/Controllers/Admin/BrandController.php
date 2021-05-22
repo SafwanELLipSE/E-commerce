@@ -43,4 +43,15 @@ class BrandController extends Controller
         $this->brandRepository->status($request,$id); 
         return redirect()->back();
     }
+    public function deleteSelectedBrand(Request $request)
+    {
+        $brand_id_array = $request->input('id');
+        $this->brandRepository->selectedDelete($request, $brand_id_array);
+        return response()->json("Successfully, Brands has been deleted", 200);
+    }
+    public function deleteAllBrand(Request $request)
+    {
+        $this->brandRepository->deleteAll($request);
+        return response()->json("Successfully, All Brands has been deleted", 200);
+    }
 }

@@ -57,7 +57,7 @@ class BrandRepository implements BrandInterface{
             $image = $brand->image != null ? asset('brand_image/' . $brand->image) : asset("/backend/dist/img/No image.png");
             $status_icon = $brand->status != 1 ? "fa-check" : "fa-times";
             $status_color = $brand->status != 1 ? "btn-success" : "btn-danger";
-            $localArray[0] = $brand->id;
+            $localArray[0] = "<input type='checkbox' name='brand_checkbox[]' class='brand_checkbox mr-2' value='{$brand->id}'/>" . $brand->id;
             $localArray[1] = $brand->name;
             $localArray[2] = "<img src='{$image}' alt='$brand->name' class='img-centered img-thumbnail mx-auto d-block mt-2'>";
             $localArray[3] = Brand::getStatus($brand->status);
@@ -127,6 +127,32 @@ class BrandRepository implements BrandInterface{
         }
         $brand->save();
         Alert::success('Success', 'Successfully Status of Brand has been changed.');
+    }
+    public function selectedDelete($request, $id)
+    {
+        $brandImage = Brand::whereIn('id', $id)->pluck('image');
+        if (count($brandImage) != 0) {
+            foreach ($brandImage as $image) {
+                $path_image = public_path() . '/brand_image/' . $image;
+                if (file_exists($path_image) == true) {
+                    unlink($path_image);
+                }
+            }
+        }
+        $brand = Brand::whereIn('id', $id)->delete();
+    }
+    public function deleteAll($request)
+    {
+        $allBrandImages = Brand::pluck('image');
+        if (count($allBrandImages) != 0) {
+            foreach ($allBrandImages as $image) {
+                $path_image = public_path() . '/brand_image/' . $image;
+                if (file_exists($path_image) == true) {
+                    unlink($path_image);
+                }
+            }
+        }
+        $brand = Brand::truncate();
     }
     private function validationBrand($request){
         return  Validator::make($request->all(),[

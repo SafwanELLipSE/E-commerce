@@ -23,6 +23,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('update', ['as' => 'update', 'uses' => 'Admin\BrandController@updateBrand']);
             Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\BrandController@destroyBrand']);
             Route::get('status/{id}', ['as' => 'status', 'uses' => 'Admin\BrandController@changeStatus']);
+            Route::post('delete-selected', ['as' => 'delete_selected', 'uses' => 'Admin\BrandController@deleteSelectedBrand']);
+            Route::post('delete-all', ['as' => 'delete_all', 'uses' => 'Admin\BrandController@deleteAllBrand']);
         });
         Route::group(['prefix' => 'category', 'as' => 'category.'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'Admin\CategoryController@index']);

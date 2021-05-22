@@ -65,7 +65,7 @@ $(document).ready(function() {
 
     $(document).on('click', '#bulk_delete_size', function() {
         var id = [];
-        toastr.warning("<br /><button type='button' value='yes'>Yes</button><button type='button' value='no' >No</button>", 'Are you sure you want to delete this item?', {
+        toastr.warning("<br /><button type='button' value='yes'>Yes</button><button type='button' value='no' >No</button>", 'Are you sure you want to delete this Sizes?', {
             allowHtml: true,
             timeOut: 1500,
             "positionClass": "toast-top-center",
@@ -99,7 +99,7 @@ $(document).ready(function() {
         })
     });
     $(document).on('click', '#delete_all_size', function() {
-        toastr.warning("<br /><button type='button' value='yes'>Yes</button><button type='button' value='no' >No</button>", 'Are you sure you want to delete All Stocks?', {
+        toastr.warning("<br /><button type='button' value='yes'>Yes</button><button type='button' value='no' >No</button>", 'Are you sure you want to delete All Sizes?', {
             allowHtml: true,
             timeOut: 1500,
             "positionClass": "toast-top-center",

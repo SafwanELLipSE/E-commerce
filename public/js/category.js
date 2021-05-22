@@ -6,7 +6,7 @@ $(document).ready(function() {
 
         dataTable = $('#category_table').DataTable({
             "serverSide": false,
-            "processing": true,
+            "processing": false,
             "pageLength": 10,
             "order": [],
             dom: 'Bfrtip',

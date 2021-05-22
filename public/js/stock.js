@@ -51,7 +51,7 @@ $(document).ready(function() {
 
     $(document).on('click', '#bulk_delete', function() {
         var id = [];
-        toastr.warning("<br /><button type='button' value='yes'>Yes</button><button type='button' value='no' >No</button>", 'Are you sure you want to delete this item?', {
+        toastr.warning("<br /><button type='button' value='yes'>Yes</button><button type='button' value='no' >No</button>", 'Are you sure you want to delete this Stocks?', {
             allowHtml: true,
             timeOut: 1500,
             "positionClass": "toast-top-center",
