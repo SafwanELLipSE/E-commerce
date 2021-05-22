@@ -59,8 +59,6 @@
 <!-- ChartJS -->
 <script src="{{asset('assets/backend')}}/plugins/chart.js/Chart.min.js"></script>
 
-<!-- AdminLTE for demo purposes -->
-<script src="{{asset('assets/backend')}}/dist/js/demo.js"></script>
 @yield('additional_scripts')
 </body>
 </html>

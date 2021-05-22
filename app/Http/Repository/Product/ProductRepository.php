@@ -27,6 +27,7 @@ class ProductRepository implements ProductInterface
         $this->saveMainImage($product, $request);
         $this->saveSliderImage($product, $request);
         $product->status = Product::NO_STOCK;
+        $product->discount_status = Product::DISCOUNT_NOT_AVAILABLE;
         $product->created_by = Auth::user()->id;
         $product->save();
         Alert::success('Success', 'Successfully Created a new Product');
@@ -44,6 +45,9 @@ class ProductRepository implements ProductInterface
         }
         elseif ($request->post('status')) {
             $products = Product::where('status', $request->post('status'))->get();
+        } 
+        elseif ($request->post('status_discount')) {
+            $products = Product::where('discount_status', $request->post('status_discount'))->get();
         }
 
         $totalData = $products->count();
@@ -60,8 +64,9 @@ class ProductRepository implements ProductInterface
             $localArray[4] = isset($product->subCategory->name) ? $product->subCategory->name : 'No Longer Available';
             $localArray[5] = $product->selling_price;
             $localArray[6] = Product::getStatus($product->status);
-            $localArray[7] = $product->created_at->format('d.m.Y');
-            $localArray[8] = "
+            $localArray[7] = Product::getStatusDiscount($product->discount_status);
+            $localArray[8] = $product->created_at->format('d.m.Y');
+            $localArray[9] = "
                 <div class='btn-group'>
                     <a href='{$show}' class='btn btn-sm btn-primary'>View</a>
                     <button type='button' class='btn btn-sm btn-primary dropdown-toggle dropdown-icon' data-toggle='dropdown'>

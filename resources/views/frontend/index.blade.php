@@ -11,7 +11,7 @@ OneTechShop | Home
 		<!-- Banner -->
 
         <div class="banner">
-            <div class="banner_background" style="background-image:url(images/banner_background.jpg)"></div>
+            <div class="banner_background" style="background-image:url(assets/frontend/images/banner_background.jpg)"></div>
             <div class="container fill_height">
                 <div class="row fill_height">
                     <div class="banner_product_image"><img src="{{asset('assets/frontend/images/banner_product.png')}}" alt=""></div>
@@ -1560,7 +1560,7 @@ OneTechShop | Home
         <!-- Banner -->
     
         <div class="banner_2">
-            <div class="banner_2_background" style="background-image:url(images/banner_2_background.jpg)"></div>
+            <div class="banner_2_background" style="background-image:url(assets/frontend/images/banner_2_background.jpg)"></div>
             <div class="banner_2_container">
                 <div class="banner_2_dots"></div>
                 <!-- Banner 2 Slider -->
@@ -3666,7 +3666,7 @@ OneTechShop | Home
     <!-- Trends -->
 
 	<div class="trends">
-		<div class="trends_background" style="background-image:url(images/trends_background.jpg)"></div>
+		<div class="trends_background" style="background-image:url(assets/frontend/images/trends_background.jpg)"></div>
 		<div class="trends_overlay"></div>
 		<div class="container">
 			<div class="row">
@@ -4053,18 +4053,13 @@ OneTechShop | Home
 					<div class="brands_slider_container">
 						
 						<!-- Brands Slider -->
-
+                        @php
+                            $allBrands = DB::table('brands')->get();
+                        @endphp
 						<div class="owl-carousel owl-theme brands_slider">
-							
-							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{asset('assets/frontend')}}/images/brands_1.jpg" alt=""></div></div>
-							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{asset('assets/frontend')}}/images/brands_2.jpg" alt=""></div></div>
-							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{asset('assets/frontend')}}/images/brands_3.jpg" alt=""></div></div>
-							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{asset('assets/frontend')}}/images/brands_4.jpg" alt=""></div></div>
-							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{asset('assets/frontend')}}/images/brands_5.jpg" alt=""></div></div>
-							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{asset('assets/frontend')}}/images/brands_6.jpg" alt=""></div></div>
-							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{asset('assets/frontend')}}/images/brands_7.jpg" alt=""></div></div>
-							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{asset('assets/frontend')}}/images/brands_8.jpg" alt=""></div></div>
-
+							@foreach ($allBrands as $brand)
+                                <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="/brand_image/{{ $brand->image }}" height="40" width="160" alt=""></div></div>
+                            @endforeach
 						</div>
 						
 						<!-- Brands Slider Navigation -->

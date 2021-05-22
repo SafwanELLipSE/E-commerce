@@ -185,6 +185,7 @@ return [
         App\Http\Repository\ProductSlider\ProductSliderRepositoryServiceProvider::class,
         App\Http\Repository\Stock\StockRepositoryServiceProvider::class,
         App\Http\Repository\StockRecord\StockRecordRepositoryServiceProvider::class,
+        App\Http\Repository\Discount\DiscountRepositoryServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
     ],

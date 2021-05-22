@@ -5,10 +5,10 @@ $(document).ready(function() {
     function populate_categories() {
 
         dataTable = $('#subCategory_table').DataTable({
-            "serverSide": true,
-            "processing": false,
-            "pageLength": 20,
-            "ordering": [],
+            "serverSide": false,
+            "processing": true,
+            "pageLength": 10,
+            "order": [],
             dom: 'Bfrtip',
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print', 'colvis'

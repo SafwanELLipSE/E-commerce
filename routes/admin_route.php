@@ -93,6 +93,16 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('update', ['as' => 'update', 'uses' => 'Admin\ProductSliderImageController@updateImage']);
             Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\ProductSliderImageController@destroyImage']);
         });
+        Route::group(['prefix' => 'discount', 'as' => 'discount.'], function () {
+            Route::get('/', ['as' => 'index', 'uses' => 'Admin\DiscountController@index']);
+            Route::get('list-view', ['as' => 'list_view', 'uses' => 'Admin\DiscountController@displayDiscountList']);
+            Route::post('create', ['as' => 'create', 'uses' => 'Admin\DiscountController@storeDiscount']);
+            Route::post('list', ['as' => 'list', 'uses' => 'Admin\DiscountController@allDiscountList']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Admin\DiscountController@editDiscount']);
+            Route::post('update', ['as' => 'update', 'uses' => 'Admin\DiscountController@updateDiscount']);
+            Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\DiscountController@destroyDiscount']);
+            Route::get('status/{id}', ['as' => 'status', 'uses' => 'Admin\DiscountController@changeStatus']);
+        });
     });
     Route::group(['prefix' => 'utilize', 'as' => 'utilize.'], function () {
         Route::group(['prefix' => 'stock', 'as' => 'stock.'], function () {
@@ -106,6 +116,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('display/{id}', ['as' => 'display', 'uses' => 'Admin\StockController@displayStock']);
             Route::post('update', ['as' => 'update', 'uses' => 'Admin\StockController@updateStock']);
             Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\StockController@destroyStock']);
+            Route::post('delete-selected', ['as' => 'delete_selected', 'uses' => 'Admin\StockController@deleteSelectedStock']);
+            Route::post('delete-all', ['as' => 'delete_all', 'uses' => 'Admin\StockController@deleteAllStock']);
         });
 
         Route::group(['prefix' => 'stockRecord', 'as' => 'stockRecord.'], function () {

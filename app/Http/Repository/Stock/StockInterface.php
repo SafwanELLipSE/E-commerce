@@ -14,4 +14,6 @@ interface StockInterface
     public function stockOut($request, $id);
     public function update($request, $id);
     public function delete($request, $id);
+    public function selectedDelete($request, $id);
+    public function deleteAll($request);
 }

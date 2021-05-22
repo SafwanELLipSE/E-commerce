@@ -8,7 +8,7 @@ $(document).ready(function() {
             "serverSide": true,
             "processing": false,
             "pageLength": 20,
-            "ordering": [],
+            "order": [],
             dom: 'Bfrtip',
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print', 'colvis'
@@ -21,6 +21,7 @@ $(document).ready(function() {
                     'category': $("#category").val(),
                     'subCategory': $("#subCategory").val(),
                     'status': $("#status").val(),
+                    'status_discount': $("#status_discount").val(),
                     _token
                 },
             },
@@ -34,6 +35,11 @@ $(document).ready(function() {
 
     }
     populate_products();
+
+    $("#status_discount").on("change", function() {
+        dataTable.destroy();
+        populate_products();
+    });
 
     $("#status").on("change", function() {
         dataTable.destroy();

@@ -50,15 +50,23 @@ class StockController extends Controller
         $this->stockRepository->stockOut($request, $id);
         return redirect()->back();
     }
-    public function updateStock(Request $request)
-    {
+    public function updateStock(Request $request){
         $id = $request->post('stock_id');
         $this->stockRepository->update($request, $id);
         return redirect()->back();
     }
-    public function destroyStock(Request $request)
-    {
+    public function destroyStock(Request $request){
         $this->stockRepository->delete($request, $request->post('id'));
         return response()->json("Successfully, Stock has been deleted", 200);
+    }
+    public function deleteSelectedStock(Request $request){
+        $discount_id_array = $request->input('id');
+        $this->stockRepository->selectedDelete($request, $discount_id_array);
+        return response()->json("Successfully, Stocks has been deleted", 200);
+    }
+    public function deleteAllStock(Request $request)
+    {
+        $this->stockRepository->deleteAll($request);
+        return response()->json("Successfully, All Stocks has been deleted", 200);
     }
 }

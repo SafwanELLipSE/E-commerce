@@ -33,9 +33,7 @@ class CategoryController extends Controller
     public function updateCategory(Request $request){
         $id = $request->post('category_id');
         $this->categoryRepository->update($request, $id);
-        return view('backend.category.category_edit', [
-            'category' => $this->categoryRepository->get($id)
-        ]);
+        return redirect()->back();
     }
     public function destroyCategory(Request $request){
         $this->categoryRepository->delete($request,$request->post('id'));

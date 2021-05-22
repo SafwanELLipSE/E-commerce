@@ -2,9 +2,8 @@ $(document).ready(function() {
     var _token = $('meta[name="_token"]').attr('content');
     var ssl = $('meta[name="ssl"]').attr('content');
 
-    function populate_sliders() {
-
-        dataTable = $('#slider_table').DataTable({
+    function populate_discounts() {
+        dataTable = $('#discount_table').DataTable({
             "serverSide": true,
             "processing": false,
             "pageLength": 20,
@@ -14,10 +13,9 @@ $(document).ready(function() {
                 'copy', 'csv', 'excel', 'pdf', 'print', 'colvis'
             ],
             "ajax": {
-                url: ssl + window.location.hostname + "/customize/slider/list",
+                url: ssl + window.location.hostname + "/customize/discount/list",
                 type: "POST",
                 data: {
-                    'status': $("#status").val(),
                     _token
                 },
             },
@@ -28,27 +26,21 @@ $(document).ready(function() {
                 }
             }
         });
-
     }
-    populate_sliders();
+    populate_discounts();
 
-    $("#status").on("change", function() {
-        dataTable.destroy();
-        populate_sliders();
-    });
-
-    $("#slider_table").on("click", '#delete-slider', function() {
-        var slider_id = $(this).attr("data-slider-id");
+    $("#discount_table").on("click", '#delete-discount', function() {
+        var discount_id = $(this).attr("data-discount-id");
         $.ajax({
-            url: ssl + window.location.hostname + "/customize/slider/delete",
+            url: ssl + window.location.hostname + "/customize/discount/delete",
             type: "POST",
             data: {
-                'id': slider_id,
+                'id': discount_id,
                 _token
             },
             success: function(response) {
-                $('#slider_table').DataTable().destroy();
-                populate_sliders();
+                $('#discount_table').DataTable().destroy();
+                populate_discounts();
                 toastr.success('SUCCESS!!', response, { timeOut: 5000 })
             },
             error: function(response) {

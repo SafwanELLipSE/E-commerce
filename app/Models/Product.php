@@ -9,7 +9,10 @@ class Product extends Model
     const NO_STOCK = 1;
     const IN_STOCK = 2;
     const OUT_OF_STOCK = 0;
-    
+
+    const DISCOUNT_AVAILABLE = 1;
+    const DISCOUNT_NOT_AVAILABLE = 0;
+
     protected $table = 'products';
     public function brand()
     {
@@ -50,6 +53,15 @@ class Product extends Model
                 return "<span class='text-warning'> No Previous Stock </span>";
             case 2:
                 return "<span class='text-success'> In Stock </span>";
+        }
+    }
+    public static function getStatusDiscount($status_id)
+    {
+        switch ($status_id) {
+            case 0:
+                return "<span class='text-danger'> No </span>";
+            case 1:
+                return "<span class='text-success'> Yes </span>";
         }
     }
 }

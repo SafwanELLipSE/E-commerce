@@ -7,7 +7,7 @@ $(document).ready(function() {
             "serverSide": true,
             "processing": false,
             "pageLength": 20,
-            "ordering": [],
+            "order": [],
             dom: 'Bfrtip',
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print', 'colvis'
@@ -47,5 +47,69 @@ $(document).ready(function() {
                 toastr.error('ERROR!!', response, { timeOut: 5000 })
             }
         });
+    });
+
+    $(document).on('click', '#bulk_delete', function() {
+        var id = [];
+        toastr.warning("<br /><button type='button' value='yes'>Yes</button><button type='button' value='no' >No</button>", 'Are you sure you want to delete this item?', {
+            allowHtml: true,
+            timeOut: 1500,
+            "positionClass": "toast-top-center",
+            onclick: function(toast) {
+                value = toast.target.value
+                if (value == 'yes') {
+                    $('.discount_checkbox:checked').each(function() {
+                        id.push($(this).val());
+                    });
+                    if (id.length > 0) {
+                        $.ajax({
+                            url: ssl + window.location.hostname + "/utilize/stock/delete-selected",
+                            method: "POST",
+                            data: {
+                                id: id,
+                                _token
+                            },
+                            success: function(data) {
+                                $('#stock_table').DataTable().destroy();
+                                populate_stocks();
+                                toastr.success('SUCCESS!!', data, { timeOut: 5000 })
+                            }
+                        });
+                    } else {
+                        toastr.error("Please select at least one checkbox", { timeOut: 1500 });
+                    }
+                } else {
+                    console.log('cancel');
+                }
+            }
+        })
+    });
+    $(document).on('click', '#delete_all', function() {
+        var id = [];
+        toastr.warning("<br /><button type='button' value='yes'>Yes</button><button type='button' value='no' >No</button>", 'Are you sure you want to delete All Stocks?', {
+            allowHtml: true,
+            timeOut: 1500,
+            "positionClass": "toast-top-center",
+            onclick: function(toast) {
+                value = toast.target.value
+                if (value == 'yes') {
+                    $.ajax({
+                        url: ssl + window.location.hostname + "/utilize/stock/delete-all",
+                        method: "POST",
+                        data: {
+                            id: id,
+                            _token
+                        },
+                        success: function(data) {
+                            $('#stock_table').DataTable().destroy();
+                            populate_stocks();
+                            toastr.success('SUCCESS!!', data, { timeOut: 5000 })
+                        }
+                    });
+                } else {
+                    console.log('cancel');
+                }
+            }
+        })
     });
 });

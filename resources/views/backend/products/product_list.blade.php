@@ -78,6 +78,13 @@
                                             <option value="0">Out Stock</option>
                                         </select>
                                     </th>
+                                    <th width="10%">
+                                        <select id="status_discount" class="custom-select form-control-border border-width-2">
+                                            <option value="" selected>Status Discount</option>
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                    </th>
                                     <th width="10%">Created Date</th>
                                     <th width="20%">Action</th>
                                 </tr>

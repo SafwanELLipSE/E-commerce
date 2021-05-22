@@ -32,7 +32,6 @@ class StockRepository implements StockInterface
             alert()->warning('Error occurred', $validator->errors()->all()[0]);
             return redirect()->back()->withInput()->withErrors($validator);
         }
-
         $uniqueProduct = Stock::where('product_id', $request->post('product'))
                                 ->where('color_id', $request->post('color'))
                                 ->where('size_id', $request->post('size'))
@@ -52,7 +51,7 @@ class StockRepository implements StockInterface
             $record->save();
             Alert::success('Success', 'Successfully Created a new Stock');
         }else{
-            Alert::warning('Warning', 'The Product is already added Stock. Please, Try to Update.');
+            Alert::warning('Warning', 'The Product is already added in the Stock list. Please, Try to Update.');
         }
     }
     public function list($request)
@@ -65,7 +64,7 @@ class StockRepository implements StockInterface
         $count = 1;
         foreach ($stocks as $stock) {
             $show = route('utilize.stockRecord.view', $stock->id);
-            $localArray[0] = $count++;
+            $localArray[0] = "<input type='checkbox' name='discount_checkbox[]' class='discount_checkbox mr-2' value='{$stock->id}'/>". $count++;
             $localArray[1] = $stock->product->name;
             $localArray[2] = $stock->color->name;
             $localArray[3] = $stock->size->measurement;
@@ -132,6 +131,7 @@ class StockRepository implements StockInterface
             return redirect()->back()->withInput()->withErrors($validator);
         }
 
+        $product = Product::find($request->post('product'));
         $inStock = $this->get($id)->current_stock - ($request->post('in_stock') + $this->get($id)->stock_in);
 
         if($inStock >= 0){
@@ -143,7 +143,8 @@ class StockRepository implements StockInterface
             $this->saveRecord($record, $stock->id, $inStock, $request->post('in_stock'), 0, 0, Stock_record::STOCK_IN);
             $record->created_by = Auth::user()->id;
             $record->save();
-
+            $product->status = Product::IN_STOCK;
+            $product->save();
             Alert::success('Success', 'Successfully, Stock has been Stock-In');
         }else{
             Alert::warning('Warning', 'Stock can\'t be taken more than '.$this->get($id)->current_stock.'. Please, Try to Update.');
@@ -159,7 +160,7 @@ class StockRepository implements StockInterface
             alert()->warning('Error occurred', $validator->errors()->all()[0]);
             return redirect()->back()->withInput()->withErrors($validator);
         }
-
+        $product = Product::find($request->post('product'));
         $outStock = $this->get($id)->stock_in - $request->post('out_stock');
         $currentStock = $this->get($id)->current_stock + $request->post('out_stock');
         
@@ -172,7 +173,10 @@ class StockRepository implements StockInterface
             $this->saveRecord($record, $stock->id, $outStock, 0, $request->post('out_stock'), 0, Stock_record::OUT_OF_STOCK);
             $record->created_by = Auth::user()->id;
             $record->save();
-
+            if($outStock == 0){
+                $product->status = Product::OUT_OF_STOCK;
+                $product->save();
+            }
             Alert::success('Success', 'Successfully, Stock has been Stock-Out');
         } else {
             Alert::warning('Warning', 'Stock can\'t be taken more than ' . $this->get($id)->stock_in . '. Please, Try to Update.');
@@ -214,6 +218,14 @@ class StockRepository implements StockInterface
         $record = Stock_record::where('stock_id', $id)->delete();
         $stock = $this->get($id);
         $stock->delete();
+    }
+    public function selectedDelete($request, $id){
+        $record = Stock_record::whereIn('stock_id', $id)->delete();
+        $stock = Stock::whereIn('id', $id)->delete();
+    }
+    public function deleteAll($request){
+        $record = Stock_record::truncate();
+        $stock = Stock::truncate();
     }
     private function saveStock($data, $current, $in, $restock, $status)
     {

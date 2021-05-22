@@ -102,6 +102,29 @@
                   </li>
                 </ul>
               </li>
+              <li class="nav-item has-treeview">
+                <a href="#" class="nav-link {{Request::is('customize/discount') || Request::is('customize/discount/*') ? 'active' : ''}}">
+                  <i class="nav-icon fas fa-percent"></i>
+                  <p>
+                    Discount
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('customize.discount.index')}}" class="nav-link {{Request::is('customize/discount') ? 'active' : ''}}">
+                      <i class="fas fa-percent nav-icon"></i>
+                      <p>Create Discount</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('customize.discount.list_view')}}" class="nav-link {{Request::is('customize/discount/list-view') ? 'active' : ''}}">
+                      <i class="fas fa-percent nav-icon"></i>
+                      <p>All Discounts</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
             </ul>
           </li>
           <li class="nav-item {{Request::is('utilize') || Request::is('utilize/*') ? 'menu-open' : ''}}">

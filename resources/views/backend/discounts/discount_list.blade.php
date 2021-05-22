@@ -1,7 +1,7 @@
 @extends('backend.layouts.app')
 
 @section('title')
-{{ env('APP_NAME') }} | All Stock List
+{{ env('APP_NAME') }} | All Discount List
 @endsection
 @section('additional_headers')
     <!-- DataTables -->
@@ -18,12 +18,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0"><i class="fab fa-stripe-s"></i> All Stock of Product</h1>
+                    <h1 class="m-0"><i class="fas fa-percent"></i> All Discount of Product</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i> Home</a></li>
-                        <li class="breadcrumb-item active"><i class="fab fa-stripe-s mt-1 mr-1"></i> All Stock</li>
+                        <li class="breadcrumb-item active"><i class="fas fa-percent mt-1 mr-1"></i> All Discount</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -36,24 +36,20 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Stock's Table List</h3>
-                            <button type="button" id="delete_all" class="btn btn-warning btn-sm float-right text-light ml-1"><i class="fas fa-exclamation-circle"></i> Deleted All</button>
-                            <button type="button" name="bulk_delete" id="bulk_delete" class="btn btn-danger btn-sm float-right ml-1"><i class="fas fa-trash"></i> Selected Delete</button>
-                            <a href="{{route('utilize.stock.index')}}" class="btn btn-sm btn-primary float-right"><i class="fas fa-folder-plus"></i> Add Stock</a>
+                            <h3 class="card-title">Discount's Table List</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="stock_table" class="table table-bordered table-striped" style="width:100%">
+                            <table id="discount_table" class="table table-bordered table-striped" style="width:100%">
                             <thead>
                                 <tr>
                                     <th width="5%">No.</th>
-                                    <th width="15%">Name</th>
-                                    <th width="9%">Color</th>
-                                    <th width="7%">Size</th>
-                                    <th width="8%">Current</th>
-                                    <th width="10%">Stock In</th>
-                                    <th width="8%">Restock</th>
-                                    <th width="10%">Status</th>
+                                    <th width="15%">Product</th>
+                                    <th width="9%">Percentage</th>
+                                    <th width="7%">Amount</th>
+                                    <th width="8%">Start Date</th>
+                                    <th width="10%">End Date</th>
+                                    <th width="10%">Creator</th>
                                     <th width="10%">Created Date</th>
                                     <th width="10%">Action</th>
                                 </tr>
@@ -68,10 +64,6 @@
             </div>
         </div>
     </section>
-    @include('backend/stocks/in_model')
-    @include('backend/stocks/out_model')
-    @include('backend/stocks/restock_model')
-    @include('backend/stocks/edit_model')
     <!-- /.content -->
 </div>
 @endsection
@@ -91,32 +83,5 @@
     <script src="{{asset('assets/backend')}}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="{{asset('assets/backend')}}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="{{asset('assets/backend')}}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-    <script src="{{asset('js/stock.js')}}"></script>
-
-    <script>
-        $('#modal-In').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget)
-            var stock_id = button.data('stockid')
-            var modal = $(this)
-            modal.find('.modal-body #stock_id').val(stock_id);
-        })
-        $('#modal-Out').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget)
-            var stock_id = button.data('stockid')
-            var modal = $(this)
-            modal.find('.modal-body #stock_id').val(stock_id);
-        })
-        $('#modal-reStock').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget)
-            var stock_id = button.data('stockid')
-            var modal = $(this)
-            modal.find('.modal-body #stock_id').val(stock_id);
-        })
-        $('#modal-Edit').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget)
-            var stock_id = button.data('stockid')
-            var modal = $(this)
-            modal.find('.modal-body #stock_id').val(stock_id);
-        })
-    </script>
+    <script src="{{asset('js/discount.js')}}"></script>
 @endsection

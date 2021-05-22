@@ -8,7 +8,7 @@ $(document).ready(function() {
             "serverSide": true,
             "processing": false,
             "pageLength": 20,
-            "ordering": [],
+            "order": [],
             dom: 'Bfrtip',
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print', 'colvis'
