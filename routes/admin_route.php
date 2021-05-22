@@ -34,6 +34,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('update', ['as' => 'update', 'uses' => 'Admin\CategoryController@updateCategory']);
             Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\CategoryController@destroyCategory']);
             Route::get('status/{id}', ['as' => 'status', 'uses' => 'Admin\CategoryController@changeStatus']);
+            Route::post('delete-selected', ['as' => 'delete_selected', 'uses' => 'Admin\CategoryController@deleteSelectedCategory']);
+            Route::post('delete-all', ['as' => 'delete_all', 'uses' => 'Admin\CategoryController@deleteAllCategory']);
         });
         Route::group(['prefix' => 'subCategory', 'as' => 'subCategory.'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'Admin\SubCategoryController@index']);

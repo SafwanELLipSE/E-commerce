@@ -126,6 +126,8 @@
                                             <div class="card">
                                                 <div class="card-header">
                                                     <h3 class="card-title">Category's Table List</h3>
+                                                    <button type="button" id="delete_all" class="btn btn-warning btn-sm float-right text-light ml-1"><i class="fas fa-exclamation-circle"></i> Deleted All</button>
+                                                    <button type="button" name="bulk_delete" id="bulk_delete" class="btn btn-danger btn-sm float-right ml-1"><i class="fas fa-trash"></i> Selected Delete</button>
                                                 </div>
                                                 <!-- /.card-header -->
                                                 <div class="card-body">

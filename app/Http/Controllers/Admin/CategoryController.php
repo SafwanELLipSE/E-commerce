@@ -43,4 +43,15 @@ class CategoryController extends Controller
         $this->categoryRepository->status($request,$id); 
         return redirect()->back();
     }
+    public function deleteSelectedCategory(Request $request)
+    {
+        $category_id_array = $request->input('id');
+        $this->categoryRepository->selectedDelete($request, $category_id_array);
+        return response()->json("Successfully, Categories has been deleted", 200);
+    }
+    public function deleteAllCategory(Request $request)
+    {
+        $this->categoryRepository->deleteAll($request);
+        return response()->json("Successfully, All Categories has been deleted", 200);
+    }
 }

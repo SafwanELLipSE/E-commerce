@@ -56,7 +56,7 @@ class CategoryRepository implements CategoryInterface{
             $image = $category->image != null ? asset('category_image/' . $category->image) : asset("/backend/dist/img/No image.png");
             $status_icon = $category->status != 1 ? "fa-check" : "fa-times";
             $status_color = $category->status != 1 ? "btn-success" : "btn-danger";
-            $localArray[0] = $category->id;
+            $localArray[0] = "<input type='checkbox' name='category_checkbox[]' class='category_checkbox mr-2' value='{$category->id}'/>" . $category->id;
             $localArray[1] = $category->name;
             $localArray[2] = "<img src='{$image}' alt='{$category->name}' class='img-centered img-thumbnail mx-auto d-block mt-2'>";
             $localArray[3] = category::getStatus($category->status);
@@ -119,6 +119,32 @@ class CategoryRepository implements CategoryInterface{
         }
         $category->save();
         Alert::success('Success', 'Successfully Status of Category has been changed.');
+    }
+    public function selectedDelete($request, $id)
+    {
+        $categoryImage = Category::whereIn('id', $id)->pluck('image');
+        if (count($categoryImage) != 0) {
+            foreach ($categoryImage as $image) {
+                $path_image = public_path() . '/category_image/' . $image;
+                if (file_exists($path_image) == true) {
+                    unlink($path_image);
+                }
+            }
+        }
+        $category = Category::whereIn('id', $id)->delete();
+    }
+    public function deleteAll($request)
+    {
+        $allCategoryImages = Category::pluck('image');
+        if (count($allCategoryImages) != 0) {
+            foreach ($allCategoryImages as $image) {
+                $path_image = public_path() . '/category_image/' . $image;
+                if (file_exists($path_image) == true) {
+                    unlink($path_image);
+                }
+            }
+        }
+        $category = Category::truncate();
     }
     private function validationCategory($request){
         return  Validator::make($request->all(),[
