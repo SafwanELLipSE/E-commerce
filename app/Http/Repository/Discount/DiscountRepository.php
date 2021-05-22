@@ -51,7 +51,7 @@ class DiscountRepository implements DiscountInterface
         foreach ($discounts as $discount) {
             $show = route('customize.discount.edit', $discount->id);
             $localArray[0] = $count++;
-            $localArray[1] = $discount->product->name;
+            $localArray[1] = isset($discount->product->name) ? $discount->product->name : 'No Longer Available';
             $localArray[2] = $discount->percentage;
             $localArray[3] = $discount->current_amount;
             $localArray[4] = date('d.m.Y', strtotime($discount->start_date));
@@ -95,7 +95,6 @@ class DiscountRepository implements DiscountInterface
     }
     private function validationDiscount($request)
     {
-        // dd($request->post('start_date'), $request->post('end_date'));
         return  Validator::make($request->all(), [
             'product'   => 'required|',
             'start_date' => 'required|after:yesterday',
