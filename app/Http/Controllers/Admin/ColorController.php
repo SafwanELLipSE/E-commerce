@@ -42,13 +42,13 @@ class ColorController extends Controller
         $this->colorRepository->delete($request, $request->post('id'));
         return response()->json("Successfully, Color has been deleted", 200);
     }
-    public function deleteSelectedStock(Request $request)
+    public function deleteSelectedColor(Request $request)
     {
         $color_id_array = $request->input('id');
         $this->colorRepository->selectedDelete($request, $color_id_array);
         return response()->json("Successfully, Colors has been deleted", 200);
     }
-    public function deleteAllStock(Request $request)
+    public function deleteAllColor(Request $request)
     {
         $this->colorRepository->deleteAll($request);
         return response()->json("Successfully, All Colors has been deleted", 200);

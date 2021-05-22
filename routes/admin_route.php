@@ -50,6 +50,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('update', ['as' => 'update', 'uses' => 'Admin\SizeController@updateSize']);
             Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\SizeController@destroySize']);
             Route::get('status/{id}', ['as' => 'status', 'uses' => 'Admin\SizeController@changeStatus']);
+            Route::post('delete-selected', ['as' => 'delete_selected', 'uses' => 'Admin\SizeController@deleteSelectedSize']);
+            Route::post('delete-all', ['as' => 'delete_all', 'uses' => 'Admin\SizeController@deleteAllSize']);
         });
         Route::group(['prefix' => 'feature', 'as' => 'feature.'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'Admin\FeatureController@index']);
@@ -58,8 +60,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Admin\FeatureController@editFeature']);
             Route::post('update', ['as' => 'update', 'uses' => 'Admin\FeatureController@updateFeature']);
             Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\FeatureController@destroyFeature']);
-            Route::post('delete-selected', ['as' => 'delete_selected', 'uses' => 'Admin\FeatureController@deleteSelectedStock']);
-            Route::post('delete-all', ['as' => 'delete_all', 'uses' => 'Admin\FeatureController@deleteAllStock']);
+            Route::post('delete-selected', ['as' => 'delete_selected', 'uses' => 'Admin\FeatureController@deleteSelectedFeature']);
+            Route::post('delete-all', ['as' => 'delete_all', 'uses' => 'Admin\FeatureController@deleteAllFeature']);
         });
         Route::group(['prefix' => 'color', 'as' => 'color.'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'Admin\ColorController@index']);
@@ -68,8 +70,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Admin\ColorController@editColor']);
             Route::post('update', ['as' => 'update', 'uses' => 'Admin\ColorController@updateColor']);
             Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\ColorController@destroyColor']);
-            Route::post('delete-selected', ['as' => 'delete_selected', 'uses' => 'Admin\ColorController@deleteSelectedStock']);
-            Route::post('delete-all', ['as' => 'delete_all', 'uses' => 'Admin\ColorController@deleteAllStock']);
+            Route::post('delete-selected', ['as' => 'delete_selected', 'uses' => 'Admin\ColorController@deleteSelectedColor']);
+            Route::post('delete-all', ['as' => 'delete_all', 'uses' => 'Admin\ColorController@deleteAllColor']);
         });
         Route::group(['prefix' => 'slider', 'as' => 'slider.'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'Admin\SliderController@index']);

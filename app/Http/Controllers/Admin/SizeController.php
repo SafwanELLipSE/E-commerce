@@ -50,4 +50,15 @@ class SizeController extends Controller
         $this->sizeRepository->status($request, $id);
         return redirect()->back();
     }
+    public function deleteSelectedSize(Request $request)
+    {
+        $size_id_array = $request->input('id');
+        $this->sizeRepository->selectedDelete($request, $size_id_array);
+        return response()->json("Successfully, Sizes has been deleted", 200);
+    }
+    public function deleteAllSize(Request $request)
+    {
+        $this->sizeRepository->deleteAll($request);
+        return response()->json("Successfully, All Sizes has been deleted", 200);
+    }
 }

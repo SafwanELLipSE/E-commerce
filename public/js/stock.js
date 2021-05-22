@@ -50,6 +50,7 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '#bulk_delete', function() {
+        var id = [];
         toastr.warning("<br /><button type='button' value='yes'>Yes</button><button type='button' value='no' >No</button>", 'Are you sure you want to delete this item?', {
             allowHtml: true,
             timeOut: 1500,
@@ -65,6 +66,7 @@ $(document).ready(function() {
                             url: ssl + window.location.hostname + "/utilize/stock/delete-selected",
                             method: "POST",
                             data: {
+                                id: id,
                                 _token
                             },
                             success: function(data) {
@@ -83,7 +85,6 @@ $(document).ready(function() {
         })
     });
     $(document).on('click', '#delete_all', function() {
-        var id = [];
         toastr.warning("<br /><button type='button' value='yes'>Yes</button><button type='button' value='no' >No</button>", 'Are you sure you want to delete All Stocks?', {
             allowHtml: true,
             timeOut: 1500,
@@ -95,7 +96,6 @@ $(document).ready(function() {
                         url: ssl + window.location.hostname + "/utilize/stock/delete-all",
                         method: "POST",
                         data: {
-                            id: id,
                             _token
                         },
                         success: function(data) {

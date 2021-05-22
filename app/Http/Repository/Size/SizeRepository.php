@@ -64,7 +64,7 @@ class SizeRepository implements SizeInterface
             $status_link = route('customize.size.status', $size->id);
             $status_icon = $size->status != 1 ? "fa-check" : "fa-times";
             $status_color = $size->status != 1 ? "btn-success" : "btn-danger";
-            $localArray[0] = $size->id;
+            $localArray[0] = "<input type='checkbox' name='size_checkbox[]' class='size_checkbox mr-2' value='{$size->id}'/>" . $size->id;
             $localArray[1] = $size->measurement;
             $localArray[2] = $size->unit;
             $localArray[3] = isset($size->subCategory->name) ? $size->subCategory->name : 'No Long Available';
@@ -115,6 +115,14 @@ class SizeRepository implements SizeInterface
         }
         $size->save();
         Alert::success('Success', 'Successfully Status of Size has been changed.');
+    }
+    public function selectedDelete($request, $id)
+    {
+        $size = Size::whereIn('id', $id)->delete();
+    }
+    public function deleteAll($request)
+    {
+        $size = Size::truncate();
     }
     private function validationSize($request)
     {
