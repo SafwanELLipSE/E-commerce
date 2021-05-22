@@ -41,4 +41,15 @@ class SliderController extends Controller
         $this->sliderRepository->status($request,$id); 
         return redirect()->back();
     }
+    public function deleteSelectedSlider(Request $request)
+    {
+        $slider_id_array = $request->input('id');
+        $this->sliderRepository->selectedDelete($request, $slider_id_array);
+        return response()->json("Successfully, Sliders has been deleted", 200);
+    }
+    public function deleteAllSlider(Request $request)
+    {
+        $this->sliderRepository->deleteAll($request);
+        return response()->json("Successfully, All Sliders has been deleted", 200);
+    }
 }

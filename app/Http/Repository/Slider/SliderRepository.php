@@ -57,7 +57,7 @@ class SliderRepository implements SliderInterface{
             $image = $slider->image != null  ? asset('slider_image/' . $slider->image) : asset("/backend/dist/img/No image.png");
             $status_icon = $slider->status != 1 ? "fa-check" : "fa-times";
             $status_color = $slider->status != 1 ? "btn-success" : "btn-danger";
-            $localArray[0] = $slider->id;
+            $localArray[0] = "<input type='checkbox' name='slider_checkbox[]' class='slider_checkbox mr-2' value='{$slider->id}'/>" . $slider->id;
             $localArray[1] = $slider->title;
             $localArray[2] = $slider->sub_title;
             $localArray[3] = "<img src='{$image}' alt='$slider->name' class='img-centered img-thumbnail mx-auto d-block mt-2'>";
@@ -126,6 +126,32 @@ class SliderRepository implements SliderInterface{
         }
         $slider->save();
         Alert::success('Success', 'Successfully Status of Slider has been changed.');
+    }
+    public function selectedDelete($request, $id)
+    {
+        $sliderImage = Slider::whereIn('id', $id)->pluck('image');
+        if (count($sliderImage) != 0) {
+            foreach ($sliderImage as $image) {
+                $path_image = public_path() . '/slider_image/' . $image;
+                if (file_exists($path_image) == true) {
+                    unlink($path_image);
+                }
+            }
+        }
+        $slider = Slider::whereIn('id', $id)->delete();
+    }
+    public function deleteAll($request)
+    {
+        $allSliderImages = Slider::pluck('image');
+        if (count($allSliderImages) != 0) {
+            foreach ($allSliderImages as $image) {
+                $path_image = public_path() . '/slider_image/' . $image;
+                if (file_exists($path_image) == true) {
+                    unlink($path_image);
+                }
+            }
+        }
+        $slider = Slider::truncate();
     }
     private function validationSlider($request){
         return  Validator::make($request->all(),[
