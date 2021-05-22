@@ -50,4 +50,15 @@ class SubCategoryController extends Controller
         $this->subCategoryRepository->status($request,$id); 
         return redirect()->back();
     }
+    public function deleteSelectedSubcategory(Request $request)
+    {
+        $subCategory_id_array = $request->input('id');
+        $this->subCategoryRepository->selectedDelete($request, $subCategory_id_array);
+        return response()->json("Successfully, Sub-Categories has been deleted", 200);
+    }
+    public function deleteAllSubcategory(Request $request)
+    {
+        $this->subCategoryRepository->deleteAll($request);
+        return response()->json("Successfully, All Sub-Categories has been deleted", 200);
+    }
 }

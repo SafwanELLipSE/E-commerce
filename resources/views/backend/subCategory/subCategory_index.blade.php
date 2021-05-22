@@ -217,6 +217,8 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <h3 class="card-title">Sub-category's Table List</h3>
+                                            <button type="button" id="delete_all_subCategory" class="btn btn-warning btn-sm float-right text-light ml-1"><i class="fas fa-exclamation-circle"></i> Deleted All</button>
+                                            <button type="button" name="bulk_delete_subCategory" id="bulk_delete_subCategory" class="btn btn-danger btn-sm float-right ml-1"><i class="fas fa-trash"></i> Selected Delete</button>
                                             <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#modal-subCategory"><i class="fas fa-folder-plus"></i> Add Sub-Category</button>
                                         </div>
                                         <!-- /.card-header -->

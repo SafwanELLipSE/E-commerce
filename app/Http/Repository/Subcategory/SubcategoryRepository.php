@@ -65,7 +65,7 @@ class SubcategoryRepository implements SubcategoryInterface
             $image = $subCategory->image != null  ? asset('subCategory_image/' . $subCategory->image) : asset("assets/backend/dist/img/No image.png");
             $status_icon = $subCategory->status != 1 ? "fa-check" : "fa-times";
             $status_color = $subCategory->status != 1 ? "btn-success" : "btn-danger";
-            $localArray[0] = $subCategory->id;
+            $localArray[0] = "<input type='checkbox' name='subCategory_checkbox[]' class='subCategory_checkbox mr-2' value='{$subCategory->id}'/>" . $subCategory->id;
             $localArray[1] = $subCategory->name;
             $localArray[2] = isset($subCategory->category->name) ? $subCategory->category->name : 'No Longer Available';
             $localArray[3] = "<img src='{$image}' alt='{$subCategory->name}' class='img-centered img-thumbnail mx-auto d-block mt-2'>";
@@ -135,6 +135,32 @@ class SubcategoryRepository implements SubcategoryInterface
         }
         $subCategory->save();
         Alert::success('Success', 'Successfully Status of Sub-category has been changed.');
+    }
+    public function selectedDelete($request, $id)
+    {
+        $subCategoryImage = Sub_Category::whereIn('id', $id)->pluck('image');
+        if (count($subCategoryImage) != 0) {
+            foreach ($subCategoryImage as $image) {
+                $path_image = public_path() . '/subCategory_image/' . $image;
+                if (file_exists($path_image) == true) {
+                    unlink($path_image);
+                }
+            }
+        }
+        $subCategory = Sub_Category::whereIn('id', $id)->delete();
+    }
+    public function deleteAll($request)
+    {
+        $allSubCategoryImages = Sub_Category::pluck('image');
+        if (count($allSubCategoryImages) != 0) {
+            foreach ($allSubCategoryImages as $image) {
+                $path_image = public_path() . '/subCategory_image/' . $image;
+                if (file_exists($path_image) == true) {
+                    unlink($path_image);
+                }
+            }
+        }
+        $subCategory = Sub_Category::truncate();
     }
     private function validationSubcategory($request){
         return Validator::make($request->all(),[

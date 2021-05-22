@@ -45,6 +45,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('update', ['as' => 'update', 'uses' => 'Admin\SubCategoryController@updateSubcategory']);
             Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\SubCategoryController@destroySubcategory']);
             Route::get('status/{id}', ['as' => 'status', 'uses' => 'Admin\SubCategoryController@changeStatus']);
+            Route::post('delete-selected', ['as' => 'delete_selected', 'uses' => 'Admin\SubCategoryController@deleteSelectedSubcategory']);
+            Route::post('delete-all', ['as' => 'delete_all', 'uses' => 'Admin\SubCategoryController@deleteAllSubcategory']);
         });
         Route::group(['prefix' => 'size', 'as' => 'size.'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'Admin\SizeController@index']);
@@ -85,6 +87,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('update', ['as' => 'update', 'uses' => 'Admin\SliderController@updateSlider']);
             Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\SliderController@destroySlider']);
             Route::get('status/{id}', ['as' => 'status', 'uses' => 'Admin\SliderController@changeStatus']);
+            Route::post('delete-selected', ['as' => 'delete_selected', 'uses' => 'Admin\SliderController@deleteSelectedSlider']);
+            Route::post('delete-all', ['as' => 'delete_all', 'uses' => 'Admin\SliderController@deleteAllSlider']);
         });
         Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'Admin\ProductController@index']);
