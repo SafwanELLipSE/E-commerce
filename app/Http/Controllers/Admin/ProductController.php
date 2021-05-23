@@ -76,4 +76,15 @@ class ProductController extends Controller
         $this->productRepository->delete($request, $request->post('id'));
         return response()->json("Successfully, Product has been deleted", 200);
     }
+    public function deleteSelectedProduct(Request $request)
+    {
+        $product_id_array = $request->input('id');
+        $this->productRepository->selectedDelete($request, $product_id_array);
+        return response()->json("Successfully, Products has been deleted", 200);
+    }
+    public function deleteAllProduct(Request $request)
+    {
+        $this->productRepository->deleteAll($request);
+        return response()->json("Successfully, All Products has been deleted", 200);
+    }
 }

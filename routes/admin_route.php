@@ -100,6 +100,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('update', ['as' => 'update', 'uses' => 'Admin\ProductController@updateProduct']);
             Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\ProductController@destroyProduct']);
             Route::get('status/{id}', ['as' => 'status', 'uses' => 'Admin\ProductController@changeStatus']);
+            Route::post('delete-selected', ['as' => 'delete_selected', 'uses' => 'Admin\ProductController@deleteSelectedProduct']);
+            Route::post('delete-all', ['as' => 'delete_all', 'uses' => 'Admin\ProductController@deleteAllProduct']);
         });
         Route::group(['prefix' => 'productImages', 'as' => 'productImages.'], function () {
             Route::get('internals/{id}', ['as' => 'internals', 'uses' => 'Admin\ProductSliderImageController@index']);
@@ -115,8 +117,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Admin\DiscountController@editDiscount']);
             Route::post('update', ['as' => 'update', 'uses' => 'Admin\DiscountController@updateDiscount']);
             Route::post('delete', ['as' => 'delete', 'uses' => 'Admin\DiscountController@destroyDiscount']);
-            Route::post('delete-selected', ['as' => 'delete_selected', 'uses' => 'Admin\DiscountController@deleteSelectedStock']);
-            Route::post('delete-all', ['as' => 'delete_all', 'uses' => 'Admin\DiscountController@deleteAllStock']);
+            Route::post('delete-selected', ['as' => 'delete_selected', 'uses' => 'Admin\DiscountController@deleteSelectedDiscount']);
+            Route::post('delete-all', ['as' => 'delete_all', 'uses' => 'Admin\DiscountController@deleteAllDiscount']);
         });
     });
     Route::group(['prefix' => 'utilize', 'as' => 'utilize.'], function () {

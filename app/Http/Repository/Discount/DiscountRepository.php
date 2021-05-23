@@ -50,7 +50,7 @@ class DiscountRepository implements DiscountInterface
         $count = 1;
         foreach ($discounts as $discount) {
             $show = route('customize.discount.edit', $discount->id);
-            $localArray[0] = $count++;
+            $localArray[0] = "<input type='checkbox' name='discount_checkbox[]' class='discount_checkbox mr-2' value='{$discount->id}'/>" . $count++;
             $localArray[1] = isset($discount->product->name) ? $discount->product->name : 'No Longer Available';
             $localArray[2] = $discount->percentage;
             $localArray[3] = $discount->current_amount;
@@ -89,9 +89,27 @@ class DiscountRepository implements DiscountInterface
         ]);
         if ($validator->fails())
             return response()->json($validator->errors()->all()[0], 422);
+            
+        $discountProduct = Discount::where('id', $id)->pluck('product_id');
+
+        $productNew = Product::where('id', $discountProduct)->first();
+        $productNew->discount_status = Product::DISCOUNT_NOT_AVAILABLE;
+        $productNew->save();
 
         $discount = $this->get($id);
         $discount->delete();
+    }
+    public function selectedDelete($request, $id)
+    {
+        $discountProduct = Discount::whereIn('id', $id)->pluck('product_id');
+        $product = Product::whereIn('id', $discountProduct)->update(['discount_status' => Product::DISCOUNT_NOT_AVAILABLE]);
+        $discount = Discount::whereIn('id', $id)->delete();
+    }
+    public function deleteAll($request)
+    {
+        $allDiscountImages = Discount::pluck('product_id');
+        $product = Product::whereIn('id', $allDiscountImages)->update(['discount_status' => Product::DISCOUNT_NOT_AVAILABLE]);
+        $discount = Discount::truncate();
     }
     private function validationDiscount($request)
     {

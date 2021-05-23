@@ -3,6 +3,7 @@
 namespace App\Http\Repository\Product;
 
 use App\Models\Product;
+use App\Models\Discount;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
@@ -57,7 +58,7 @@ class ProductRepository implements ProductInterface
         foreach ($products as $product) {
             $show = route('customize.product.display', $product->id);
             $status_link = route('customize.product.status', $product->id);
-            $localArray[0] = $product->id;
+            $localArray[0] = "<input type='checkbox' name='product_checkbox[]' class='product_checkbox mr-2' value='{$product->id}'/>" . $product->id;
             $localArray[1] = $product->name;
             $localArray[2] = isset($product->brand->name) ? $product->brand->name : 'No Longer Available';
             $localArray[3] = isset($product->category->name) ? $product->category->name : 'No Longer Available';
@@ -137,6 +138,63 @@ class ProductRepository implements ProductInterface
         }
 
         $product->delete();
+    }
+    public function selectedDelete($request, $id)
+    {
+        $productImage = Product::whereIn('id', $id)->pluck('image');
+        if (count($productImage) != 0) {
+            foreach ($productImage as $image) {
+                $path_image = public_path() . '/product_image/' . $image;
+                if (file_exists($path_image) == true) {
+                    unlink($path_image);
+                }
+            }
+        }
+        $productImageSlider = Product::whereIn('id', $id)->pluck('image_slider');
+        if (count($productImageSlider) != 0) {
+            foreach ($productImageSlider as $imageText) {
+                $Images = explode(',', $imageText);
+                if (count($Images) != 0) {
+                    foreach($Images as $image){
+                        $path_image = public_path() . '/product_image/' . $image;
+                        if (file_exists($path_image) == true) {
+                            unlink($path_image);
+                        }
+                    }
+                }
+            }
+        }
+        $product = Product::whereIn('id', $id)->delete();
+        $discount = Discount::whereIn('product_id', $id)->delete();
+    }
+    public function deleteAll($request)
+    {
+        $productIds = Product::pluck('id');
+        $productImage = Product::whereIn('id', $productIds)->pluck('image');
+        if (count($productImage) != 0) {
+            foreach ($productImage as $image) {
+                $path_image = public_path() . '/product_image/' . $image;
+                if (file_exists($path_image) == true) {
+                    unlink($path_image);
+                }
+            }
+        }
+        $productImageSlider = Product::whereIn('id', $productIds)->pluck('image_slider');
+        if (count($productImageSlider) != 0) {
+            foreach ($productImageSlider as $imageText) {
+                $Images = explode(',', $imageText);
+                if (count($Images) != 0) {
+                    foreach ($Images as $image) {
+                        $path_image = public_path() . '/product_image/' . $image;
+                        if (file_exists($path_image) == true) {
+                            unlink($path_image);
+                        }
+                    }
+                }
+            }
+        }
+        $product = Product::truncate();
+        $discount = Discount::truncate();
     }
     private function validationProduct($request)
     {

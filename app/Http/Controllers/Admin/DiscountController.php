@@ -51,4 +51,15 @@ class DiscountController extends Controller
         $this->discountRepository->delete($request, $request->post('id'));
         return response()->json("Successfully, Category has been deleted", 200);
     }
+    public function deleteSelectedDiscount(Request $request)
+    {
+        $discount_id_array = $request->input('id');
+        $this->discountRepository->selectedDelete($request, $discount_id_array);
+        return response()->json("Successfully, Discounts has been deleted", 200);
+    }
+    public function deleteAllDiscount(Request $request)
+    {
+        $this->discountRepository->deleteAll($request);
+        return response()->json("Successfully, All Discounts has been deleted", 200);
+    }
 }
