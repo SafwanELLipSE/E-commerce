@@ -4,6 +4,8 @@ namespace App\Http\Repository\Product;
 
 use App\Models\Product;
 use App\Models\Discount;
+use App\Models\Stock;
+use App\Models\Stock_record;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
@@ -136,7 +138,11 @@ class ProductRepository implements ProductInterface
                 }
             }
         }
+        $stockID = Stock::where('product_id', $id)->pluck('id');
 
+        $discount = Discount::where('product_id', $id)->delete();
+        $record = Stock_record::where('stock_id', $stockID)->delete();
+        $stock = Stock::where('product_id', $id)->delete();
         $product->delete();
     }
     public function selectedDelete($request, $id)
@@ -164,8 +170,12 @@ class ProductRepository implements ProductInterface
                 }
             }
         }
+        $stockID = Stock::whereIn('product_id', $id)->pluck('id');
+
         $product = Product::whereIn('id', $id)->delete();
         $discount = Discount::whereIn('product_id', $id)->delete();
+        $record = Stock_record::whereIn('stock_id', $stockID)->delete();
+        $stock = Stock::whereIn('product_id', $id)->delete();
     }
     public function deleteAll($request)
     {
@@ -195,6 +205,8 @@ class ProductRepository implements ProductInterface
         }
         $product = Product::truncate();
         $discount = Discount::truncate();
+        $Stock = Stock::truncate();
+        $Stock = Stock_record::truncate();
     }
     private function validationProduct($request)
     {
