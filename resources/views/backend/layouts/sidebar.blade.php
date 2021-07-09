@@ -1,4 +1,4 @@
- <aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
       <img src="{{asset('assets/backend')}}/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -22,7 +22,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
               with font-awesome or any other icon font library -->
-          <li class="nav-item {{Request::is('dashboard') ? 'menu-open' : ''}}">
+          <li class="nav-item {{Request::is('dashboard') ? 'menu-is-opening menu-open' : ''}}">
             <a href="#" class="nav-link {{Request::is('dashboard') ? 'active' : ''}}">
               <i class="nav-icon fas fa-home"></i>
               <p>
@@ -39,7 +39,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item {{Request::is('customize') || Request::is('customize/*') ? 'menu-open' : ''}}">
+          <li class="nav-item {{Request::is('customize') || Request::is('customize/*') ? 'menu-is-opening menu-open' : ''}}">
             <a href="#" class="nav-link {{Request::is('customize') || Request::is('customize/*') ? 'active' : ''}}">
               <i class="nav-icon fas fa-archive"></i>
               <p>
@@ -79,7 +79,8 @@
                   <p>Slider</p>
                 </a>
               </li>
-              <li class="nav-item has-treeview">
+              {{--  --}}
+              <li class="nav-item {{Request::is('customize/product') || Request::is('customize/product/*') ? 'menu-is-opening menu-open' : ''}}">
                 <a href="#" class="nav-link {{Request::is('customize/product') || Request::is('customize/product/*') ? 'active' : ''}}">
                   <i class="nav-icon fab fa-product-hunt"></i>
                   <p>
@@ -87,7 +88,7 @@
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
-                <ul class="nav nav-treeview">
+                <ul class="nav nav-treeview" style="display: none !important">
                   <li class="nav-item">
                     <a href="{{route('customize.product.index')}}" class="nav-link {{Request::is('customize/product') ? 'active' : ''}}">
                       <i class="fab fa-product-hunt nav-icon"></i>
@@ -102,7 +103,8 @@
                   </li>
                 </ul>
               </li>
-              <li class="nav-item has-treeview">
+              {{--  --}}
+              <li class="nav-item {{Request::is('customize/discount') || Request::is('customize/discount/*') ? 'menu-open' : ''}}">
                 <a href="#" class="nav-link {{Request::is('customize/discount') || Request::is('customize/discount/*') ? 'active' : ''}}">
                   <i class="nav-icon fas fa-percent"></i>
                   <p>
@@ -127,7 +129,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item {{Request::is('utilize') || Request::is('utilize/*') ? 'menu-open' : ''}}">
+          <li class="nav-item {{Request::is('utilize') || Request::is('utilize/*') ? 'menu-is-opening menu-open' : ''}}">
             <a href="#" class="nav-link {{Request::is('utilize') || Request::is('utilize/*') ? 'active' : ''}}">
               <i class="nav-icon fas fa-chart-line"></i>
               <p>
@@ -152,7 +154,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{route('utilize.stock.list_view')}}" class="nav-link {{Request::is('customize/stock/list-view') ? 'active' : ''}}">
+                    <a href="{{route('utilize.stock.list_view')}}" class="nav-link {{Request::is('utilize/stock/list-view') ? 'active' : ''}}">
                       <i class="fab fa-stripe-s nav-icon"></i>
                       <p>All Stock</p>
                     </a>

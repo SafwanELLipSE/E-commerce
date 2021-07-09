@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-    <!-- Toastr -->
-    <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/toastr/toastr.min.css">
+    {{-- sweet alert 2 --}}
+    <link src="{{asset('assets/backend')}}/plugins/sweetalert2/sweetalert2.min.css">
 @endsection
 @section('content')
 <div class="content-wrapper">
@@ -208,8 +208,6 @@
 </div>
 @endsection
 @section('additional_scripts')
-    <!-- Toastr -->
-    <script src="{{asset('assets/backend')}}/plugins/toastr/toastr.min.js"></script>
     <!-- DataTables  & Plugins -->
     <script src="{{asset('assets/backend')}}/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="{{asset('assets/backend')}}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -223,6 +221,8 @@
     <script src="{{asset('assets/backend')}}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="{{asset('assets/backend')}}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="{{asset('assets/backend')}}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    {{-- sweet alert 2 --}}
+    <script src="{{asset('assets/backend')}}/plugins/sweetalert2/sweetalert2.all.js"></script>
     <script src="{{asset('js/brand.js')}}"></script>
     <!-- bs-custom-file-input -->
     <script src="{{asset('assets/backend')}}/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>

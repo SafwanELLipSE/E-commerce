@@ -24,6 +24,7 @@ Route::group(['middleware' => ['auth']], function () {
         require __DIR__ . '/admin_route/slider.php';
         require __DIR__ . '/admin_route/product.php';
         require __DIR__ . '/admin_route/discount.php';
+        require __DIR__ . '/admin_route/review.php';
     });
     Route::group(['prefix' => 'utilize', 'as' => 'utilize.'], function () {
         require __DIR__ . '/admin_route/stock.php';

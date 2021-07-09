@@ -43,72 +43,99 @@ $(document).ready(function() {
             success: function(response) {
                 $('#feature_table').DataTable().destroy();
                 populate_features();
-                toastr.success('SUCCESS!!', response, { timeOut: 5000 })
+                Swal.fire({
+                    title: "SUCCESS!!",
+                    text: response,
+                    type: "success",
+                });
             },
             error: function(response) {
-                toastr.error('ERROR!!', response, { timeOut: 5000 })
+                Swal.fire({
+                    title: "ERROR!",
+                    text: response.responseJSON,
+                    type: "error",
+                });
             }
         });
     });
 
     $(document).on('click', '#bulk_delete_feature', function() {
         var id = [];
-        toastr.warning("<br /><button type='button' value='yes'>Yes</button><button type='button' value='no' >No</button>", 'Are you sure you want to delete this Features?', {
-            allowHtml: true,
-            timeOut: 1500,
-            "positionClass": "toast-top-center",
-            onclick: function(toast) {
-                value = toast.target.value
-                if (value == 'yes') {
-                    $('.feature_checkbox:checked').each(function() {
-                        id.push($(this).val());
-                    });
-                    if (id.length > 0) {
-                        $.ajax({
-                            url: ssl + window.location.hostname + "/customize/feature/delete-selected",
-                            method: "POST",
-                            data: {
-                                id: id,
-                                _token
-                            },
-                            success: function(data) {
-                                $('#feature_table').DataTable().destroy();
-                                populate_features();
-                                toastr.success('SUCCESS!!', data, { timeOut: 5000 })
-                            }
-                        });
-                    } else {
-                        toastr.error("Please select at least one checkbox", { timeOut: 1500 });
-                    }
-                } else {
-                    console.log('cancel');
-                }
-            }
-        })
-    });
-    $(document).on('click', '#delete_all_feature', function() {
-        toastr.warning("<br /><button type='button' value='yes'>Yes</button><button type='button' value='no' >No</button>", 'Are you sure you want to delete All Features?', {
-            allowHtml: true,
-            timeOut: 1500,
-            "positionClass": "toast-top-center",
-            onclick: function(toast) {
-                value = toast.target.value
-                if (value == 'yes') {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete the Selected!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('.feature_checkbox:checked').each(function() {
+                    id.push($(this).val());
+                });
+                if (id.length > 0) {
                     $.ajax({
-                        url: ssl + window.location.hostname + "/customize/feature/delete-all",
+                        url: ssl + window.location.hostname + "/customize/feature/delete-selected",
                         method: "POST",
                         data: {
+                            id: id,
                             _token
                         },
                         success: function(data) {
                             $('#feature_table').DataTable().destroy();
                             populate_features();
-                            toastr.success('SUCCESS!!', data, { timeOut: 5000 })
+                            Swal.fire({
+                                title: "SUCCESS!!",
+                                text: data,
+                                type: "success",
+                            });
+                        },
+                        error: function(response) {
+                            Swal.fire({
+                                title: "ERROR!",
+                                text: response.responseJSON,
+                                type: "error",
+                            });
                         }
                     });
                 } else {
-                    console.log('cancel');
+                    Swal.fire({
+                        title: "ERROR!",
+                        text: "Please select at least one checkbox",
+                        type: "error",
+                    });
                 }
+            }
+        })
+    });
+    $(document).on('click', '#delete_all_feature', function() {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete All Features!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: ssl + window.location.hostname + "/customize/feature/delete-all",
+                    method: "POST",
+                    data: {
+                        _token
+                    },
+                    success: function(data) {
+                        $('#feature_table').DataTable().destroy();
+                        populate_features();
+                        Swal.fire(
+                            'Deleted!',
+                            data,
+                            'success'
+                        )
+                    }
+                });
             }
         })
     });

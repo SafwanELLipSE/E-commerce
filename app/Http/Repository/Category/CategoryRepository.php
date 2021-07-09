@@ -148,9 +148,9 @@ class CategoryRepository implements CategoryInterface{
     }
     private function validationCategory($request){
         return  Validator::make($request->all(),[
-                    'category_name'   => 'required',
-                    'category_image'  => 'image|mimes:jpeg,png,jpg,svg|max:2048',
-                ]);
+            'category_name'   => 'required',
+            'category_image'  => 'image|mimes:jpeg,png,jpg,svg|max:2048',
+        ]);
     }
     private function saveInformation($data, $request)
     {

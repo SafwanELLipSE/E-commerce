@@ -49,72 +49,99 @@ $(document).ready(function() {
             success: function(response) {
                 $('#slider_table').DataTable().destroy();
                 populate_sliders();
-                toastr.success('SUCCESS!!', response, { timeOut: 5000 })
+                Swal.fire({
+                    title: "SUCCESS!!",
+                    text: response,
+                    type: "success",
+                });
             },
             error: function(response) {
-                toastr.error('ERROR!!', response, { timeOut: 5000 })
+                Swal.fire({
+                    title: "ERROR!",
+                    text: response.responseJSON,
+                    type: "error",
+                });
             }
         });
     });
 
     $(document).on('click', '#bulk_delete', function() {
         var id = [];
-        toastr.warning("<br /><button type='button' value='yes'>Yes</button><button type='button' value='no' >No</button>", 'Are you sure you want to delete this Sliders?', {
-            allowHtml: true,
-            timeOut: 7000,
-            "positionClass": "toast-top-center",
-            onclick: function(toast) {
-                value = toast.target.value
-                if (value == 'yes') {
-                    $('.slider_checkbox:checked').each(function() {
-                        id.push($(this).val());
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete the Selected!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('.slider_checkbox:checked').each(function() {
+                    id.push($(this).val());
+                });
+                if (id.length > 0) {
+                    $.ajax({
+                        url: ssl + window.location.hostname + "/customize/slider/delete-selected",
+                        method: "POST",
+                        data: {
+                            id: id,
+                            _token
+                        },
+                        success: function(data) {
+                            $$('#slider_table').DataTable().destroy();
+                            populate_sliders();
+                            Swal.fire({
+                                title: "SUCCESS!!",
+                                text: data,
+                                type: "success",
+                            });
+                        },
+                        error: function(response) {
+                            Swal.fire({
+                                title: "ERROR!",
+                                text: response.responseJSON,
+                                type: "error",
+                            });
+                        }
                     });
-                    if (id.length > 0) {
-                        $.ajax({
-                            url: ssl + window.location.hostname + "/customize/slider/delete-selected",
-                            method: "POST",
-                            data: {
-                                id: id,
-                                _token
-                            },
-                            success: function(data) {
-                                $('#slider_table').DataTable().destroy();
-                                populate_sliders();
-                                toastr.success('SUCCESS!!', data, { timeOut: 5000 })
-                            }
-                        });
-                    } else {
-                        toastr.error("Please select at least one checkbox", { timeOut: 1500 });
-                    }
                 } else {
-                    console.log('cancel');
+                    Swal.fire({
+                        title: "ERROR!",
+                        text: "Please select at least one checkbox",
+                        type: "error",
+                    });
                 }
             }
         })
     });
     $(document).on('click', '#delete_all', function() {
-        toastr.warning("<br /><button type='button' value='yes'>Yes</button><button type='button' value='no' >No</button>", 'Are you sure you want to delete All Sliders?', {
-            allowHtml: true,
-            timeOut: 7000,
-            "positionClass": "toast-top-center",
-            onclick: function(toast) {
-                value = toast.target.value
-                if (value == 'yes') {
-                    $.ajax({
-                        url: ssl + window.location.hostname + "/customize/slider/delete-all",
-                        method: "POST",
-                        data: {
-                            _token
-                        },
-                        success: function(data) {
-                            $('#slider_table').DataTable().destroy();
-                            populate_sliders();
-                            toastr.success('SUCCESS!!', data, { timeOut: 5000 })
-                        }
-                    });
-                } else {
-                    console.log('cancel');
-                }
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete All Sliders!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: ssl + window.location.hostname + "/customize/slider/delete-all",
+                    method: "POST",
+                    data: {
+                        _token
+                    },
+                    success: function(data) {
+                        $('#slider_table').DataTable().destroy();
+                        populate_sliders();
+                        Swal.fire(
+                            'Deleted!',
+                            data,
+                            'success'
+                        )
+                    }
+                });
             }
         })
     });

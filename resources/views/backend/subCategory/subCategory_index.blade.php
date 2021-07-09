@@ -11,8 +11,8 @@
     <!-- Select2 -->
     <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/select2/css/select2.min.css">
     <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
-    <!-- Toastr -->
-    <link rel="stylesheet" href="{{asset('assets/backend')}}/plugins/toastr/toastr.min.css">
+    {{-- sweet alert 2 --}}
+    <link src="{{asset('assets/backend')}}/plugins/sweetalert2/sweetalert2.min.css">
 @endsection
 @section('content')
 <div class="content-wrapper">
@@ -318,8 +318,8 @@
 </div>
 @endsection
 @section('additional_scripts')
-    <!-- Toastr -->
-    <script src="{{asset('assets/backend')}}/plugins/toastr/toastr.min.js"></script>
+    {{-- sweet alert 2 --}}
+    <script src="{{asset('assets/backend')}}/plugins/sweetalert2/sweetalert2.all.js"></script>
     <!-- DataTables  & Plugins -->
     <script src="{{asset('assets/backend')}}/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="{{asset('assets/backend')}}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
